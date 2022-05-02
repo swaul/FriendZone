@@ -1,0 +1,4 @@
+PRODUCT_BUNDLE_IDENTIFIER = at.mikeleon.friendzone-staging
+SERVER_ENVIRONMENT = staging
+SERVER_ENVIRONMENT_SUFFIX = -staging
+APP_NAME_SUFFIX = -Staging

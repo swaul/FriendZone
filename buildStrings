@@ -1,0 +1,3 @@
+#!/bin/bash
+texterify download
+swiftgen

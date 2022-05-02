@@ -1,0 +1,14 @@
+strings:
+  inputs: friendzoneKit/SupportingFiles/de.lproj
+  filter: .+\.strings$
+  outputs:
+    - templateName: structured-swift4
+      output: friendzoneKit/Code/Strings.swift
+      params:
+        enumName: Strings
+        publicAccess: true
+xcassets:
+ inputs: friendzone/Assets/Assets.xcassets
+ outputs:
+  templateName: swift4
+  output: friendzone/Code/Assets.swift
