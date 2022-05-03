@@ -31,6 +31,8 @@ internal enum Asset {
   internal static let `left` = ImageAsset(name: "left")
   internal static let lightPrimaryColor = ColorAsset(name: "lightPrimaryColor")
   internal static let lightTextColor = ColorAsset(name: "lightTextColor")
+  internal static let loginBlobColor1 = ColorAsset(name: "loginBlobColor1")
+  internal static let loginBlobColor2 = ColorAsset(name: "loginBlobColor2")
   internal static let middle = ImageAsset(name: "middle")
   internal static let primaryColor = ColorAsset(name: "primaryColor")
   internal static let `right` = ImageAsset(name: "right")

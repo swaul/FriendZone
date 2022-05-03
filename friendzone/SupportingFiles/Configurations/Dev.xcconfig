@@ -1,4 +1,4 @@
-PRODUCT_BUNDLE_IDENTIFIER = at.mikeleon.friendzone-dev
+PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleone-dev
 SERVER_ENVIRONMENT = dev
 SERVER_ENVIRONMENT_SUFFIX = -dev
 APP_NAME_SUFFIX = -Dev

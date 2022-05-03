@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Profilbider erstellen</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Die App nutzt deinen Standort um andere Nutzer in denier Nähe zu finden</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Die App nutzt deinen Standort um andere Nutzer in denier Nähe zu finden</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Die App nutzt deinen Standort um andere Nutzer in denier Nähe zu finden</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -32,6 +24,14 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Profilbider erstellen</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Die App nutzt deinen Standort um andere Nutzer in denier Nähe zu finden</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Die App nutzt deinen Standort um andere Nutzer in denier Nähe zu finden</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Die App nutzt deinen Standort um andere Nutzer in denier Nähe zu finden</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -45,6 +45,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 	<key>_Configuration</key>
 	<string>$(CONFIGURATION)</string>
 	<key>_ServerEnvironment</key>

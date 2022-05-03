@@ -18,8 +18,10 @@ class FriendZoneButton: SimpleButton {
     
     enum Style {
         case primary
+        case primaryDark
         case secondary
         case tertiary
+        case tertiaryDark
     }
     
     // MARK: - Properties
@@ -51,10 +53,15 @@ class FriendZoneButton: SimpleButton {
         switch style {
         case .primary:
             setupPrimaryStyle()
+        case .primaryDark:
+            setupPrimaryDarkBackground()
         case .secondary:
             setupSecondaryStyle()
         case .tertiary:
             setupTertiaryStyle()
+        case .tertiaryDark:
+            setupTertiaryDark()
+            
         case .none:
             break
         }
@@ -73,7 +80,7 @@ class FriendZoneButton: SimpleButton {
         super.layoutSubviews()
         
         switch style {
-        case .primary, .secondary, .tertiary:
+        case .primary, .secondary, .tertiary, .primaryDark, .tertiaryDark:
             setCornerRadius(frame.height / 2)
         case .none:
             setCornerRadius(0)
@@ -151,6 +158,24 @@ class FriendZoneButton: SimpleButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
+    private func setupPrimaryDarkBackground() {
+        regularInsets = UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 32)
+        
+        compactInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+        imageTitleSpacing = 10
+        imageSize = CGSize(width: 24, height: 24)
+        
+        foregroundColorNormal = Asset.primaryColor.color
+        foregroundColorHighlighted = .systemGray6
+        foregroundColorDisabled = Asset.lightTextColor.color
+        
+        setBackgroundColor(Asset.lightTextColor.color, for: .normal, animated: false)
+        setBackgroundColor(Asset.lightTextColor.color.lighter(), for: .highlighted, animated: false)
+        setBackgroundColor(.systemGray, for: .disabled, animated: false)
+        
+        titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    }
+    
     private func setupSecondaryStyle() {
         regularInsets = UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 32)
         
@@ -190,6 +215,25 @@ class FriendZoneButton: SimpleButton {
         setBackgroundColor(.clear, for: .disabled, animated: false)
         
         titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        
+    }
+    
+    private func setupTertiaryDark() {
+        regularInsets = UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 32)
+        
+        compactInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+        imageTitleSpacing = 10
+        imageSize = CGSize(width: 20, height: 20)
+        
+        foregroundColorNormal = Asset.lightTextColor.color
+        foregroundColorHighlighted = Asset.lightTextColor.color
+        foregroundColorDisabled = Asset.lightTextColor.color
+        
+        setBackgroundColor(.clear, for: .normal, animated: false)
+        setBackgroundColor(.clear, for: .highlighted, animated: false)
+        setBackgroundColor(.clear, for: .disabled, animated: false)
+        
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
     }
 }

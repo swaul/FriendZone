@@ -11,7 +11,7 @@ class AuthCoordinator: NavigationCoordinator {
     
     override init(navigationController: UINavigationController = UINavigationController()) {
         super.init(navigationController: navigationController)
-        
+        navigationController.setNeedsStatusBarAppearanceUpdate()
         navigationController.isModalInPresentation = true
         navigationController.setNavigationBarHidden(true, animated: true)
     }
@@ -21,6 +21,14 @@ class AuthCoordinator: NavigationCoordinator {
     override func start() {
         let viewModel = LoginViewModel()
         let viewController = LoginViewController.createWith(storyboard: .auth, viewModel: viewModel)
+        
+        viewController.onLogin = { [weak self] in
+            
+        }
+        
+        viewController.onRegister = { [weak self] in
+            
+        }
         
         push(viewController, animated: true)
     }

@@ -53,10 +53,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llr-Ne-z2K">
-                                        <rect key="frame" x="70.5" y="802" width="273" height="32"/>
+                                        <rect key="frame" x="72.5" y="802" width="269" height="32"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zy1-yr-c6M" customClass="FriendZoneButton" customModule="friendzone" customModuleProvider="target">
-                                                <rect key="frame" x="198" y="0.5" width="67" height="31"/>
+                                                <rect key="frame" x="194" y="0.5" width="67" height="31"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
@@ -64,7 +64,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ich habe schon einen Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLT-ND-gJb">
-                                                <rect key="frame" x="8" y="8" width="182" height="16"/>
+                                                <rect key="frame" x="4" y="8" width="182" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -76,13 +76,13 @@
                                             <constraint firstAttribute="bottom" secondItem="dLT-ND-gJb" secondAttribute="bottom" constant="8" id="Yit-mr-Vps"/>
                                             <constraint firstItem="Zy1-yr-c6M" firstAttribute="centerY" secondItem="dLT-ND-gJb" secondAttribute="centerY" id="cgp-87-2V4"/>
                                             <constraint firstAttribute="trailing" secondItem="Zy1-yr-c6M" secondAttribute="trailing" constant="8" id="hEk-KM-sFS"/>
-                                            <constraint firstItem="dLT-ND-gJb" firstAttribute="leading" secondItem="llr-Ne-z2K" secondAttribute="leading" constant="8" id="uqH-O6-lsO"/>
+                                            <constraint firstItem="dLT-ND-gJb" firstAttribute="leading" secondItem="llr-Ne-z2K" secondAttribute="leading" constant="4" id="uqH-O6-lsO"/>
                                             <constraint firstItem="dLT-ND-gJb" firstAttribute="top" secondItem="llr-Ne-z2K" secondAttribute="top" constant="8" id="zA6-Uw-Fd5"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="omC-Wo-Hwj"/>
-                                <color key="backgroundColor" name="primaryColor"/>
+                                <color key="backgroundColor" red="0.24313725490196078" green="0.3411764705882353" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="IIV-fX-1z2" firstAttribute="top" secondItem="yOZ-b7-tlS" secondAttribute="bottom" id="6EJ-hh-w1i"/>
                                     <constraint firstItem="llr-Ne-z2K" firstAttribute="top" secondItem="WbQ-2C-do2" secondAttribute="bottom" constant="16" id="Ce5-B5-LiH"/>
