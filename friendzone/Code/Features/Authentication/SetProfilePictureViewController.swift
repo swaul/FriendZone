@@ -53,11 +53,11 @@ class SetProfilePictureViewController: UIViewController {
     
     func setupView() {
         bioTextView.layer.cornerRadius = 10
-        bioTextView.layer.borderColor = Asset.loginBlue.color.cgColor
+        bioTextView.layer.borderColor = Asset.primaryColor.color.cgColor
         bioTextView.layer.borderWidth = 1
         profilePictureImageView.layer.cornerRadius = 10
         profilePictureImageView.layer.borderWidth = 1
-        profilePictureImageView.layer.borderColor = Asset.loginBlue.color.cgColor
+        profilePictureImageView.layer.borderColor = Asset.primaryColor.color.cgColor
         
         bioHintLabel.setStyle(TextStyle.blueNormal)
         bioHintLabel.text = "Füge eine Kurze Bio hinzu"

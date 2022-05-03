@@ -107,7 +107,7 @@
 		3AC7FF08462700CF26BDFDF5 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		3B5394B1B396189E3DA2BAFC /* friendzoneKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = friendzoneKit.h; sourceTree = "<group>"; };
 		4180B8D7CEA82D7BC607535C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		45C1A0FEB648D2F7EB6FE3A6 /* friendzone.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = friendzone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45C1A0FEB648D2F7EB6FE3A6 /* friendzone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = friendzone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46B97994383B299760120F96 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		62A54F6C64FF8B0ECE3BFCE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A212F62C044322632EB2A63 /* TemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewModel.swift; sourceTree = "<group>"; };
@@ -534,9 +534,6 @@
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "aaa - all about apps Gmbh";
 				TargetAttributes = {
-					845CF2E063226891D0FEED01 = {
-						DevelopmentTeam = M8F9QH57A6;
-					};
 					896EE76C6DF6CE9BFEFF5449 = {
 						DevelopmentTeam = M8F9QH57A6;
 					};
@@ -728,6 +725,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2B6FWRNH2M;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -892,6 +890,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2B6FWRNH2M;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -22,14 +22,6 @@ class AuthCoordinator: NavigationCoordinator {
         let viewModel = LoginViewModel()
         let viewController = LoginViewController.createWith(storyboard: .auth, viewModel: viewModel)
         
-        viewController.onLogin = { [weak self] in
-            self?.popViewController(animated: true)
-        }
-
-        viewController.onRegister = { [weak self] email in
-            self?.showRegistration(email: email)
-        }
-        
         push(viewController, animated: true)
     }
     

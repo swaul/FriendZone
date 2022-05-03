@@ -88,7 +88,7 @@ class DesignableTextField: UITextField {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         leftViewMode = .always
-        imageView.tintColor = Asset.loginBlue.color
+        imageView.tintColor = Asset.primaryColor.color
         leftView = imageView
         
         let button = UIButton(type: .system)

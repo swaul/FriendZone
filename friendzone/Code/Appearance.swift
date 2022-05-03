@@ -10,7 +10,7 @@ struct Appearance {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
-        UITabBar.appearance().tintColor = Asset.loginBlue.color
+        UITabBar.appearance().tintColor = Asset.primaryColor.color
     }
 }
 
@@ -43,9 +43,9 @@ public struct TextStyle {
     static let primaryButton = Style(font: UIFont.FZ.boldTextFont.withSize(16.0), color: Asset.accentColor.color)
     static let secondaryButton = Style(font: UIFont.FZ.boldTextFont.withSize(16.0), color: Asset.accentColor.color)
     
-    static let blueSmall = Style(font: UIFont.FZ.lightTextFont.withSize(14.0), color: Asset.loginBlue.color.lighter())
-    static let blueNormal = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.loginBlue.color)
-    static let blueBig = Style(font: UIFont.FZ.regularTextFont.withSize(24.0), color: Asset.loginBlue.color)
+    static let blueSmall = Style(font: UIFont.FZ.lightTextFont.withSize(14.0), color: Asset.primaryColor.color)
+    static let blueNormal = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.primaryColor.color)
+    static let blueBig = Style(font: UIFont.FZ.regularTextFont.withSize(24.0), color: Asset.primaryColor.color)
     static let errorText = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.errorColor.color)
     static let versionLabel = Style(font: UIFont.FZ.regularTextFont.withSize(36.0), color: Asset.errorColor.color)
 }
@@ -60,13 +60,13 @@ public struct TextFieldStyle {
     public static let primary = TextFieldStyle(titleStyle: TextStyle.blueSmall,
                                                placeHolderStyle: TextStyle.lightBody,
                                                textStyle: TextStyle.blueNormal,
-                                               activeLineColor: Asset.loginBlue.color,
+                                               activeLineColor: Asset.primaryColor.color,
                                                lineColor: .gray)
     
     public static let comment = TextFieldStyle(titleStyle: TextStyle.lightBody,
                                                placeHolderStyle: TextStyle.lightBody,
                                                textStyle: TextStyle.normal,
-                                               activeLineColor: Asset.loginBlue.color,
+                                               activeLineColor: Asset.primaryColor.color,
                                                lineColor: Asset.inactiveCommentInputColor.color)
 }
 

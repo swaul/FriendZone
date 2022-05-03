@@ -27,13 +27,4 @@ class MainCoordinator: TabBarCoordinator {
         
         tabBarController.selectedIndex = 1
     }
-    
-    private func presentLogin(animated: Bool) {
-        let coordinator = AuthCoordinator()
-        
-        coordinator.start()
-        
-        addChild(coordinator)
-        present(coordinator, animated: animated, completion: nil)
-    }
 }

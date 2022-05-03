@@ -144,8 +144,8 @@ class FriendZoneButton: SimpleButton {
         foregroundColorHighlighted = .systemGray6
         foregroundColorDisabled = Asset.lightTextColor.color
         
-        setBackgroundColor(Asset.loginBlue.color, for: .normal, animated: false)
-        setBackgroundColor(Asset.loginBlue.color.lighter(), for: .highlighted, animated: false)
+        setBackgroundColor(Asset.primaryColor.color, for: .normal, animated: false)
+        setBackgroundColor(Asset.primaryColor.color.lighter(), for: .highlighted, animated: false)
         setBackgroundColor(.systemGray, for: .disabled, animated: false)
         
         titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -158,7 +158,7 @@ class FriendZoneButton: SimpleButton {
         imageTitleSpacing = 10
         imageSize = CGSize(width: 24, height: 24)
         
-        foregroundColorNormal = Asset.loginBlue.color
+        foregroundColorNormal = Asset.primaryColor.color
         foregroundColorHighlighted = Asset.textColor.color
         foregroundColorDisabled = .systemGray
         
@@ -167,7 +167,7 @@ class FriendZoneButton: SimpleButton {
         setBackgroundColor(.clear, for: .disabled, animated: false)
         
         setBorderWidth(2)
-        setBorderColor(Asset.loginBlue.color, for: .normal)
+        setBorderColor(Asset.primaryColor.color, for: .normal)
         setBorderColor(.black, for: .highlighted)
         setBorderColor(.systemGray, for: .disabled)
         
@@ -181,9 +181,9 @@ class FriendZoneButton: SimpleButton {
         imageTitleSpacing = 10
         imageSize = CGSize(width: 20, height: 20)
         
-        foregroundColorNormal = Asset.loginBlue.color
-        foregroundColorHighlighted = Asset.loginBlue.color
-        foregroundColorDisabled = Asset.loginBlue.color
+        foregroundColorNormal = Asset.primaryColor.color
+        foregroundColorHighlighted = Asset.primaryColor.color
+        foregroundColorDisabled = Asset.primaryColor.color
         
         setBackgroundColor(.clear, for: .normal, animated: false)
         setBackgroundColor(.clear, for: .highlighted, animated: false)
