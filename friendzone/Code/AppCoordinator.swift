@@ -17,6 +17,11 @@ class AppCoordinator: Coordinator {
         self.window = window
         
         authCoordinator.start()
+        
+        authCoordinator.onLogin = { [weak self] in
+            self?.reset(animated: true)
+        }
+        
         addChild(authCoordinator)
         
         window.rootViewController = authCoordinator.rootViewController
@@ -25,14 +30,6 @@ class AppCoordinator: Coordinator {
         printRootDebugStructure()
         
         checkCredentials(animated: false)
-        
-//        CredentialsController.shared.$currentCredentialsChanged
-//            .sink { [weak self] isChanged in
-//                if isChanged {
-//                    self?.checkCredentials()
-//                }
-//            }
-//            .store(in: &cancellable)
     }
     
     func checkCredentials(animated: Bool = true) {
@@ -49,6 +46,12 @@ class AppCoordinator: Coordinator {
         childCoordinators
             .filter { $0 !== mainCoordinator }
             .forEach { removeChild($0) }
+        
+        mainCoordinator.start()
+        addChild(mainCoordinator)
+        
+        window.rootViewController = mainCoordinator.rootViewController
+        window.makeKeyAndVisible()
         
         printRootDebugStructure()
     }

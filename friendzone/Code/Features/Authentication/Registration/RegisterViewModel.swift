@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseAnalytics
 import Combine
+import friendzoneKit
 
 class RegisterViewModel {
     
@@ -223,9 +224,15 @@ class RegisterViewModel {
 
     }
     
-    public func uploadImage(userId: String) {
-        guard let image = profilePicture, let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+    public func uploadImage() {
+        guard let user = Auth.auth().currentUser else { return }
         
+        guard let image = profilePicture, let imageData = image.jpegData(compressionQuality: 0.5) else {
+            uploadUserInfo(userId: user.uid)
+            return
+        }
+        
+        let userId = user.uid
         let imagesRef = storageRef.child("images/\(userId)")
         
         let uploadTask = imagesRef.putData(imageData, metadata: nil) { metadata, error in
@@ -269,9 +276,11 @@ class RegisterViewModel {
         let data: [String: Any] = [
             "email": email.value!,
             "name": name.value!,
-            "phoneNumber": phoneNumber.value!,
             "bio": bio,
-            "score": 0
+            "score": 0,
+            "instagram": instagram ?? "",
+            "tiktok": tiktok ?? "",
+            "snapchat": snapchat ?? ""
         ]
         
         return data

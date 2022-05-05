@@ -69,6 +69,7 @@
 		9EDA92A528224E6B003461DE /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA92A428224E6B003461DE /* RegisterCoordinator.swift */; };
 		9EED0CCE2822BA710046AEEC /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */; };
 		9EED0CD02823E7920046AEEC /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */; };
+		9EED0CD42823F1080046AEEC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CD32823F1080046AEEC /* LoginViewController.swift */; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -162,6 +163,7 @@
 		9EDA92A428224E6B003461DE /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
 		9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		9EED0CD32823F1080046AEEC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BDED4A77DB95E3B3172963C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		D053B79F9B078A665D55AC2F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -402,10 +404,10 @@
 				9EDA92A428224E6B003461DE /* RegisterCoordinator.swift */,
 				9E50C3AC281D5C0B0008BFDD /* RegisterViewController.swift */,
 				9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */,
+				9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */,
 				9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */,
 				9E50C3B2281E04CD0008BFDD /* SetProfilePictureViewController.swift */,
 				9E22E676281F13F40030DF7C /* SetSocialMediaViewController.swift */,
-				9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */,
 				9E50C3AE281DB84F0008BFDD /* RegisterViewModel.swift */,
 			);
 			path = Registration;
@@ -415,6 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */,
+				9EED0CD32823F1080046AEEC /* LoginViewController.swift */,
 				9E50C393281C2B5F0008BFDD /* LoginViewModel.swift */,
 			);
 			path = Login;
@@ -726,6 +729,7 @@
 				9E50C392281C2B2A0008BFDD /* WelcomeViewController.swift in Sources */,
 				9E50C3AD281D5C0B0008BFDD /* RegisterViewController.swift in Sources */,
 				9E22E677281F13F40030DF7C /* SetSocialMediaViewController.swift in Sources */,
+				9EED0CD42823F1080046AEEC /* LoginViewController.swift in Sources */,
 				9E95E9AF281ADD3F00639243 /* YourZoneViewController.swift in Sources */,
 				9E22E660281E844A0030DF7C /* ValidatedText.swift in Sources */,
 				9E22E662281E957C0030DF7C /* FirebaseHandler.swift in Sources */,

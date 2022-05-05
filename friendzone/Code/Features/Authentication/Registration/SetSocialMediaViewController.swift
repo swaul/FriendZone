@@ -66,6 +66,12 @@ class SetSocialMediaViewController: UIViewController {
                 self.tiktokTextField.placeholder = "Da scheint was nicht zu stimmen"
             }
         }.store(in: &cancellabels)
+        
+        viewModel.$profileCreated.sink { [weak self] created in
+            if created {
+                self?.onContinue()
+            }
+        }.store(in: &cancellabels)
     }
     
     func setupView() {
@@ -77,17 +83,19 @@ class SetSocialMediaViewController: UIViewController {
         instagramTextField.textContentType = .username
         instagramTextField.leftView = UIImageView(image: Asset.instagram.image)
         
+        tiktokTitleLabel.text = "TikTok"
         tiktokTextField.delegate = self
         tiktokTextField.placeholder = tiktokPlaceholder
         tiktokTextField.textContentType = .username
         tiktokTextField.leftView = UIImageView(image: Asset.tiktok.image)
         
+        snapchatTitleLabel.text = "Snapchat"
         snapchatTextField.delegate = self
         snapchatTextField.placeholder = "Dein Snapchat Username"
         snapchatTextField.textContentType = .username
         snapchatTextField.leftView = UIImageView(image: Asset.snapchat.image)
         
-        continiueButton.setTitle("Weiter", for: .normal)
+        continiueButton.setTitle("Fertig!", for: .normal)
         continiueButton.setStyle(.primary)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
@@ -102,10 +110,10 @@ class SetSocialMediaViewController: UIViewController {
     }
     
     let instaPlaceholder: String = "Dein Instagram Username"
-    let tiktokPlaceholder: String = "Dein tiktok Username"
+    let tiktokPlaceholder: String = "Dein TikTok Username"
     
     @IBAction func continueButtonTapped(_ sender: Any) {
-        onContinue()
+        viewModel.uploadImage()
     }
 }
 

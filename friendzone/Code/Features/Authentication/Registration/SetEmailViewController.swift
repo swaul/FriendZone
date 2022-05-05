@@ -48,6 +48,8 @@ class SetEmailViewController: UIViewController {
     func setupView() {
         emailTextField.delegate = self
 
+        emailTitleLabel.text = "E-Mail Adresse hinzufügen"
+        
         emailTextField.placeholder = "Email"
         emailTextField.textContentType = .emailAddress
         emailTextField.keyboardType = .emailAddress

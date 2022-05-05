@@ -71,11 +71,13 @@ class SetPasswordViewController: UIViewController {
             $0.addTarget(self, action: #selector(confirmHidePw), for: .touchUpInside)
         }
         
+        newPasswordTitleLabel.text = "Passwort erstellen"
         newPasswordTextfield.placeholder = "Neues Passwort"
         newPasswordTextfield.textContentType = .newPassword
         newPasswordTextfield.isSecureTextEntry = true
         newPasswordTextfield.rightView = showPwButton
         
+        confirmPasswordTitleLabel.text = "Password wiederholen"
         confirmPasswordTextfield.placeholder = "Passwort wiederholen"
         confirmPasswordTextfield.textContentType = .password
         confirmPasswordTextfield.isSecureTextEntry = true

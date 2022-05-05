@@ -3,6 +3,8 @@ import Toolbox
 
 class AuthCoordinator: NavigationCoordinator {
     
+    var welcomeViewController: WelcomeViewController!
+    
     // MARK: Interface
     
     var onLogin: (() -> Void)!
@@ -19,17 +21,21 @@ class AuthCoordinator: NavigationCoordinator {
     // MARK: Start
     
     override func start() {
-        let viewController = WelcomeViewController.createWith(storyboard: .auth)
+        welcomeViewController = WelcomeViewController.createWith(storyboard: .auth)
         
-        viewController.onLogin = { [weak self] in
+        welcomeViewController.onLogin = { [weak self] in
             self?.showLogin()
         }
         
-        viewController.onRegister = { [weak self] in
+        welcomeViewController.onRegister = { [weak self] in
             self?.showRegistration()
         }
         
-        push(viewController, animated: true)
+        welcomeViewController.onRegistered = { [weak self] in
+            self?.onLogin()
+        }
+        
+        push(welcomeViewController, animated: true)
     }
     
     func showLogin() {
@@ -44,6 +50,15 @@ class AuthCoordinator: NavigationCoordinator {
             self?.dismissChildCoordinator(animated: true)
         }
         
+        coordinator.onSubmit = { [weak self] in
+            self?.showSuccessfulRegistration()
+        }
+        
         present(coordinator, animated: true)
+    }
+    
+    func showSuccessfulRegistration() {
+        welcomeViewController.showSuccessfulRegistration()
+        self.dismissChildCoordinator(animated: true)
     }
 }

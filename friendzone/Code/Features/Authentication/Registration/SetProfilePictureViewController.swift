@@ -57,7 +57,7 @@ class SetProfilePictureViewController: UIViewController {
         bioHintLabel.text = "Füge einen Steckbrief hinzu"
         
         profilePictureHintLabel.setStyle(TextStyle.blueNormal)
-        profilePictureHintLabel.text = "Füge ein Profilbild hinzu"
+        profilePictureHintLabel.text = "Profilbild hinzufügen"
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
         profilePictureImageView.addGestureRecognizer(gesture)

@@ -17,9 +17,9 @@ class LoginCoordinator: CardCoordinator {
     }
     
     override func start() {
-//        let viewModel = LoginViewModel()
-//        let viewController = LoginViewController.createWith(storyboard: .auth, viewModel: viewModel)
-//        
-//        navigationController.pushViewController(viewController, animated: true)
+        let viewModel = LoginViewModel()
+        let viewController = LoginViewController.createWith(storyboard: .auth, viewModel: viewModel)
+        
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

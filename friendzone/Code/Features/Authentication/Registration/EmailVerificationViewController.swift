@@ -59,7 +59,7 @@ class EmailVerificationViewController: UIViewController {
         titleLabel.text = "Verifizieren"
         
         verifyHintLabel.text = "Zur Sicherheit haben wir dir eine Email mit einem Link geschickt. Bitte bestätige damit deine Email und klicke anschließend auf weiter!"
-        verifyHintLabel.setStyle(TextStyle.blueBig)
+        verifyHintLabel.setStyle(TextStyle.blueSmall)
         
         continueButton.setStyle(.primary)
         continueButton.setTitle("Weiter", for: .normal)

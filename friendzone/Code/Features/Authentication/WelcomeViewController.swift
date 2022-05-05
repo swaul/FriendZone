@@ -25,7 +25,10 @@ class WelcomeViewController: UIViewController {
         
     var onLogin: (() -> Void)!
     var onRegister: (() -> Void)!
+    var onRegistered: (() -> Void)!
     
+    @IBOutlet var authButtonView: UIView!
+    @IBOutlet var welcomeTitleLabel: UILabel!
     @IBOutlet var headerView: UIView!
     @IBOutlet var registerButton: FriendZoneButton!
     @IBOutlet var loginButton: FriendZoneButton!
@@ -33,94 +36,34 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupBindings()
     }
-    
-    var cancellabels = Set<AnyCancellable>()
-    
-    func setupBindings() {
-//        viewModel.$onLogin.sink { [weak self] onLogin in
-//            if onLogin {
-//                self?.viewModel.onLogin = false
-//                self?.onLogin()
-//            }
-//        }.store(in: &cancellabels)
-//        
-        //        viewModel.$error.sink { [weak self] errorMessage in
-        //            guard let errorMessage = errorMessage else {
-        //                self?.passwordTextfield.error = false
-        //                return
-        //            }
-        //            self?.passwordTextfield.error = true
-        //            self?.errorLabel.text = errorMessage
-        //            self?.errorLabel.isHidden = false
-        //        }.store(in: &cancellabels)
-        //
-        //        passwordTextfield.publisher(for: \.isSecureTextEntry).sink { [weak self] isSecure in
-        //            if isSecure {
-        //                self?.passwordTextfield.rightImage = UIImage(systemSymbol: .eyeSlash)
-        //            } else {
-        //                self?.passwordTextfield.rightImage = UIImage(systemSymbol: .eye)
-        //            }
-        //        }.store(in: &cancellabels)
-    }
-    
+      
     func setupView() {
         let framer = RectFramer(withView: headerView)
         framer.drawLineIn(withRectRef: framer)
         framer.drawUpperLineIn(withRectRef: framer)
-        //        let bezPathStage0: UIBezierPath = UIBezierPath()
-        //        bezPathStage0.move(to: CGPoint(x: headerView.frame.maxX, y: headerView.frame.minY))
-        //        bezPathStage0.addLine(to: CGPoint(x: headerView.frame.midX, y: headerView.frame.minY))
-        //        //        bezPathStage0.addLine(to: rectRef.bottomLeft) // A Current point
-        //        bezPathStage0.addLine(to: CGPoint(x: headerView.frame.maxX, y: headerView.frame.midY)) // C End point, straight line
-        //        bezPathStage0.close()
-        //
-        //        let drawingLayer = CAShapeLayer()
-        //        drawingLayer.path = bezPathStage0.cgPath
-        //        drawingLayer.strokeColor = UIColor.systemBlue.cgColor
-        //        drawingLayer.fillColor = UIColor.systemBlue.cgColor
-        //        drawingLayer.lineWidth = 4.0
-        //
-        //        headerView.layer.insertSublayer(drawingLayer, at: 0)
-        
-        //        emailTextField.delegate = self
-        //        emailTextField.configure(style: .primary)
-        //        emailTextField.placeholder = "E-Mail"
-        //        emailTextField.textContentType = .emailAddress
-        //        emailTextField.keyboardType = .emailAddress
-        //        emailTextField.image = UIImage(systemSymbol: .envelope).withTintColor(Asset.primaryColor.color)
-        //
-        //        passwordTextfield.delegate = self
-        //        passwordTextfield.configure(style: .primary)
-        //        passwordTextfield.placeholder = "Passwort"
-        //        passwordTextfield.textContentType = .password
-        //        passwordTextfield.isSecureTextEntry = true
-        //        passwordTextfield.image = UIImage(systemSymbol: .lock)
-        //
-        //        passwordTextfield.rightImage = UIImage(systemSymbol: .eyeSlash)
-        //
-        //        passwordTextfield.rightButtonTapped = { [weak self] in
-        //            self?.passwordTextfield.isSecureTextEntry.toggle()
-        //        }
-        //
+
         loginButton.setStyle(.tertiaryDark)
         loginButton.setTitle("Login", for: .normal)
         registerButton.setStyle(.primaryDark)
         registerButton.setTitle("Neues Konto erstellen", for: .normal)
         headerView.layer.cornerRadius = 10
-        //
-        //        errorLabel.setStyle(TextStyle.errorText)
-        //        errorLabel.isHidden = viewModel.error == nil
-        //
-        //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
-        //        view.addGestureRecognizer(tapGesture)
-        //        view.isUserInteractionEnabled = true
     }
     
-    @objc func didTapOutside() {
-        //        emailTextField.resignFirstResponder()
-        //        passwordTextfield.resignFirstResponder()
+    var timer: Timer?
+    
+    func showSuccessfulRegistration() {
+        authButtonView.isHidden = true
+        welcomeTitleLabel.text = "Geschafft!"
+        popSelf()
+    }
+    
+    func popSelf() {
+        timer?.invalidate()
+        print("timer started")
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
+            self.onRegistered()
+        }
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -131,30 +74,6 @@ class WelcomeViewController: UIViewController {
     }
     
 }
-
-//extension LoginViewController: UITextFieldDelegate {
-//
-//    func textFieldDidChangeSelection(_ textField: UITextField) {
-//        guard let text = textField.text else { return }
-//        if emailTextField.isFirstResponder {
-//            viewModel.email = text
-//            textField.returnKeyType = .continue
-//        } else if passwordTextfield.isFirstResponder {
-//            viewModel.password = text
-//            textField.returnKeyType = .send
-//        }
-//    }
-//
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        if emailTextField.isFirstResponder {
-//            passwordTextfield.becomeFirstResponder()
-//        } else if passwordTextfield.isFirstResponder {
-//            viewModel.login()
-//        }
-//        return true
-//    }
-//
-//}
 
 internal struct RectFramer {
     var viewRef: UIView
@@ -227,7 +146,7 @@ internal struct RectFramer {
         let bezPathStage6: UIBezierPath = UIBezierPath()
         bezPathStage6.move(to: rectRef.topRight)
         bezPathStage6.addLine(to: rectRef.smallTopLeft)
-        bezPathStage6.addQuadCurve(to: rectRef.smallBottomRight, controlPoint: CGPoint(x: rectRef.midX, y: rectRef.midY - rectRef.midY / 2))
+        bezPathStage6.addQuadCurve(to: rectRef.smallBottomRight, controlPoint: CGPoint(x: rectRef.midX + rectRef.midX / 2, y: rectRef.midY - rectRef.midY / 2))
         bezPathStage6.close()
         
         let bezPathStage7: UIBezierPath = UIBezierPath()

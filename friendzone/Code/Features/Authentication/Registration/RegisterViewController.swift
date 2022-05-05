@@ -21,6 +21,7 @@ class RegisterViewController: UIViewController {
     }
     
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var nameTitleLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var loginInsteadHintLabel: UILabel!
     @IBOutlet var loginInsteadButton: SimpleButton!
@@ -51,7 +52,8 @@ class RegisterViewController: UIViewController {
     func setupView() {
         nameTextField.delegate = self
 
-        nameTextField.placeholder = "Name"
+        nameTitleLabel.text = "Benutzernamen erstellen"
+        nameTextField.placeholder = "Benutzername"
         nameTextField.textContentType = .name
         nameTextField.becomeFirstResponder()
         
