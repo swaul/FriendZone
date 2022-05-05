@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseAnalytics
 import Combine
 
 class RegisterViewModel {
@@ -55,8 +56,9 @@ class RegisterViewModel {
     
     @Published var confirmPasswordValid: Bool = false
     
+    @Published var usernameValid: Bool = false
     @Published var emailStepValid: Bool = false
-    @Published var profileStepValid: Bool = false
+    @Published var profileStepValid: Bool = true
     @Published var passwordStepValid: Bool = false
     
     @Published var instagramValid: Bool?
@@ -82,15 +84,13 @@ class RegisterViewModel {
     }
     
     @Published var snapchat: String?
-    
     @Published var percentComplete: Float = 0.0
-    
     @Published var profileCreated: Bool = false
+    @Published var userCreated: Bool?
     
     let storageRef = Storage.storage().reference()
     
-    init(email: String) {
-        self.email.value = email
+    init() {
         setupBindings()
     }
     
@@ -141,19 +141,19 @@ class RegisterViewModel {
     }
     
     func setupBindings() {
-        Publishers.CombineLatest3(email.$validation, name.$validation, phoneNumber.$validation).sink { [weak self] (email, name, phone) in
-            if email == .valid && name == .valid && phone == .valid {
-                self?.emailStepValid = true
+        name.$validation.sink { [weak self] name in
+            if name == .valid {
+                self?.usernameValid = true
             } else {
-                self?.emailStepValid = false
+                self?.usernameValid = false
             }
         }.store(in: &cancellabels)
         
-        Publishers.CombineLatest($bio, $profilePicture).sink { [weak self] (bio, profilePicture) in
-            if !bio.isNilOrEmpty && (profilePicture != nil) {
-                self?.profileStepValid = true
+        email.$validation.sink { [weak self] email in
+            if email == .valid {
+                self?.emailStepValid = true
             } else {
-                self?.profileStepValid = false
+                self?.emailStepValid = false
             }
         }.store(in: &cancellabels)
         
@@ -179,13 +179,48 @@ class RegisterViewModel {
         Auth.auth().createUser(withEmail: email.value!, password: newPassword.value!) { [weak self] authResult, error in
             if let error = error {
                 print(error.localizedDescription)
+                self?.userCreated = false
             } else {
                 guard let result = authResult else { return }
+                if !result.user.isEmailVerified {
+                    result.user.sendEmailVerification(completion: { error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else {
+                            self?.userCreated = true
+                            print("logged in")
+                            print("email sent")
+                        }
+                    })
+                } else {
+                    print("logged in")
+                    print("verified")
+                    self?.userCreated = true
+                }
                 
-                self?.uploadImage(userId: result.user.uid)
-                print("logged in")
             }
         }
+    }
+    
+    func checkVerification(completion: ((Bool) -> Void)?) {
+        guard let user = Auth.auth().currentUser else {
+            completion?(false)
+            return
+        }
+        user.reload { error in
+            if let error = error {
+                completion?(false)
+                print(error.localizedDescription)
+            } else {
+                if user.isEmailVerified {
+                    print("YOU DID IT YOU CRAZY SON OF")
+                    completion?(true)
+                } else {
+                    completion?(false)
+                }
+            }
+        }
+
     }
     
     public func uploadImage(userId: String) {

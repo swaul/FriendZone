@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,7 @@
 		9E22E68028216B600030DF7C /* CardNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E67F28216B600030DF7C /* CardNavigationController.swift */; };
 		9E22E68228216BBC0030DF7C /* CardPresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E68128216BBC0030DF7C /* CardPresentationAnimation.swift */; };
 		9E22E68428216C0C0030DF7C /* CustomPushAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E68328216C0C0030DF7C /* CustomPushAnimation.swift */; };
+		9E36EBC22822B5DA004BE351 /* SetEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */; };
 		9E50C38C281B49630008BFDD /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 9E50C38B281B49630008BFDD /* TinyConstraints */; };
 		9E50C390281C28020008BFDD /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E50C38F281C28020008BFDD /* Authorization.storyboard */; };
 		9E50C392281C2B2A0008BFDD /* LogniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E50C391281C2B2A0008BFDD /* LogniViewController.swift */; };
@@ -65,6 +66,8 @@
 		9E95E9B5281ADE0B00639243 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E95E9B4281ADE0B00639243 /* User.swift */; };
 		9E95E9B9281AE32700639243 /* UserNearbyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E95E9B7281AE32700639243 /* UserNearbyTableViewCell.swift */; };
 		9E95E9BA281AE32700639243 /* UserNearbyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E95E9B8281AE32700639243 /* UserNearbyTableViewCell.xib */; };
+		9EDA92A528224E6B003461DE /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA92A428224E6B003461DE /* RegisterCoordinator.swift */; };
+		9EED0CCE2822BA710046AEEC /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -138,6 +141,7 @@
 		9E22E67F28216B600030DF7C /* CardNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNavigationController.swift; sourceTree = "<group>"; };
 		9E22E68128216BBC0030DF7C /* CardPresentationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresentationAnimation.swift; sourceTree = "<group>"; };
 		9E22E68328216C0C0030DF7C /* CustomPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimation.swift; sourceTree = "<group>"; };
+		9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEmailViewController.swift; sourceTree = "<group>"; };
 		9E50C38F281C28020008BFDD /* Authorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		9E50C391281C2B2A0008BFDD /* LogniViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogniViewController.swift; sourceTree = "<group>"; };
 		9E50C393281C2B5F0008BFDD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 		9E95E9B4281ADE0B00639243 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9E95E9B7281AE32700639243 /* UserNearbyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNearbyTableViewCell.swift; sourceTree = "<group>"; };
 		9E95E9B8281AE32700639243 /* UserNearbyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserNearbyTableViewCell.xib; sourceTree = "<group>"; };
+		9EDA92A428224E6B003461DE /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
+		9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		BDED4A77DB95E3B3172963C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		D053B79F9B078A665D55AC2F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -390,11 +396,14 @@
 		9E22E6852821A6590030DF7C /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				9E50C3AE281DB84F0008BFDD /* RegisterViewModel.swift */,
+				9EDA92A428224E6B003461DE /* RegisterCoordinator.swift */,
 				9E50C3AC281D5C0B0008BFDD /* RegisterViewController.swift */,
-				9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */,
+				9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */,
+				9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */,
 				9E50C3B2281E04CD0008BFDD /* SetProfilePictureViewController.swift */,
 				9E22E676281F13F40030DF7C /* SetSocialMediaViewController.swift */,
+				9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */,
+				9E50C3AE281DB84F0008BFDD /* RegisterViewModel.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -563,10 +572,10 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = "aaa - all about apps Gmbh";
+				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = B3DF07C4B4171983E3983FA0 /* Build configuration list for PBXProject "friendzone" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -692,6 +701,7 @@
 			files = (
 				9E22E67E28216AD90030DF7C /* CardViewController.swift in Sources */,
 				9E22E673281F01160030DF7C /* PostalCode.swift in Sources */,
+				9E36EBC22822B5DA004BE351 /* SetEmailViewController.swift in Sources */,
 				2B4078944203D8A41757C2E7 /* AppCoordinator.swift in Sources */,
 				9E50C3B3281E04CD0008BFDD /* SetProfilePictureViewController.swift in Sources */,
 				9E50C3B1281DBE940008BFDD /* FriendZoneButton.swift in Sources */,
@@ -703,6 +713,7 @@
 				9E22E664281ED6980030DF7C /* YourZoneCoordinator.swift in Sources */,
 				D6E23396A15DA2BFD631E690 /* AppDelegate.swift in Sources */,
 				E54BADB31CB040FD3AEA46FE /* Appearance.swift in Sources */,
+				9EED0CCE2822BA710046AEEC /* EmailVerificationViewController.swift in Sources */,
 				781F7C7A73769EF72CDDFE4A /* Assets.swift in Sources */,
 				9E50C3A7281CA4090008BFDD /* DesignableTextField.swift in Sources */,
 				9E95E9B1281ADD4800639243 /* YourZoneViewModel.swift in Sources */,
@@ -714,6 +725,7 @@
 				9E95E9AF281ADD3F00639243 /* YourZoneViewController.swift in Sources */,
 				9E22E660281E844A0030DF7C /* ValidatedText.swift in Sources */,
 				9E22E662281E957C0030DF7C /* FirebaseHandler.swift in Sources */,
+				9EDA92A528224E6B003461DE /* RegisterCoordinator.swift in Sources */,
 				9E22E66A281ED8190030DF7C /* HistoryCoordinator.swift in Sources */,
 				9E50C394281C2B5F0008BFDD /* LoginViewModel.swift in Sources */,
 				208868220051B3B1C3B82636 /* Logging.swift in Sources */,
@@ -754,7 +766,8 @@
 			baseConfigurationReference = E1C78B71A5912AF3FA0BD54B /* Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 846WZ8H33D;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
@@ -766,6 +779,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-dev";
 				PRODUCT_NAME = friendzone;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -835,7 +849,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M8F9QH57A6;
+				DEVELOPMENT_TEAM = 846WZ8H33D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -849,6 +863,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -891,7 +906,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M8F9QH57A6;
+				DEVELOPMENT_TEAM = 846WZ8H33D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -912,6 +927,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = incremental;
@@ -925,7 +941,8 @@
 			baseConfigurationReference = E1C78B71A5912AF3FA0BD54B /* Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 846WZ8H33D;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
@@ -937,6 +954,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-dev";
 				PRODUCT_NAME = friendzone;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -977,7 +995,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M8F9QH57A6;
+				DEVELOPMENT_TEAM = 846WZ8H33D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -998,6 +1016,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = incremental;
@@ -1041,7 +1060,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M8F9QH57A6;
+				DEVELOPMENT_TEAM = 846WZ8H33D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1055,6 +1074,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1067,7 +1087,8 @@
 			baseConfigurationReference = F638987ECDC86FB82BA1CFBB /* Live.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 846WZ8H33D;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
@@ -1079,6 +1100,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = friendzone;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1147,7 +1169,8 @@
 			baseConfigurationReference = EDD3C36E661FBA1791B43ECF /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 846WZ8H33D;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
@@ -1159,6 +1182,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-staging";
 				PRODUCT_NAME = friendzone;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1199,7 +1223,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M8F9QH57A6;
+				DEVELOPMENT_TEAM = 846WZ8H33D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1213,6 +1237,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1225,7 +1250,8 @@
 			baseConfigurationReference = EDD3C36E661FBA1791B43ECF /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 846WZ8H33D;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
@@ -1237,6 +1263,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-staging";
 				PRODUCT_NAME = friendzone;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1276,7 +1303,8 @@
 			baseConfigurationReference = F638987ECDC86FB82BA1CFBB /* Live.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 846WZ8H33D;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
@@ -1288,6 +1316,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = friendzone;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1328,7 +1357,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M8F9QH57A6;
+				DEVELOPMENT_TEAM = 846WZ8H33D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1349,6 +1378,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = incremental;

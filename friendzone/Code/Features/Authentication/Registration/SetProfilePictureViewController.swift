@@ -25,7 +25,6 @@ class SetProfilePictureViewController: UIViewController {
     
     var viewModel: RegisterViewModel!
     
-    @IBOutlet var backButton: FriendZoneButton!
     @IBOutlet var profilePictureImageView: UIImageView!
     @IBOutlet var profilePictureHintLabel: UILabel!
     @IBOutlet var bioHintLabel: UILabel!
@@ -45,30 +44,18 @@ class SetProfilePictureViewController: UIViewController {
         Keyboard.shared.$info.sink { [weak self] info in
             self?.updateSafeAreaInsets(keyboardInfo: info, animated: true)
         }.store(in: &cancellabels)
-        
-        viewModel.$emailStepValid.sink { [weak self] valid in
-                self?.continueButton.isEnabled = valid
-        }.store(in: &cancellabels)
     }
     
     func setupView() {
-        bioTextView.layer.cornerRadius = 10
-        bioTextView.layer.borderColor = Asset.primaryColor.color.cgColor
-        bioTextView.layer.borderWidth = 1
-        profilePictureImageView.layer.cornerRadius = 10
-        profilePictureImageView.layer.borderWidth = 1
-        profilePictureImageView.layer.borderColor = Asset.primaryColor.color.cgColor
+        profilePictureImageView.layer.cornerRadius = profilePictureImageView.bounds.height / 2
+        profilePictureImageView.layer.borderWidth = 2
+        profilePictureImageView.layer.borderColor = Asset.accentColor.color.cgColor
         
         bioHintLabel.setStyle(TextStyle.blueNormal)
-        bioHintLabel.text = "Füge eine Kurze Bio hinzu"
+        bioHintLabel.text = "Füge einen Steckbrief hinzu"
         
         profilePictureHintLabel.setStyle(TextStyle.blueNormal)
         profilePictureHintLabel.text = "Füge ein Profilbild hinzu"
-        
-        backButton.setStyle(.tertiary)
-        backButton.setTitle("Zurück", for: .normal)
-        continueButton.setStyle(.primary)
-        continueButton.setTitle("Weiter", for: .normal)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
         profilePictureImageView.addGestureRecognizer(gesture)
@@ -80,14 +67,13 @@ class SetProfilePictureViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
+        
+        continueButton.setStyle(.primary)
+        continueButton.setTitle("Fast geschafft", for: .normal)
     }
     
     @objc func didTapOutside() {
         bioTextView.resignFirstResponder()
-    }
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        onBack()
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {

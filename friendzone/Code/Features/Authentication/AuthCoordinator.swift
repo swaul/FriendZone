@@ -27,65 +27,15 @@ class AuthCoordinator: NavigationCoordinator {
         }
         
         viewController.onRegister = { [weak self] in
-            
+            self?.showRegistration()
         }
         
         push(viewController, animated: true)
     }
     
-    func showRegistration(email: String) {
-        let viewController = RegisterViewController.createWith(storyboard: .auth, viewModel: RegisterViewModel(email: email))
-        
-        viewController.onContinue = { [weak self] viewModel in
-            self?.showImagePicker(viewModel: viewModel)
-        }
-        
-        viewController.onBack = { [weak self] in
-            self?.popViewController(animated: true)
-        }
-        
-        push(viewController, animated: true)
-    }
-    
-    func showImagePicker(viewModel: RegisterViewModel) {
-        let viewController = SetProfilePictureViewController.createWith(storyboard: .auth, viewModel: viewModel)
-        
-        viewController.onBack = { [weak self] in
-            self?.popViewController(animated: true)
-        }
-        
-        viewController.onContinue = { [weak self] viewModel in
-            self?.showSocialMediaSetup(viewModel: viewModel)
-        }
-        
-        push(viewController, animated: true)
-    }
-    
-    func showSocialMediaSetup(viewModel: RegisterViewModel) {
-        let viewController = SetSocialMediaViewController.createWith(storyboard: .auth, viewModel: viewModel)
-        
-        viewController.onBack = { [weak self] in
-            self?.popViewController(animated: true)
-        }
-        
-        viewController.onContinue = { [weak self] viewModel in
-            self?.showPasswortSetup(viewModel: viewModel)
-        }
-        
-        push(viewController, animated: true)
-    }
-    
-    func showPasswortSetup(viewModel: RegisterViewModel) {
-        let viewController = SetPasswordViewController.createWith(storyboard: .auth, viewModel: viewModel)
-        
-        viewController.onBack = { [weak self] in
-            self?.popViewController(animated: true)
-        }
-        
-        viewController.onSubmit = { [weak self] in
-            self?.popToRoot(animated: true)
-        }
-        
-        push(viewController, animated: true)
+    func showRegistration() {
+        let coordinator = RegisterCoordinator()
+        coordinator.start()
+        present(coordinator, animated: true)
     }
 }

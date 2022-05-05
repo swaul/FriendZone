@@ -30,6 +30,11 @@ class CardViewController: UIViewController {
         setupViews()
         setupConstraints()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        container.layer.cornerRadius = 20
+    }
 
     var panGesture: UIPanGestureRecognizer!
 
@@ -37,18 +42,22 @@ class CardViewController: UIViewController {
     // to extend background to cover
     var extendedBackground: UIView!
     var extendedBackgroundHeight: NSLayoutConstraint!
-    private let headerHeight: CGFloat = 20
-    private let dragIndicatorHeight: CGFloat = 2.5
+    private let headerHeight: CGFloat = 0
+    private let dragIndicatorHeight: CGFloat = 0
     var headerView: UIView!
 
     var container: UIView!
+    
+    lazy var backButton = UIButton().with {
+        $0.setImage(.chevronLeft, for: .normal)
+        
+        $0.tintColor = .white
+    }
 
     func setupViews() {
-        view.backgroundColor = .black.withAlphaComponent(0.7)
+        view.backgroundColor = .clear
         container = UIView()
-        let dismissTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
-        dismissTapGestureRecognizer.delegate = self
-        view.addGestureRecognizer(dismissTapGestureRecognizer)
+        view.addSubview(backButton)
         view.addSubview(container)
         currentHeightConstraint = container.heightAnchor.constraint(equalToConstant: headerHeight)
 
@@ -69,6 +78,7 @@ class CardViewController: UIViewController {
                 extendedBackgroundHeight
             ]
         }
+        
         setUpHeader()
     }
 
@@ -76,10 +86,10 @@ class CardViewController: UIViewController {
         // header container
         headerView = UIView()
         container.addSubview(headerView)
-        headerView.backgroundColor = Asset.backgroundColor.color
+        headerView.backgroundColor = .red
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         headerView.layer.cornerRadius = Style.CornerRadius.normal
-
+        
         // drag indicator
 
         let dragIndicator = UIView()
@@ -94,15 +104,17 @@ class CardViewController: UIViewController {
                     view.constraintWidth(32)
                 ]
         }
-
-        // drag indicator
-
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:)))
-        headerView.isUserInteractionEnabled = true
-        headerView.addGestureRecognizer(panGesture)
     }
 
     func setupConstraints() {
+        
+        backButton.withConstraints { button in
+            [
+                button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                button.bottomAnchor.constraint(equalTo: container.topAnchor, constant: -16)
+            ]
+        }
+        
         headerView.withConstraints { view in
             [
                 view.alignLeading(),
@@ -117,7 +129,8 @@ class CardViewController: UIViewController {
                 currentHeightConstraint,
                 view.alignLeading(),
                 view.alignTrailing(),
-                view.alignBottom()
+                view.alignBottom(),
+                view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 48)
             ]
         }
     }
@@ -173,7 +186,6 @@ class CardViewController: UIViewController {
         extendedBackgroundHeight.constant = max(abs(difference), 0)
         currentHeightConstraint?.constant = cappedHeight
         
-        
         if let provider = children.first as? InteractiveAnimationProvider,
            provider.shouldExecuteAnimationInteractive {
             currentDiffToAnimate = difference
@@ -211,63 +223,5 @@ extension CardViewController: InteractiveAnimationDelegate {
             }
             self.container.transform = .identity
         })
-    }
-}
-
-// Interactive dragging
-
-extension CardViewController {
-    @objc func draggedView(_ sender: UIPanGestureRecognizer) {
-        let location = sender.location(in: headerView)
-
-        let originalContainerY = originalContainerY ?? container.frame.minY
-        let origin = view.convert(location, from: headerView)
-        let delta = max(origin.y - originalContainerY, 0)
-
-        if panGesture.state == .began {
-            didBeginDragging()
-        } else if panGesture.state == .ended {
-            endDragging(delta: delta, velocity: sender.velocity(in: headerView).y)
-        } else {
-            updateDragging(delta: delta)
-        }
-
-    }
-
-    func didBeginDragging() {
-        originalContainerY = container.frame.minY
-    }
-
-    func updateDragging(delta: CGFloat) {
-        container.transform = CGAffineTransform(translationX: 0, y: delta)
-    }
-
-    func endDragging(delta: CGFloat, velocity: CGFloat?) {
-        originalContainerY = nil
-        if let velocity = velocity,
-           velocity > 1000 {
-            onDismiss()
-            return
-        }
-
-        if delta > container.bounds.height * 0.3 {
-            onDismiss()
-            return
-        }
-        // not dismissed so reset
-        UIView.animate(
-            withDuration: 0.1,
-            delay: 0,
-            options: .curveEaseInOut,
-            animations: {
-                self.container.transform = .identity
-            })
-    }
-}
-
-extension CardViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        guard let view = touch.view, !view.isDescendant(of: container) else { return false }
-        return true
     }
 }

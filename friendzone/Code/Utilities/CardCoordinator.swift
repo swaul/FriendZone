@@ -36,4 +36,3 @@ extension CardCoordinator: UIViewControllerTransitioningDelegate {
         return CardPresentationAnimation(direction: .dismiss)
     }
 }
-

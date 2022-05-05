@@ -19,10 +19,12 @@ class SetPasswordViewController: UIViewController {
         return viewController
     }
     
-    @IBOutlet var newPasswordTextfield: DesignableTextField!
-    @IBOutlet var confirmPasswordTextfield: DesignableTextField!
-    @IBOutlet var cancelButton: FriendZoneButton!
+    @IBOutlet var newPasswordTextfield: UITextField!
+    @IBOutlet var confirmPasswordTextfield: UITextField!
+    @IBOutlet var newPasswordTitleLabel: UILabel!
+    @IBOutlet var confirmPasswordTitleLabel: UILabel!
     @IBOutlet var doneBUtton: FriendZoneButton!
+    @IBOutlet var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +32,7 @@ class SetPasswordViewController: UIViewController {
         setupBindings()
     }
     
-    var onBack: (() -> Void)!
-    var onSubmit: (() -> Void)!
+    var onSubmit: ((RegisterViewModel) -> Void)!
     
     var viewModel: RegisterViewModel!
     
@@ -46,9 +47,10 @@ class SetPasswordViewController: UIViewController {
             self?.doneBUtton.isEnabled = valid
         }.store(in: &cancellabels)
         
-        viewModel.$profileCreated.sink { [weak self] created in
+        viewModel.$userCreated.sink { [weak self] created in
+            guard let self = self, let created = created else { return }
             if created {
-                self?.onSubmit()
+                self.onSubmit(self.viewModel)
             }
         }.store(in: &cancellabels)
     }
@@ -57,24 +59,36 @@ class SetPasswordViewController: UIViewController {
         newPasswordTextfield.delegate = self
         confirmPasswordTextfield.delegate = self
         
-        newPasswordTextfield.configure(style: .primary)
+        let showPwButton = UIButton().with {
+            $0.setImage(.eyeSlash, for: .normal)
+            $0.addTarget(self, action: #selector(hidePw), for: .touchUpInside)
+        }
+        
+        let confirmShowPwButton = UIButton().with {
+            $0.setImage(.eyeSlash, for: .normal)
+            $0.addTarget(self, action: #selector(confirmHidePw), for: .touchUpInside)
+        }
+        
         newPasswordTextfield.placeholder = "Neues Passwort"
         newPasswordTextfield.textContentType = .newPassword
         newPasswordTextfield.isSecureTextEntry = true
+        newPasswordTextfield.rightView = showPwButton
         
-        confirmPasswordTextfield.configure(style: .primary)
         confirmPasswordTextfield.placeholder = "Passwort wiederholen"
         confirmPasswordTextfield.textContentType = .password
         confirmPasswordTextfield.isSecureTextEntry = true
+        newPasswordTextfield.rightView = confirmShowPwButton
         
-        cancelButton.setStyle(.tertiary)
-        cancelButton.setTitle("Zurück", for: .normal)
         doneBUtton.setStyle(.primary)
         doneBUtton.setTitle("Fertig!", for: .normal)
     }
     
-    @IBAction func backButtonTapped(_ sender: Any) {
-        onBack()
+    @objc func hidePw() {
+        newPasswordTextfield.isSecureTextEntry.toggle()
+    }
+    
+    @objc func confirmHidePw() {
+        confirmPasswordTextfield.isSecureTextEntry.toggle()
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {

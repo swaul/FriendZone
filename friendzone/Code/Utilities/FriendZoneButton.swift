@@ -81,7 +81,7 @@ class FriendZoneButton: SimpleButton {
         
         switch style {
         case .primary, .secondary, .tertiary, .primaryDark, .tertiaryDark:
-            setCornerRadius(frame.height / 2)
+            setCornerRadius(10)
         case .none:
             setCornerRadius(0)
         }

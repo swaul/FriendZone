@@ -19,7 +19,7 @@ class SetSocialMediaViewController: UIViewController {
         return viewController
     }
     
-    var onContinue: ((RegisterViewModel) -> Void)!
+    var onContinue: (() -> Void)!
     var onBack: (() -> Void)!
     
     var viewModel: RegisterViewModel!
@@ -27,7 +27,6 @@ class SetSocialMediaViewController: UIViewController {
     @IBOutlet var instagramTextField: DesignableTextField!
     @IBOutlet var tiktokTextField: DesignableTextField!
     @IBOutlet var snapchatTextField: DesignableTextField!
-    @IBOutlet var backButton: FriendZoneButton!
     @IBOutlet var continiueButton: FriendZoneButton!
 
     var cancellabels = Set<AnyCancellable>()
@@ -85,9 +84,6 @@ class SetSocialMediaViewController: UIViewController {
         snapchatTextField.textContentType = .username
         snapchatTextField.image = Asset.snapchat.image
         
-        backButton.setTitle("Zurück", for: .normal)
-        backButton.setStyle(.tertiary)
-        
         continiueButton.setTitle("Weiter", for: .normal)
         continiueButton.setStyle(.primary)
         
@@ -106,7 +102,7 @@ class SetSocialMediaViewController: UIViewController {
     let tiktokPlaceholder: String = "Dein tiktok Username"
     
     @IBAction func continueButtonTapped(_ sender: Any) {
-        onContinue(viewModel)
+        onContinue()
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {

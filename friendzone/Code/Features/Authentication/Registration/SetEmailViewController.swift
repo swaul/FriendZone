@@ -1,18 +1,16 @@
 //
-//  RegisterViewController.swift
+//  SetEmailViewController.swift
 //  friendzone
 //
-//  Created by Paul Kühnel on 30.04.22.
-//  Copyright © 2022 aaa - all about apps Gmbh. All rights reserved.
+//  Created by Paul Kühnel on 04.05.22.
 //
 
 import Foundation
 import UIKit
 import Combine
 import Toolbox
-import SimpleButton
 
-class RegisterViewController: UIViewController {
+class SetEmailViewController: UIViewController {
     
     public static func createWith(storyboard: Storyboard, viewModel: RegisterViewModel) -> Self {
         let viewController = UIStoryboard(storyboard).instantiateViewController(self)
@@ -21,9 +19,8 @@ class RegisterViewController: UIViewController {
     }
     
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var loginInsteadHintLabel: UILabel!
-    @IBOutlet var loginInsteadButton: SimpleButton!
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var emailTitleLabel: UILabel!
     @IBOutlet var continueButton: FriendZoneButton!
     
     var onContinue: ((RegisterViewModel) -> Void)!
@@ -43,22 +40,19 @@ class RegisterViewController: UIViewController {
             self?.updateSafeAreaInsets(keyboardInfo: info, animated: true)
         }.store(in: &cancellabels)
         
-        viewModel.$usernameValid.sink { [weak self] valid in
+        viewModel.$emailStepValid.sink { [weak self] valid in
             self?.continueButton.isEnabled = valid
         }.store(in: &cancellabels)
     }
     
     func setupView() {
-        nameTextField.delegate = self
+        emailTextField.delegate = self
 
-        nameTextField.placeholder = "Name"
-        nameTextField.textContentType = .name
-        nameTextField.becomeFirstResponder()
-        
-        loginInsteadHintLabel.setStyle(TextStyle.normalTiny)
-        loginInsteadHintLabel.text = "Ich habe bereits einen Account"
-        
-        loginInsteadButton.setTitle("Login", for: .normal)
+        emailTextField.placeholder = "Email"
+        emailTextField.textContentType = .emailAddress
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.becomeFirstResponder()
+
         continueButton.setStyle(.primary)
         continueButton.setTitle("Weiter", for: .normal)
         
@@ -70,7 +64,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func didTapOutside() {
-        nameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
@@ -79,15 +73,15 @@ class RegisterViewController: UIViewController {
     
 }
 
-extension RegisterViewController: UITextFieldDelegate {
+extension SetEmailViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        viewModel.name.value = text
+        viewModel.email.value = text
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        nameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
         return true
     }
     
