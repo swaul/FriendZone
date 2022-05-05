@@ -13,6 +13,15 @@ class RegisterCoordinator: CardCoordinator {
     
     override init() {
         super.init()
+        
+        cardViewController.onBack = { [weak self] in
+            if self?.navigationController.viewControllers.count == 1 {
+                self?.onDismiss()
+            } else {
+                self?.navigationController.popViewController(animated: true)
+            }
+        }
+        
         navigationController.setNavigationBarHidden(true, animated: true)
     }
     

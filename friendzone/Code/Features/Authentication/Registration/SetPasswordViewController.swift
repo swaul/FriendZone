@@ -56,6 +56,8 @@ class SetPasswordViewController: UIViewController {
     }
 
     func setupView() {
+        view.layer.cornerRadius = 20
+
         newPasswordTextfield.delegate = self
         confirmPasswordTextfield.delegate = self
         

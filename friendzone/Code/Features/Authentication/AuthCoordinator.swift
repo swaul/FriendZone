@@ -19,11 +19,10 @@ class AuthCoordinator: NavigationCoordinator {
     // MARK: Start
     
     override func start() {
-        let viewModel = LoginViewModel()
-        let viewController = LoginViewController.createWith(storyboard: .auth, viewModel: viewModel)
+        let viewController = WelcomeViewController.createWith(storyboard: .auth)
         
         viewController.onLogin = { [weak self] in
-            
+            self?.showLogin()
         }
         
         viewController.onRegister = { [weak self] in
@@ -33,9 +32,18 @@ class AuthCoordinator: NavigationCoordinator {
         push(viewController, animated: true)
     }
     
+    func showLogin() {
+        
+    }
+    
     func showRegistration() {
         let coordinator = RegisterCoordinator()
         coordinator.start()
+        
+        coordinator.onDismiss = { [weak self] in
+            self?.dismissChildCoordinator(animated: true)
+        }
+        
         present(coordinator, animated: true)
     }
 }

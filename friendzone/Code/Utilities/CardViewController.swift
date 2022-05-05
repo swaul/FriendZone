@@ -16,6 +16,7 @@ protocol InteractiveAnimationProvider: AnyObject {
 
 class CardViewController: UIViewController {
     var onDismiss: (() -> Void)!
+    var onBack: (() -> Void)!
 
     static func create() -> CardViewController {
         return CardViewController()
@@ -50,7 +51,7 @@ class CardViewController: UIViewController {
     
     lazy var backButton = UIButton().with {
         $0.setImage(.chevronLeft, for: .normal)
-        
+        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         $0.tintColor = .white
     }
 
@@ -137,6 +138,11 @@ class CardViewController: UIViewController {
 
     @objc func backgroundTapped() {
         onDismiss()
+    }
+    
+    
+    @objc func backButtonTapped() {
+        onBack()
     }
 
     // MARK: - Setting content

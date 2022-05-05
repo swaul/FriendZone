@@ -47,6 +47,8 @@ class SetProfilePictureViewController: UIViewController {
     }
     
     func setupView() {
+        view.layer.cornerRadius = 20
+
         profilePictureImageView.layer.cornerRadius = profilePictureImageView.bounds.height / 2
         profilePictureImageView.layer.borderWidth = 2
         profilePictureImageView.layer.borderColor = Asset.accentColor.color.cgColor

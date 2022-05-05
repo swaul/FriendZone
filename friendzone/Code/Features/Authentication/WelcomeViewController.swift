@@ -12,20 +12,17 @@ import Combine
 import SFSafeSymbols
 import Toolbox
 
-class LoginViewController: UIViewController {
+class WelcomeViewController: UIViewController {
     
-    public static func createWith(storyboard: Storyboard, viewModel: LoginViewModel) -> Self {
+    public static func createWith(storyboard: Storyboard) -> Self {
         let viewController = UIStoryboard(storyboard).instantiateViewController(self)
-        viewController.viewModel = viewModel
         return viewController
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
-    
-    var viewModel: LoginViewModel!
-    
+        
     var onLogin: (() -> Void)!
     var onRegister: (() -> Void)!
     
@@ -42,13 +39,13 @@ class LoginViewController: UIViewController {
     var cancellabels = Set<AnyCancellable>()
     
     func setupBindings() {
-        viewModel.$onLogin.sink { [weak self] onLogin in
-            if onLogin {
-                self?.viewModel.onLogin = false
-                self?.onLogin()
-            }
-        }.store(in: &cancellabels)
-        
+//        viewModel.$onLogin.sink { [weak self] onLogin in
+//            if onLogin {
+//                self?.viewModel.onLogin = false
+//                self?.onLogin()
+//            }
+//        }.store(in: &cancellabels)
+//        
         //        viewModel.$error.sink { [weak self] errorMessage in
         //            guard let errorMessage = errorMessage else {
         //                self?.passwordTextfield.error = false
@@ -127,7 +124,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        viewModel.login()
     }
     
     @IBAction func registerTapped(_ sender: Any) {

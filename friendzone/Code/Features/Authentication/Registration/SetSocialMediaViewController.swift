@@ -24,9 +24,12 @@ class SetSocialMediaViewController: UIViewController {
     
     var viewModel: RegisterViewModel!
     
-    @IBOutlet var instagramTextField: DesignableTextField!
-    @IBOutlet var tiktokTextField: DesignableTextField!
-    @IBOutlet var snapchatTextField: DesignableTextField!
+    @IBOutlet var instagramTitleLabel: UILabel!
+    @IBOutlet var instagramTextField: UITextField!
+    @IBOutlet var tiktokTitleLabel: UILabel!
+    @IBOutlet var tiktokTextField: UITextField!
+    @IBOutlet var snapchatTitleLabel: UILabel!
+    @IBOutlet var snapchatTextField: UITextField!
     @IBOutlet var continiueButton: FriendZoneButton!
 
     var cancellabels = Set<AnyCancellable>()
@@ -45,10 +48,10 @@ class SetSocialMediaViewController: UIViewController {
         viewModel.$instagramValid.sink { [weak self] isValid in
             guard let self = self, let isValid = isValid else { return }
             if isValid {
-                self.instagramTextField.error = false
+                self.instagramTextField.textColor = Asset.textColor.color
                 self.instagramTextField.placeholder = self.instaPlaceholder
             } else {
-                self.instagramTextField.error = true
+                self.instagramTextField.textColor = .systemRed
                 self.instagramTextField.placeholder = "Da scheint was nicht zu stimmen"
             }
         }.store(in: &cancellabels)
@@ -56,33 +59,33 @@ class SetSocialMediaViewController: UIViewController {
         viewModel.$tiktokValid.sink { [weak self] isValid in
             guard let self = self, let isValid = isValid else { return }
             if isValid {
-                self.tiktokTextField.error = false
+                self.tiktokTextField.textColor = Asset.textColor.color
                 self.tiktokTextField.placeholder = self.tiktokPlaceholder
             } else {
-                self.tiktokTextField.error = true
+                self.tiktokTextField.textColor = .systemRed
                 self.tiktokTextField.placeholder = "Da scheint was nicht zu stimmen"
             }
         }.store(in: &cancellabels)
     }
     
     func setupView() {
+        view.layer.cornerRadius = 20
+
+        instagramTitleLabel.text = "Instagram"
         instagramTextField.delegate = self
-        instagramTextField.configure(style: .primary)
         instagramTextField.placeholder = instaPlaceholder
         instagramTextField.textContentType = .username
-        instagramTextField.image = Asset.instagram.image
+        instagramTextField.leftView = UIImageView(image: Asset.instagram.image)
         
         tiktokTextField.delegate = self
-        tiktokTextField.configure(style: .primary)
         tiktokTextField.placeholder = tiktokPlaceholder
         tiktokTextField.textContentType = .username
-        tiktokTextField.image = Asset.tiktok.image
+        tiktokTextField.leftView = UIImageView(image: Asset.tiktok.image)
         
         snapchatTextField.delegate = self
-        snapchatTextField.configure(style: .primary)
         snapchatTextField.placeholder = "Dein Snapchat Username"
         snapchatTextField.textContentType = .username
-        snapchatTextField.image = Asset.snapchat.image
+        snapchatTextField.leftView = UIImageView(image: Asset.snapchat.image)
         
         continiueButton.setTitle("Weiter", for: .normal)
         continiueButton.setStyle(.primary)
@@ -104,10 +107,6 @@ class SetSocialMediaViewController: UIViewController {
     @IBAction func continueButtonTapped(_ sender: Any) {
         onContinue()
     }
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        onBack()
-    }
 }
 
 extension SetSocialMediaViewController: UITextFieldDelegate {
@@ -127,9 +126,9 @@ extension SetSocialMediaViewController: UITextFieldDelegate {
         if instagramTextField.isFirstResponder {
             tiktokTextField.becomeFirstResponder()
         } else if tiktokTextField.isFirstResponder {
-            
+            snapchatTextField.becomeFirstResponder()
         } else if snapchatTextField.isFirstResponder {
-            
+            snapchatTextField.resignFirstResponder()
         }
         
         return true
