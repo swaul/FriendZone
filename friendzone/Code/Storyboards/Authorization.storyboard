@@ -296,32 +296,59 @@
                                 <color key="textColor" name="primaryColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4R-E7-Aal">
-                                <rect key="frame" x="32" y="144" width="350" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rLq-5a-xlF">
-                                <rect key="frame" x="32" y="169" width="350" height="34"/>
-                                <color key="backgroundColor" red="0.4941176471" green="0.47843137250000001" blue="0.47843137250000001" alpha="0.14173828529999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O59-H7-360">
-                                <rect key="frame" x="32" y="244" width="350" height="34"/>
-                                <color key="backgroundColor" red="0.4941176471" green="0.47843137250000001" blue="0.47843137250000001" alpha="0.14173828529999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT6-ap-005">
-                                <rect key="frame" x="32" y="219" width="350" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VCL-Yr-8SV">
+                                <rect key="frame" x="32" y="144" width="350" height="198"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="av3-nT-LcZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="91"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4R-E7-Aal">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rLq-5a-xlF">
+                                                <rect key="frame" x="0.0" y="28.5" width="350" height="34"/>
+                                                <color key="backgroundColor" red="0.4941176471" green="0.47843137250000001" blue="0.47843137250000001" alpha="0.14173828529999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPq-nG-wTp" userLabel="Email Error Label">
+                                                <rect key="frame" x="0.0" y="70.5" width="350" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3m2-eA-OOO">
+                                        <rect key="frame" x="0.0" y="107" width="350" height="91"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT6-ap-005">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O59-H7-360">
+                                                <rect key="frame" x="0.0" y="28.5" width="350" height="34"/>
+                                                <color key="backgroundColor" red="0.4941176471" green="0.47843137250000001" blue="0.47843137250000001" alpha="0.14173828529999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbT-Br-eMf" userLabel="Password Error Label">
+                                                <rect key="frame" x="0.0" y="70.5" width="350" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhP-5E-gK5" customClass="FriendZoneButton" customModule="friendzone" customModuleProvider="target">
-                                <rect key="frame" x="40" y="290" width="132.5" height="31"/>
+                                <rect key="frame" x="40" y="354" width="132.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Forgot password"/>
                             </button>
@@ -334,7 +361,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghg-6t-sxY">
-                                <rect key="frame" x="164" y="325" width="86.5" height="32"/>
+                                <rect key="frame" x="164" y="389" width="86.5" height="32"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9X-Vd-rM0">
                                         <rect key="frame" x="32.5" y="4" width="50" height="24"/>
@@ -368,32 +395,25 @@
                             <constraint firstItem="Ghg-6t-sxY" firstAttribute="centerX" secondItem="DtH-AZ-R8N" secondAttribute="centerX" id="2Hy-J7-gPS"/>
                             <constraint firstItem="Ghg-6t-sxY" firstAttribute="top" secondItem="JhP-5E-gK5" secondAttribute="bottom" constant="4" id="4Sw-54-76W"/>
                             <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="R5t-AH-1g0" secondAttribute="trailing" constant="32" id="8ZU-b6-ZGo"/>
-                            <constraint firstItem="JT6-ap-005" firstAttribute="top" secondItem="rLq-5a-xlF" secondAttribute="bottom" constant="16" id="9mm-T3-aso"/>
-                            <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="L4R-E7-Aal" secondAttribute="trailing" constant="32" id="AJe-iq-OIO"/>
                             <constraint firstItem="JhP-5E-gK5" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="40" id="AMR-uP-y7Q"/>
-                            <constraint firstItem="JhP-5E-gK5" firstAttribute="top" secondItem="O59-H7-360" secondAttribute="bottom" constant="12" id="Bo0-bl-9PT"/>
-                            <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="O59-H7-360" secondAttribute="trailing" constant="32" id="Etu-g5-RdT"/>
                             <constraint firstItem="R5t-AH-1g0" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="HqS-SJ-qPz"/>
-                            <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="JT6-ap-005" secondAttribute="trailing" constant="32" id="OgO-NB-cC4"/>
                             <constraint firstItem="R5t-AH-1g0" firstAttribute="top" secondItem="Zay-Nt-9LA" secondAttribute="top" constant="16" id="PjR-PY-eeB"/>
-                            <constraint firstItem="L4R-E7-Aal" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="W3e-rb-lzL"/>
-                            <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="rLq-5a-xlF" secondAttribute="trailing" constant="32" id="Xfw-pE-bVY"/>
+                            <constraint firstItem="VCL-Yr-8SV" firstAttribute="top" secondItem="R5t-AH-1g0" secondAttribute="bottom" constant="48" id="Q1T-dg-6PQ"/>
+                            <constraint firstItem="JhP-5E-gK5" firstAttribute="top" secondItem="VCL-Yr-8SV" secondAttribute="bottom" constant="12" id="Xqu-BQ-Vij"/>
+                            <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="VCL-Yr-8SV" secondAttribute="trailing" constant="32" id="aJN-Nz-6Hg"/>
+                            <constraint firstItem="VCL-Yr-8SV" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="bbR-HZ-MWU"/>
                             <constraint firstItem="Zay-Nt-9LA" firstAttribute="bottom" secondItem="OSP-6i-PjD" secondAttribute="bottom" constant="16" id="cF3-yW-TP4"/>
-                            <constraint firstItem="L4R-E7-Aal" firstAttribute="top" secondItem="R5t-AH-1g0" secondAttribute="bottom" constant="48" id="dnf-xs-Xwh"/>
-                            <constraint firstItem="JT6-ap-005" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="haP-nu-DEZ"/>
                             <constraint firstItem="Zay-Nt-9LA" firstAttribute="trailing" secondItem="OSP-6i-PjD" secondAttribute="trailing" constant="32" id="l5g-Sj-ya2"/>
                             <constraint firstItem="OSP-6i-PjD" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="lGF-Ts-mP7"/>
-                            <constraint firstItem="O59-H7-360" firstAttribute="top" secondItem="JT6-ap-005" secondAttribute="bottom" constant="4" id="n8R-sc-2hd"/>
-                            <constraint firstItem="rLq-5a-xlF" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="o3z-wf-c9r"/>
-                            <constraint firstItem="O59-H7-360" firstAttribute="leading" secondItem="Zay-Nt-9LA" secondAttribute="leading" constant="32" id="qBe-V1-6ts"/>
-                            <constraint firstItem="rLq-5a-xlF" firstAttribute="top" secondItem="L4R-E7-Aal" secondAttribute="bottom" constant="4" id="uUN-qL-lIU"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailErrorLabel" destination="EPq-nG-wTp" id="l9D-Q4-YAz"/>
                         <outlet property="emailTextField" destination="rLq-5a-xlF" id="OjU-N2-3bt"/>
                         <outlet property="emailTitleLabel" destination="L4R-E7-Aal" id="XUY-Yx-Hwo"/>
                         <outlet property="forgotPasswordButton" destination="JhP-5E-gK5" id="a9F-b8-YwQ"/>
                         <outlet property="loginButton" destination="OSP-6i-PjD" id="q3K-0P-ddb"/>
+                        <outlet property="passwordErrorLabel" destination="cbT-Br-eMf" id="dMT-r3-J6s"/>
                         <outlet property="passwordTextfield" destination="O59-H7-360" id="8rr-y2-Xof"/>
                         <outlet property="passwordTitleLabel" destination="JT6-ap-005" id="g73-Xh-MxQ"/>
                         <outlet property="registerButton" destination="l9X-Vd-rM0" id="MMM-ap-7bO"/>

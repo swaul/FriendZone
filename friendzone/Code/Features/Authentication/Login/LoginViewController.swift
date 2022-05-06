@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
     @IBOutlet var registerHintLabel: UILabel!
     @IBOutlet var registerButton: UIButton!
     @IBOutlet var loginButton: FriendZoneButton!
+    @IBOutlet var emailErrorLabel: UILabel!
+    @IBOutlet var passwordErrorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +48,32 @@ class LoginViewController: UIViewController {
                 self?.onLogin()
             }
         }.store(in: &cancellabels)
-
-        passwordTextfield.publisher(for: \.isSecureTextEntry).sink { [weak self] isSecure in
-            if isSecure {
-                self?.passwordTextfield.rightView = UIImageView(image: UIImage(systemSymbol: .eyeSlash))
+        
+        Publishers.CombineLatest(viewModel.email.$validation, viewModel.password.$validation).sink { [weak self] (emailValid, passwordValid) in
+            self?.loginButton.isEnabled = emailValid.isValid && passwordValid.isValid
+            if let error = emailValid.errorMessage {
+                self?.viewModel.emailError = error
+            }
+            if let error = passwordValid.errorMessage {
+                self?.viewModel.emailError = error
+            }
+        }.store(in: &cancellabels)
+        
+        viewModel.$passwordError.sink { [weak self] error in
+            if let error = error {
+                self?.passwordErrorLabel.isHidden = false
+                self?.passwordErrorLabel.text = error
             } else {
-                self?.passwordTextfield.rightView = UIImageView(image: UIImage(systemSymbol: .eye))
+                self?.passwordErrorLabel.isHidden = true
+            }
+        }.store(in: &cancellabels)
+        
+        viewModel.$emailError.sink { [weak self] error in
+            if let error = error {
+                self?.emailErrorLabel.isHidden = false
+                self?.emailErrorLabel.text = error
+            } else {
+                self?.emailErrorLabel.isHidden = true
             }
         }.store(in: &cancellabels)
     }
@@ -65,12 +87,19 @@ class LoginViewController: UIViewController {
         emailTextField.placeholder = "Deine E-Mail"
         emailTextField.textContentType = .emailAddress
         emailTextField.keyboardType = .emailAddress
+        emailErrorLabel.setStyle(TextStyle.errorText)
+        emailErrorLabel.isHidden = true
         
         passwordTitleLabel.text = "Password"
         passwordTextfield.delegate = self
         passwordTextfield.placeholder = "Dein Passwort"
         passwordTextfield.textContentType = .password
         passwordTextfield.isSecureTextEntry = true
+        passwordTextfield.rightViewMode = .always
+        passwordTextfield.rightView?.isUserInteractionEnabled = true
+        passwordTextfield.enablePasswordToggle()
+        passwordErrorLabel.setStyle(TextStyle.errorText)
+        passwordErrorLabel.isHidden = true
         
         forgotPasswordButton.setStyle(.tertiary)
         forgotPasswordButton.setTitle("Password vergessen", for: .normal)
@@ -98,13 +127,21 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if emailTextField.isFirstResponder {
+            emailErrorLabel.isHidden = true
+        } else if passwordTextfield.isFirstResponder {
+            passwordErrorLabel.isHidden = true
+        }
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if emailTextField.isFirstResponder {
-            viewModel.email = text
+            viewModel.email.value = text
             textField.returnKeyType = .continue
         } else if passwordTextfield.isFirstResponder {
-            viewModel.password = text
+            viewModel.password.value = text
             textField.returnKeyType = .send
         }
     }
@@ -118,4 +155,28 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+extension UITextField {
+    fileprivate func setPasswordToggleImage(_ button: UIButton) {
+        if isSecureTextEntry {
+            button.setImage(UIImage(systemSymbol: .eyeSlash), for: .normal)
+        } else {
+            button.setImage(UIImage(systemSymbol: .eye), for: .normal)
+        }
+    }
+    
+    func enablePasswordToggle() {
+        let button = UIButton(type: .custom)
+        setPasswordToggleImage(button)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        button.frame = CGRect(x: CGFloat(self.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
+        button.addTarget(self, action: #selector(self.togglePasswordView), for: .touchUpInside)
+        self.rightView = button
+        self.rightViewMode = .always
+    }
+    @objc func togglePasswordView(_ sender: Any) {
+        self.isSecureTextEntry = !self.isSecureTextEntry
+        setPasswordToggleImage(sender as! UIButton)
+    }
 }

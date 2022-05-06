@@ -19,7 +19,6 @@
 		2B4078944203D8A41757C2E7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97635C8CFC060CCA53D0E9BF /* AppCoordinator.swift */; };
 		3AF0388F1D95160A10C72B21 /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDA0D2096BB19BD7E99001D /* TemplateViewController.swift */; };
 		4FFB9EC7934E131655729B78 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45DC28C0E687C764FFCCF9 /* Weak.swift */; };
-		5636A7EBE2FA10E971EC7400 /* friendzoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; };
 		5C280DE09C9AA8B7F203192D /* friendzoneKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B5394B1B396189E3DA2BAFC /* friendzoneKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E13D4B07849BE36B65F6A7A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAABD047E36454FFD5E6C17E /* Formatters.swift */; };
 		781F7C7A73769EF72CDDFE4A /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31918F371436960CC3327AF4 /* Assets.swift */; };
@@ -72,6 +71,7 @@
 		9EED0CD62823FDC60046AEEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */; };
 		9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */; };
 		9EED0CDD28250DA80046AEEC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CDC28250DA80046AEEC /* ConfettiView.swift */; };
+		9EED0CDE28255C2E0046AEEC /* friendzoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -79,7 +79,6 @@
 		D829FEC506D59CBB008223C0 /* DataSource in Frameworks */ = {isa = PBXBuildFile; productRef = C8D36C8F213E50486B7CB7D4 /* DataSource */; };
 		E54BADB31CB040FD3AEA46FE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871F735C1AF27D272483D1EE /* Appearance.swift */; };
 		F4EC279B43421B6A6EA3C16F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3000B83750C14BCF08771 /* Settings.bundle */; };
-		F6D7FCFFE92F12979B8D9AF6 /* friendzoneKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FB4B2B21829C7D09F8382D77 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06CB228569057750D0B824 /* Strings.swift */; };
 		FDCFF6B74CB7DB68CDF7BC7F /* Fetch in Frameworks */ = {isa = PBXBuildFile; productRef = C395B301798EFD9CE6287FB7 /* Fetch */; };
 /* End PBXBuildFile section */
@@ -93,20 +92,6 @@
 			remoteInfo = friendzoneKit;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		133248ECA1AC8930A9F9E4CF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F6D7FCFFE92F12979B8D9AF6 /* friendzoneKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		043AE38D39252DD0AC23E72F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -184,7 +169,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E22E67A28204C480030DF7C /* SFSafeSymbols in Frameworks */,
-				5636A7EBE2FA10E971EC7400 /* friendzoneKit.framework in Frameworks */,
 				9E50C399281C2D020008BFDD /* FirebaseAuth in Frameworks */,
 				C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */,
 				9E50C39B281C2D020008BFDD /* FirebaseCrashlytics in Frameworks */,
@@ -193,6 +177,7 @@
 				9E50C39F281C2D020008BFDD /* FirebaseStorage in Frameworks */,
 				9E50C39D281C2D020008BFDD /* FirebaseDatabase in Frameworks */,
 				9E50C38C281B49630008BFDD /* TinyConstraints in Frameworks */,
+				9EED0CDE28255C2E0046AEEC /* friendzoneKit.framework in Frameworks */,
 				9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,7 +512,6 @@
 				A66CE9453EB78493B65B574A /* Copy GoogleService-Info */,
 				438FB7206FBF74985D59FA4F /* Resources */,
 				028743C166640F82FB6706F1 /* Frameworks */,
-				133248ECA1AC8930A9F9E4CF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -792,12 +776,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-dev";
 				PRODUCT_NAME = friendzone;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug-Dev";
 		};
@@ -825,7 +809,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug-Live";
@@ -967,12 +952,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-dev";
 				PRODUCT_NAME = friendzone;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release-Dev";
 		};
@@ -1113,12 +1098,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = friendzone;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug-Live";
 		};
@@ -1146,7 +1131,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug-Dev";
@@ -1175,7 +1161,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug-Staging";
@@ -1195,12 +1182,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-staging";
 				PRODUCT_NAME = friendzone;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug-Staging";
 		};
@@ -1276,12 +1263,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-staging";
 				PRODUCT_NAME = friendzone;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release-Staging";
 		};
@@ -1309,7 +1296,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Release-Staging";
@@ -1329,12 +1317,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = friendzone;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release-Live";
 		};
@@ -1427,7 +1415,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Release-Dev";
@@ -1456,7 +1445,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Release-Live";

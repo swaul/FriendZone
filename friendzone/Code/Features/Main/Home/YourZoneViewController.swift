@@ -265,9 +265,7 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         popUpView.center = popUpHiddenCenter
         popUpView.alpha = 0
         popUpView.layer.cornerRadius = 20
-        
-        selectedUserImageView.image = Asset.selectedUserImage.image
-        
+                
         selectedUserImageView.layer.cornerRadius = 60
         selectedUserImageView.layer.borderWidth = 4
         selectedUserImageView.layer.borderColor = Asset.accentColor.color.cgColor
@@ -276,9 +274,6 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         selectedUserImageMiddleView.layer.cornerRadius = 10
         selectedUserImageRightView.layer.cornerRadius = 10
 
-        selectedUserImageLeftView.image = Asset.left.image
-        selectedUserImageMiddleView.image = Asset.middle.image
-        selectedUserImageRightView.image = Asset.right.image
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

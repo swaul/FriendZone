@@ -19,7 +19,7 @@ public class LoadableSharedResource<T: FirebaseDecodable> {
 public enum FirebaseError: Error {
     case unknownError(error: Error)
     case urlNotFound
-    case shareNoteNoteConstructed
+    case authError
     case genericError
 }
 

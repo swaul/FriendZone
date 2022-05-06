@@ -43,6 +43,10 @@ class AppCoordinator: Coordinator {
         let coordinator = MainCoordinator()
         coordinator.start()
         
+        coordinator.loginRequired = { [weak self] in
+            self?.checkCredentials(animated: true)
+        }
+        
         addChild(coordinator)
         window.rootViewController = coordinator.rootViewController
     }
