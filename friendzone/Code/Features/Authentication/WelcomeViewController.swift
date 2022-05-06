@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 import Combine
 import SFSafeSymbols
 import Toolbox
+import ConfettiSwiftUI
 
 class WelcomeViewController: UIViewController {
     
@@ -27,18 +29,28 @@ class WelcomeViewController: UIViewController {
     var onRegister: (() -> Void)!
     var onRegistered: (() -> Void)!
     
+    @IBOutlet var confettiView: UIView!
     @IBOutlet var authButtonView: UIView!
     @IBOutlet var welcomeTitleLabel: UILabel!
     @IBOutlet var headerView: UIView!
     @IBOutlet var registerButton: FriendZoneButton!
     @IBOutlet var loginButton: FriendZoneButton!
-    
+    @IBOutlet var personImage: UIImageView!
+    @IBOutlet var teamImage: UIImageView!
+    @IBOutlet var coupleImage: UIImageView!
+    @IBOutlet var friendImage: UIImageView!
+    @IBOutlet var backgroundView: UIView!
+        
+    var loggedIn: Bool = false
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
       
     func setupView() {
+        confettiView.isHidden = true
+
         let framer = RectFramer(withView: headerView)
         framer.drawLineIn(withRectRef: framer)
         framer.drawUpperLineIn(withRectRef: framer)
@@ -48,29 +60,58 @@ class WelcomeViewController: UIViewController {
         registerButton.setStyle(.primaryDark)
         registerButton.setTitle("Neues Konto erstellen", for: .normal)
         headerView.layer.cornerRadius = 10
+        
+        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY), endPoint: CGPoint(x: friendImage.frame.midX, y: friendImage.frame.midY))
+        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.9), endPoint: CGPoint(x: coupleImage.frame.midX, y: coupleImage.frame.midY))
+        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.8), endPoint: CGPoint(x: teamImage.frame.midX, y: teamImage.frame.midY))
     }
     
     var timer: Timer?
     
     func showSuccessfulRegistration() {
+        backgroundView.isHidden = true
         authButtonView.isHidden = true
         welcomeTitleLabel.text = "Geschafft!"
-        popSelf()
-    }
-    
-    func popSelf() {
-        timer?.invalidate()
-        print("timer started")
-        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
-            self.onRegistered()
+        registerButton.setTitle("Los gehts!", for: .normal)
+        confettiView.isHidden = false
+        loggedIn = true
+        if let viewda = UIHostingController.init(rootView: ConfettiView()).view {
+        confettiView.addSubview(viewda)
+        confettiView.frame = viewda.frame
         }
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
+        onLogin()
     }
     
     @IBAction func registerTapped(_ sender: Any) {
-        onRegister()
+        if loggedIn {
+            onRegistered()
+        } else {
+            onRegister()
+        }
+    }
+    
+    var confettiSwiftUIView = ConfettiView()
+    
+    func drawLine(startPoint: CGPoint, endPoint: CGPoint) {
+        let path = UIBezierPath()
+        path.move(to: startPoint)
+        path.addLine(to: endPoint)
+    
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+        shapeLayer.strokeColor = UIColor.systemGreen.cgColor
+        shapeLayer.lineWidth = 4
+        shapeLayer.path = path.cgPath
+        shapeLayer.lineDashPattern = [3, 3, 3]
+                
+        backgroundView.layer.insertSublayer(shapeLayer, at: 0)
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.duration = 1
+        shapeLayer.add(animation, forKey: "MyAnimation")
     }
     
 }

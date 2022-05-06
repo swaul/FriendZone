@@ -53,7 +53,6 @@
 		9E50C39B281C2D020008BFDD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9E50C39A281C2D020008BFDD /* FirebaseCrashlytics */; };
 		9E50C39D281C2D020008BFDD /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9E50C39C281C2D020008BFDD /* FirebaseDatabase */; };
 		9E50C39F281C2D020008BFDD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9E50C39E281C2D020008BFDD /* FirebaseStorage */; };
-		9E50C3A1281C2F2B0008BFDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E50C3A0281C2F2B0008BFDD /* GoogleService-Info.plist */; };
 		9E50C3A7281CA4090008BFDD /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E50C3A6281CA4090008BFDD /* DesignableTextField.swift */; };
 		9E50C3AB281D5BF60008BFDD /* SetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */; };
 		9E50C3AD281D5C0B0008BFDD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E50C3AC281D5C0B0008BFDD /* RegisterViewController.swift */; };
@@ -70,6 +69,9 @@
 		9EED0CCE2822BA710046AEEC /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */; };
 		9EED0CD02823E7920046AEEC /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */; };
 		9EED0CD42823F1080046AEEC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CD32823F1080046AEEC /* LoginViewController.swift */; };
+		9EED0CD62823FDC60046AEEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */; };
+		9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */; };
+		9EED0CDD28250DA80046AEEC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CDC28250DA80046AEEC /* ConfettiView.swift */; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -147,7 +149,6 @@
 		9E50C38F281C28020008BFDD /* Authorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		9E50C391281C2B2A0008BFDD /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9E50C393281C2B5F0008BFDD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		9E50C3A0281C2F2B0008BFDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E50C3A6281CA4090008BFDD /* DesignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordViewController.swift; sourceTree = "<group>"; };
 		9E50C3AC281D5C0B0008BFDD /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +165,8 @@
 		9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		9EED0CD32823F1080046AEEC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9EED0CDC28250DA80046AEEC /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		BDED4A77DB95E3B3172963C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		D053B79F9B078A665D55AC2F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -190,6 +193,7 @@
 				9E50C39F281C2D020008BFDD /* FirebaseStorage in Frameworks */,
 				9E50C39D281C2D020008BFDD /* FirebaseDatabase in Frameworks */,
 				9E50C38C281B49630008BFDD /* TinyConstraints in Frameworks */,
+				9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +253,7 @@
 		25B0A302F3815A3DD53C3D98 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				9E50C3A0281C2F2B0008BFDD /* GoogleService-Info.plist */,
+				9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */,
 				90F44006E313BD2D2CB199B3 /* Info.plist */,
 				8BD3000B83750C14BCF08771 /* Settings.bundle */,
 				99D67423AC938875518F9720 /* Configurations */,
@@ -483,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				83FC2093EA4E47651633A947 /* .gitkeep */,
+				9EED0CDC28250DA80046AEEC /* ConfettiView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				9E50C39E281C2D020008BFDD /* FirebaseStorage */,
 				9E22E66C281EE9E60030DF7C /* FirebaseFirestore */,
 				9E22E67928204C480030DF7C /* SFSafeSymbols */,
+				9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */,
 			);
 			productName = friendzone;
 			productReference = 45C1A0FEB648D2F7EB6FE3A6 /* friendzone.app */;
@@ -601,6 +607,7 @@
 				9E50C38A281B49630008BFDD /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 				9E50C395281C2D020008BFDD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9E22E67828204C480030DF7C /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				9EED0CD9282505ED0046AEEC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -616,12 +623,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E50C3A1281C2F2B0008BFDD /* GoogleService-Info.plist in Resources */,
 				9E50C390281C28020008BFDD /* Authorization.storyboard in Resources */,
 				9E95E9BA281AE32700639243 /* UserNearbyTableViewCell.xib in Resources */,
 				CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */,
 				0574351BFB13B92B42E762E8 /* LaunchScreen.storyboard in Resources */,
 				F4EC279B43421B6A6EA3C16F /* Settings.bundle in Resources */,
+				9EED0CD62823FDC60046AEEC /* GoogleService-Info.plist in Resources */,
 				9E95E9B3281ADD8600639243 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,6 +740,7 @@
 				9E95E9AF281ADD3F00639243 /* YourZoneViewController.swift in Sources */,
 				9E22E660281E844A0030DF7C /* ValidatedText.swift in Sources */,
 				9E22E662281E957C0030DF7C /* FirebaseHandler.swift in Sources */,
+				9EED0CDD28250DA80046AEEC /* ConfettiView.swift in Sources */,
 				9EDA92A528224E6B003461DE /* RegisterCoordinator.swift in Sources */,
 				9E22E66A281ED8190030DF7C /* HistoryCoordinator.swift in Sources */,
 				9E50C394281C2B5F0008BFDD /* LoginViewModel.swift in Sources */,
@@ -1562,6 +1570,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		9EED0CD9282505ED0046AEEC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		BB36EA5C9C473900A88DCCD0 /* XCRemoteSwiftPackageReference "SimpleButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/allaboutapps/SimpleButton";
@@ -1638,6 +1654,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9E50C395281C2D020008BFDD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EED0CD9282505ED0046AEEC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
 		};
 		C395B301798EFD9CE6287FB7 /* Fetch */ = {
 			isa = XCSwiftPackageProductDependency;

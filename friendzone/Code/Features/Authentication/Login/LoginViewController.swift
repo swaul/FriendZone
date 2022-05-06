@@ -21,8 +21,15 @@ class LoginViewController: UIViewController {
     
     var viewModel: LoginViewModel!
     
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var passwordTextfield: UITextField!
     @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var emailTitleLabel: UILabel!
+    @IBOutlet var passwordTitleLabel: UILabel!
+    @IBOutlet var forgotPasswordButton: FriendZoneButton!
+    @IBOutlet var registerHintLabel: UILabel!
+    @IBOutlet var registerButton: UIButton!
+    @IBOutlet var loginButton: FriendZoneButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +46,7 @@ class LoginViewController: UIViewController {
                 self?.onLogin()
             }
         }.store(in: &cancellabels)
-        
-        viewModel.$error.sink { [weak self] errorMessage in
-//            guard let errorMessage = errorMessage else {
-//                self?.passwordTextfield.error = false
-//                return
-//            }
-//            self?.passwordTextfield.error = true
-            //                    self?.errorLabel.text = errorMessage
-            //                    self?.errorLabel.isHidden = false
-        }.store(in: &cancellabels)
-        
+
         passwordTextfield.publisher(for: \.isSecureTextEntry).sink { [weak self] isSecure in
             if isSecure {
                 self?.passwordTextfield.rightView = UIImageView(image: UIImage(systemSymbol: .eyeSlash))
@@ -63,19 +60,27 @@ class LoginViewController: UIViewController {
         
         view.layer.cornerRadius = 20
         
+        emailTitleLabel.text = "E-mail"
         emailTextField.delegate = self
-        emailTextField.placeholder = "E-Mail"
+        emailTextField.placeholder = "Deine E-Mail"
         emailTextField.textContentType = .emailAddress
         emailTextField.keyboardType = .emailAddress
         
+        passwordTitleLabel.text = "Password"
         passwordTextfield.delegate = self
-        passwordTextfield.placeholder = "Passwort"
+        passwordTextfield.placeholder = "Dein Passwort"
         passwordTextfield.textContentType = .password
         passwordTextfield.isSecureTextEntry = true
         
-        //                errorLabel.setStyle(TextStyle.errorText)
-        //                errorLabel.isHidden = viewModel.error == nil
-        //
+        forgotPasswordButton.setStyle(.tertiary)
+        forgotPasswordButton.setTitle("Password vergessen", for: .normal)
+        
+        registerHintLabel.text = "Ich habe noch keinen Account"
+        registerButton.setTitle("Registrieren", for: .normal)
+        
+        loginButton.setStyle(.primary)
+        loginButton.setTitle("Login", for: .normal)
+    
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
@@ -86,6 +91,9 @@ class LoginViewController: UIViewController {
         passwordTextfield.resignFirstResponder()
     }
     
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        viewModel.login()
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {

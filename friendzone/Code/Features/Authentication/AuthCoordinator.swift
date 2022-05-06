@@ -39,7 +39,18 @@ class AuthCoordinator: NavigationCoordinator {
     }
     
     func showLogin() {
+        let coordinator = LoginCoordinator()
+        coordinator.start()
         
+        coordinator.onDismiss = { [weak self] in
+            self?.dismissChildCoordinator(animated: true)
+        }
+        
+        coordinator.onLogin = { [weak self] in
+            self?.onLogin()
+        }
+        
+        present(coordinator, animated: true)
     }
     
     func showRegistration() {

@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "confettiswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simibac/ConfettiSwiftUI.git",
+      "state" : {
+        "revision" : "7b86d9f838a32ecfad8e69c7dbf900fea7500c76",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "datasource",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/allaboutapps/DataSource",

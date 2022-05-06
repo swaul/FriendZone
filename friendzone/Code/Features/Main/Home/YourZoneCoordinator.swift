@@ -17,6 +17,8 @@ class YourZoneCoordinator: NavigationCoordinator {
     
     // MARK: Start
     
+    var loginRequired: (() -> Void)!
+    
     override func start() {
         let viewModel = YourZoneViewModel()
         let viewController = YourZoneViewController.createWith(storyboard: .main, viewModel: viewModel)
@@ -24,7 +26,7 @@ class YourZoneCoordinator: NavigationCoordinator {
         navigationController.setNavigationBarHidden(true, animated: true)
         
         viewController.loginRequired = { [weak self] in
-            self?.presentLogin(animated: true)
+            self?.loginRequired()
         }
         
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .house)
@@ -32,12 +34,4 @@ class YourZoneCoordinator: NavigationCoordinator {
         push(viewController, animated: true)
     }
     
-    private func presentLogin(animated: Bool) {
-        let coordinator = AuthCoordinator()
-        
-        coordinator.start()
-        
-        addChild(coordinator)
-        present(coordinator.rootViewController, animated: animated, completion: nil)
-    }
 }

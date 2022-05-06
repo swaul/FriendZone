@@ -9,16 +9,25 @@ import Foundation
 
 class LoginCoordinator: CardCoordinator {
     
-    var onSubmit: (() -> Void)!
+    var onLogin: (() -> Void)!
     
     override init() {
         super.init()
+        
+        cardViewController.onBack = { [weak self] in
+            self?.onDismiss()
+        }
+        
         navigationController.setNavigationBarHidden(true, animated: true)
     }
     
     override func start() {
         let viewModel = LoginViewModel()
         let viewController = LoginViewController.createWith(storyboard: .auth, viewModel: viewModel)
+        
+        viewController.onLogin = { [weak self] in
+            self?.onLogin()
+        }
         
         navigationController.pushViewController(viewController, animated: true)
     }

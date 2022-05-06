@@ -11,20 +11,19 @@ class AppCoordinator: Coordinator {
     
     var window: UIWindow!
     let mainCoordinator = MainCoordinator()
-    let authCoordinator = AuthCoordinator()
     
     func start(window: UIWindow) {
         self.window = window
         
-        authCoordinator.start()
+        mainCoordinator.start()
         
-        authCoordinator.onLogin = { [weak self] in
-            self?.reset(animated: true)
+        mainCoordinator.loginRequired = { [weak self] in
+            self?.checkCredentials(animated: true)
         }
         
-        addChild(authCoordinator)
+        addChild(mainCoordinator)
         
-        window.rootViewController = authCoordinator.rootViewController
+        window.rootViewController = mainCoordinator.rootViewController
         window.makeKeyAndVisible()
         
         printRootDebugStructure()
@@ -33,13 +32,38 @@ class AppCoordinator: Coordinator {
     }
     
     func checkCredentials(animated: Bool = true) {
-        if Auth.auth().currentUser != nil {
-            mainCoordinator.start()
-            addChild(mainCoordinator)
-            
-            window.rootViewController = mainCoordinator.rootViewController
-            window.makeKeyAndVisible()
+        if Auth.auth().currentUser == nil {
+            // not logged in
+            presentLogin(animated: animated)
         }
+    }
+    
+    func presentMain() {
+        childCoordinators.removeAll()
+        let coordinator = MainCoordinator()
+        coordinator.start()
+        
+        addChild(coordinator)
+        window.rootViewController = coordinator.rootViewController
+    }
+    
+    var loginVisible: Bool {
+        childCoordinators.contains { $0 is AuthCoordinator }
+    }
+    
+    private func presentLogin(animated: Bool) {
+        guard !loginVisible else { return }
+        
+        let coordinator = AuthCoordinator()
+        
+        coordinator.onLogin = { [weak self] in
+            self?.presentMain()
+        }
+        
+        coordinator.start()
+        
+        addChild(coordinator)
+        window.rootViewController = coordinator.rootViewController
     }
     
     func reset(animated: Bool) {
@@ -54,18 +78,5 @@ class AppCoordinator: Coordinator {
         window.makeKeyAndVisible()
         
         printRootDebugStructure()
-    }
-    
-    private func presentLogin(animated: Bool) {
-        let coordinator = AuthCoordinator()
-        
-        coordinator.onLogin = { [weak self] in
-            self?.reset(animated: true)
-        }
-        
-        coordinator.start()
-        
-        addChild(coordinator)
-        window.topViewController()?.present(coordinator.rootViewController, animated: animated, completion: nil)
     }
 }

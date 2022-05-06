@@ -7,11 +7,17 @@ class MainCoordinator: TabBarCoordinator {
     
     // MARK: Start
     
+    var loginRequired: (() -> Void)!
+    
     var yourZoneCoordinator = YourZoneCoordinator()
     
     override func start() {
         addChild(yourZoneCoordinator)
         yourZoneCoordinator.start()
+        
+        yourZoneCoordinator.loginRequired = { [weak self] in
+            self?.loginRequired()
+        }
         
         let profile = ProfileCoordinator()
         profile.start()

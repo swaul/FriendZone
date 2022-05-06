@@ -276,7 +276,7 @@ class RegisterViewModel {
         let data: [String: Any] = [
             "email": email.value!,
             "name": name.value!,
-            "bio": bio,
+            "bio": bio ?? "",
             "score": 0,
             "instagram": instagram ?? "",
             "tiktok": tiktok ?? "",
@@ -288,7 +288,11 @@ class RegisterViewModel {
     
     func uploadUserInfo(userId: String) {
         var data = toData()
-        data["profilePicture"] = userId
+        if profilePicture != nil {
+            data["profilePicture"] = userId
+        } else {
+            data["profilePicture"] = ""
+        }
         data["id"] = userId
         FirebaseHandler.shared.uploadUserData(userId: userId, data: data) { [weak self] result in
             switch result {
