@@ -113,7 +113,6 @@ class WelcomeViewController: UIViewController {
         animation.duration = 1
         shapeLayer.add(animation, forKey: "MyAnimation")
     }
-    
 }
 
 internal struct RectFramer {

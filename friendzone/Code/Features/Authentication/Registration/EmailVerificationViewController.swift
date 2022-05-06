@@ -55,10 +55,28 @@ class EmailVerificationViewController: UIViewController {
         }.store(in: &cancellabels)
     }
     
+    func hideMidChars(_ value: String) -> String {
+       return String(value.enumerated().map { index, char in
+          return [0, 1, value.count - 1, value.count - 0].contains(index) ? char : "*"
+       })
+    }
+    
+    func hideMailMid(_ value: String) -> String {
+        guard value.contains("@") else { return "" }
+        let components = value.components(separatedBy: "@")
+        let result = hideMidChars(components.first!) + "@" + components.last!
+        return result
+    }
+    
     func setupView() {
         titleLabel.text = "Verifizieren"
         
-        verifyHintLabel.text = "Zur Sicherheit haben wir dir eine Email mit einem Link geschickt. Bitte bestätige damit deine Email und klicke anschließend auf weiter!"
+        verifyHintLabel.text = """
+        Zur Sicherheit haben wir dir eine Email an
+        \(hideMailMid(viewModel.email.value!))
+        mit einem Link geschickt.
+        Bitte bestätige damit deine Email und klicke anschließend auf weiter!
+        """
         verifyHintLabel.setStyle(TextStyle.blueSmall)
         
         continueButton.setStyle(.primary)

@@ -14,7 +14,6 @@ class AuthCoordinator: NavigationCoordinator {
     override init(navigationController: UINavigationController = UINavigationController()) {
         super.init(navigationController: navigationController)
         navigationController.setNeedsStatusBarAppearanceUpdate()
-        navigationController.isModalInPresentation = true
         navigationController.setNavigationBarHidden(true, animated: true)
     }
     
