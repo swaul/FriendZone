@@ -37,9 +37,11 @@ public struct TextStyle {
     static let lightBody = Style(font: UIFont.FZ.boldTextFont.withSize(14.0), color: Asset.placeHolderTextColor.color)
     static let primaryCaption1 = Style(font: UIFont.FZ.boldTextFont.withSize(20.0), color: Asset.textColor.color)
     static let normal = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.textColor.color)
+    static let normalSmall = Style(font: UIFont.FZ.regularTextFont.withSize(12.0), color: Asset.textColor.color)
     static let grayNormal = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.placeHolderTextColor.color)
     static let whiteNormal = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.lightTextColor.color)
-    static let normalTiny = Style(font: UIFont.FZ.regularTextFont.withSize(11.0), color: Asset.textColor.color)
+    static let whiteNormalSmall = Style(font: UIFont.FZ.regularTextFont.withSize(12.0), color: Asset.lightTextColor.color)
+    static let normalTiny = Style(font: UIFont.FZ.regularTextFont.withSize(14.0), color: Asset.textColor.color)
     
     static let primaryButton = Style(font: UIFont.FZ.boldTextFont.withSize(18.0), color: Asset.accentColor.color)
     static let secondaryButton = Style(font: UIFont.FZ.boldTextFont.withSize(18.0), color: Asset.accentColor.color)

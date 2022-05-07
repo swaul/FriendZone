@@ -24,10 +24,10 @@ class RegisterViewController: UIViewController {
     @IBOutlet var nameTitleLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var loginInsteadHintLabel: UILabel!
-    @IBOutlet var loginInsteadButton: SimpleButton!
     @IBOutlet var continueButton: FriendZoneButton!
     
     var onContinue: ((RegisterViewModel) -> Void)!
+    var onLogin: (() -> Void)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +57,26 @@ class RegisterViewController: UIViewController {
         nameTextField.textContentType = .name
         nameTextField.becomeFirstResponder()
         
-        loginInsteadHintLabel.setStyle(TextStyle.normalTiny)
-        loginInsteadHintLabel.text = "Ich habe bereits einen Account"
+        loginInsteadHintLabel.setStyle(TextStyle.normalSmall)
+        let text = "Ich habe bereits einen Account. Login"
+        let str = NSString(string: text)
+        let range = str.range(of: "Login")
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(.foregroundColor,
+                                    value: Asset.primaryColor.color,
+                                    range: range)
+        attributedText.addAttribute(.underlineStyle,
+                                    value: NSUnderlineStyle.single.rawValue,
+                                    range: range)
+        attributedText.addAttribute(.underlineColor,
+                                    value: Asset.primaryColor.color,
+                                    range: range)
         
-        loginInsteadButton.setTitle("Login", for: .normal)
+        let loginTap = UITapGestureRecognizer(target: self, action: #selector(didTapLogin))
+        loginInsteadHintLabel.addGestureRecognizer(loginTap)
+        loginInsteadHintLabel.isUserInteractionEnabled = true
+        loginInsteadHintLabel.attributedText = attributedText
+        
         continueButton.setStyle(.primary)
         continueButton.setTitle("Weiter", for: .normal)
         
@@ -69,6 +85,10 @@ class RegisterViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
+    }
+    
+    @objc func didTapLogin() {
+        onLogin()
     }
     
     @objc func didTapOutside() {

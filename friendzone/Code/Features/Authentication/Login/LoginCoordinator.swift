@@ -10,6 +10,7 @@ import Foundation
 class LoginCoordinator: CardCoordinator {
     
     var onLogin: (() -> Void)!
+    var onRegister: (() -> Void)!
     
     override init() {
         super.init()
@@ -27,6 +28,10 @@ class LoginCoordinator: CardCoordinator {
         
         viewController.onLogin = { [weak self] in
             self?.onLogin()
+        }
+        
+        viewController.onRegister = { [weak self] in
+            self?.onRegister()
         }
         
         navigationController.pushViewController(viewController, animated: true)

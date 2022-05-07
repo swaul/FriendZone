@@ -13,6 +13,7 @@ import Combine
 import SFSafeSymbols
 import Toolbox
 import ConfettiSwiftUI
+import SimpleButton
 
 class WelcomeViewController: UIViewController {
     
@@ -34,13 +35,13 @@ class WelcomeViewController: UIViewController {
     @IBOutlet var welcomeTitleLabel: UILabel!
     @IBOutlet var headerView: UIView!
     @IBOutlet var registerButton: FriendZoneButton!
-    @IBOutlet var loginButton: FriendZoneButton!
     @IBOutlet var personImage: UIImageView!
     @IBOutlet var teamImage: UIImageView!
     @IBOutlet var coupleImage: UIImageView!
     @IBOutlet var friendImage: UIImageView!
     @IBOutlet var backgroundView: UIView!
-        
+    @IBOutlet var loginHintLabel: UILabel!
+    
     var loggedIn: Bool = false
    
     override func viewDidLoad() {
@@ -54,9 +55,20 @@ class WelcomeViewController: UIViewController {
         let framer = RectFramer(withView: headerView)
         framer.drawLineIn(withRectRef: framer)
         framer.drawUpperLineIn(withRectRef: framer)
-
-        loginButton.setStyle(.tertiaryDark)
-        loginButton.setTitle("Login", for: .normal)
+        
+        loginHintLabel.setStyle(TextStyle.whiteNormalSmall)
+        let text = "Ich habe bereits einen Account. Anmelden"
+        let str = NSString(string: text)
+        let range = str.range(of: "Anmelden")
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(.font,
+                                    value: UIFont.boldSystemFont(ofSize: loginHintLabel.font.pointSize),
+                                    range: range)
+        loginHintLabel.attributedText = attributedText
+        let loginTap = UITapGestureRecognizer(target: self, action: #selector(loginButtonTapped))
+        loginHintLabel.addGestureRecognizer(loginTap)
+        loginHintLabel.isUserInteractionEnabled = true
+        
         registerButton.setStyle(.primaryDark)
         registerButton.setTitle("Neues Konto erstellen", for: .normal)
         headerView.layer.cornerRadius = 10
@@ -81,7 +93,7 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-    @IBAction func loginButtonTapped(_ sender: Any) {
+    @objc func loginButtonTapped() {
         onLogin()
     }
     
@@ -313,7 +325,7 @@ internal struct RectFramer {
         let bezPathStage7: UIBezierPath = UIBezierPath()
         bezPathStage7.move(to: rectRef.topRight)
         bezPathStage7.addLine(to: rectRef.topLeft)
-        bezPathStage7.addQuadCurve(to: rectRef.bottomRight, controlPoint: CGPoint(x: rectRef.midX, y: rectRef.minY))
+        bezPathStage7.addQuadCurve(to: rectRef.bottomRight, controlPoint: CGPoint(x: rectRef.midX, y: rectRef.minY + 32))
         bezPathStage7.close()
         
         let bezPathStage8: UIBezierPath = bezPathStage0
@@ -325,7 +337,7 @@ internal struct RectFramer {
         animStage0.toValue = bezPathStage1.cgPath
         // 3. Setting up timing
         animStage0.beginTime = 0.0
-        animStage0.duration = 6.0
+        animStage0.duration = 4.5
         
         let animStage1: CABasicAnimation = CABasicAnimation(keyPath: "path")
         animStage1.fromValue = bezPathStage1.cgPath

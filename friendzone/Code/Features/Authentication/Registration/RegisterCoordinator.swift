@@ -11,6 +11,7 @@ import UIKit
 class RegisterCoordinator: CardCoordinator {
     
     var onSubmit: (() -> Void)!
+    var onLogin: (() -> Void)!
     
     override init() {
         super.init()
@@ -36,6 +37,10 @@ class RegisterCoordinator: CardCoordinator {
         viewController.onContinue = { [weak self] viewModel in
             self?.cardViewController.updateBackButton(title: "Benutzername")
             self?.showEmailSetup(viewModel: viewModel)
+        }
+        
+        viewController.onLogin = { [weak self] in
+            self?.onLogin()
         }
         
         navigationController.pushViewController(viewController, animated: true)

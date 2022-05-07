@@ -65,6 +65,8 @@ class RegisterViewModel {
     @Published var instagramValid: Bool?
     @Published var tiktokValid: Bool?
     @Published var snapchatValid: Bool?
+    
+    @Published var agreedToTerms: Bool = false
         
     @Published var instagram: String? {
         didSet {

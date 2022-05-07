@@ -49,6 +49,12 @@ class AuthCoordinator: NavigationCoordinator {
             self?.onLogin()
         }
         
+        coordinator.onRegister = { [weak self] in
+            self?.dismissChildCoordinator(animated: true, completion: { [weak self] in
+                self?.showRegistration()
+            })
+        }
+        
         present(coordinator, animated: true)
     }
     
@@ -62,6 +68,12 @@ class AuthCoordinator: NavigationCoordinator {
         
         coordinator.onSubmit = { [weak self] in
             self?.showSuccessfulRegistration()
+        }
+        
+        coordinator.onLogin = { [weak self] in
+            self?.dismissChildCoordinator(animated: true, completion: { [weak self] in
+                self?.showLogin()
+            })
         }
         
         present(coordinator, animated: true)

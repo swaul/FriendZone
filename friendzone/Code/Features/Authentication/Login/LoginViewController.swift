@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     }
     
     var onLogin: (() -> Void)!
+    var onRegister: (() -> Void)!
     
     var viewModel: LoginViewModel!
     
@@ -28,7 +29,6 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordTitleLabel: UILabel!
     @IBOutlet var forgotPasswordButton: FriendZoneButton!
     @IBOutlet var registerHintLabel: UILabel!
-    @IBOutlet var registerButton: UIButton!
     @IBOutlet var loginButton: FriendZoneButton!
     @IBOutlet var emailErrorLabel: UILabel!
     @IBOutlet var passwordErrorLabel: UILabel!
@@ -118,11 +118,27 @@ class LoginViewController: UIViewController {
         forgotPasswordButton.setStyle(.tertiary)
         forgotPasswordButton.setTitle("Password vergessen", for: .normal)
         
-        registerHintLabel.text = "Ich habe noch keinen Account"
-        registerButton.setTitle("Registrieren", for: .normal)
-        
+        registerHintLabel.setStyle(TextStyle.normalSmall)
+        let text = "Ich habe noch keinen Account. Registrieren"
+        let str = NSString(string: text)
+        let range = str.range(of: "Registrieren")
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(.underlineStyle,
+                                    value: NSUnderlineStyle.single.rawValue,
+                                    range: range)
+        attributedText.addAttribute(.foregroundColor,
+                                    value: Asset.primaryColor.color,
+                                    range: range)
+        attributedText.addAttribute(.underlineColor,
+                                    value: Asset.primaryColor.color,
+                                    range: range)
+
+        let loginTap = UITapGestureRecognizer(target: self, action: #selector(registerTapped))
+        registerHintLabel.addGestureRecognizer(loginTap)
+        registerHintLabel.isUserInteractionEnabled = true
         loginButton.setStyle(.primary)
         loginButton.setTitle("Login", for: .normal)
+        registerHintLabel.attributedText = attributedText
     
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
@@ -132,6 +148,10 @@ class LoginViewController: UIViewController {
     @objc func didTapOutside() {
         emailTextField.resignFirstResponder()
         passwordTextfield.resignFirstResponder()
+    }
+    
+    @objc func registerTapped() {
+        onRegister()
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {

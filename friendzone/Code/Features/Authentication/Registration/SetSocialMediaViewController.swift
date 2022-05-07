@@ -33,6 +33,8 @@ class SetSocialMediaViewController: UIViewController {
     @IBOutlet var snapchatTextField: UITextField!
     @IBOutlet var continiueButton: FriendZoneButton!
     @IBOutlet var socialsErrorTItleLabel: UILabel!
+    @IBOutlet var agreeToTermsSwitch: UISwitch!
+    @IBOutlet var agreeToTermsLabel: UILabel!
     
     var cancellabels = Set<AnyCancellable>()
     
@@ -69,8 +71,14 @@ class SetSocialMediaViewController: UIViewController {
             }
         }.store(in: &cancellabels)
         
-        Publishers.CombineLatest3(viewModel.$instagramValid, viewModel.$tiktokValid, viewModel.$snapchatValid).sink { [weak self] (insta, tiktok, snap) in
+        Publishers.CombineLatest4(viewModel.$instagramValid, viewModel.$tiktokValid, viewModel.$snapchatValid, viewModel.$agreedToTerms).sink { [weak self] (insta, tiktok, snap, termsAccepted) in
             guard let self = self else { return }
+            guard termsAccepted else {
+                self.showHideErrorMessage(hide: false, error: self.socialsErrorTItleLabel)
+                self.socialsErrorTItleLabel.text = "Akzeptiere die Nutzungsbedingungen"
+                return
+            }
+            self.showHideErrorMessage(hide: true, error: self.socialsErrorTItleLabel)
             if let insta = insta, insta {
                 self.showHideErrorMessage(hide: true, error: self.socialsErrorTItleLabel)
                 self.continiueButton.isEnabled = true
@@ -93,10 +101,21 @@ class SetSocialMediaViewController: UIViewController {
                 self?.continiueButton.isLoading = false
             }
         }.store(in: &cancellabels)
+        
+        viewModel.$agreedToTerms.sink { [weak self] agreed in
+            if agreed {
+                self?.continiueButton.setTitle("Konto erstellen", for: .normal)
+            } else {
+                self?.continiueButton.setTitle("Fast geschafft", for: .normal)
+
+            }
+        }.store(in: &cancellabels)
     }
     
     func setupView() {
         view.layer.cornerRadius = 20
+        
+        agreeToTermsSwitch.setOn(false, animated: false)
         
         titleLabel.text = "Soziales"
 
@@ -124,9 +143,37 @@ class SetSocialMediaViewController: UIViewController {
         socialsErrorTItleLabel.setStyle(TextStyle.errorText)
         socialsErrorTItleLabel.isHidden = true
         
+        agreeToTermsLabel.setStyle(TextStyle.normalSmall)
+        let text = "Ich akzeptiere die Nutzungsbedingungen"
+        let str = NSString(string: text)
+        let range = str.range(of: "Nutzungsbedingungen")
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(.foregroundColor,
+                                    value: Asset.primaryColor.color,
+                                    range: range)
+        attributedText.addAttribute(.underlineStyle,
+                                    value: NSUnderlineStyle.single.rawValue,
+                                    range: range)
+        attributedText.addAttribute(.underlineColor,
+                                    value: Asset.primaryColor.color,
+                                    range: range)
+        
+        let loginTap = UITapGestureRecognizer(target: self, action: #selector(didTapTermsAndConditions))
+        agreeToTermsLabel.addGestureRecognizer(loginTap)
+        agreeToTermsLabel.isUserInteractionEnabled = true
+        agreeToTermsLabel.attributedText = attributedText
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func switchValueChanged(_ sender: Any) {
+        viewModel.agreedToTerms = agreeToTermsSwitch.isOn
+    }
+    
+    @objc func didTapTermsAndConditions() {
+        #warning("todo")
     }
     
     @objc func didTapOutside() {
