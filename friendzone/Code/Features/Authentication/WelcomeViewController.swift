@@ -48,6 +48,13 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         setupView()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY), endPoint: CGPoint(x: friendImage.frame.midX, y: friendImage.frame.midY))
+        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.9), endPoint: CGPoint(x: coupleImage.frame.midX, y: coupleImage.frame.midY))
+        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.8), endPoint: CGPoint(x: teamImage.frame.midX, y: teamImage.frame.midY))
+    }
       
     func setupView() {
         confettiView.isHidden = true
@@ -72,10 +79,6 @@ class WelcomeViewController: UIViewController {
         registerButton.setStyle(.primaryDark)
         registerButton.setTitle("Neues Konto erstellen", for: .normal)
         headerView.layer.cornerRadius = 10
-        
-        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY), endPoint: CGPoint(x: friendImage.frame.midX, y: friendImage.frame.midY))
-        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.9), endPoint: CGPoint(x: coupleImage.frame.midX, y: coupleImage.frame.midY))
-        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.8), endPoint: CGPoint(x: teamImage.frame.midX, y: teamImage.frame.midY))
     }
     
     var timer: Timer?

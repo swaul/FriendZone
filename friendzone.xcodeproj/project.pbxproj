@@ -68,12 +68,13 @@
 		9EED0CCE2822BA710046AEEC /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */; };
 		9EED0CD02823E7920046AEEC /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */; };
 		9EED0CD42823F1080046AEEC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CD32823F1080046AEEC /* LoginViewController.swift */; };
-		9EED0CD62823FDC60046AEEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */; };
 		9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */; };
 		9EED0CDD28250DA80046AEEC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CDC28250DA80046AEEC /* ConfettiView.swift */; };
-		9EED0CDE28255C2E0046AEEC /* friendzoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; };
 		9EED0CE2282578B90046AEEC /* ShakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CE1282578B90046AEEC /* ShakeView.swift */; };
 		9EED0CE4282590740046AEEC /* ImageCropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CE3282590740046AEEC /* ImageCropperViewController.swift */; };
+		9EED0CE62826ABD50046AEEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CE52826ABD50046AEEC /* GoogleService-Info.plist */; };
+		9EED0CE72826B1EB0046AEEC /* friendzoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; };
+		9EED0CE82826B1EB0046AEEC /* friendzoneKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -94,6 +95,20 @@
 			remoteInfo = friendzoneKit;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9EED0CE92826B1EB0046AEEC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9EED0CE82826B1EB0046AEEC /* friendzoneKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		043AE38D39252DD0AC23E72F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -152,10 +167,10 @@
 		9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		9EED0CCF2823E7920046AEEC /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		9EED0CD32823F1080046AEEC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EED0CDC28250DA80046AEEC /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		9EED0CE1282578B90046AEEC /* ShakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeView.swift; sourceTree = "<group>"; };
 		9EED0CE3282590740046AEEC /* ImageCropperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperViewController.swift; sourceTree = "<group>"; };
+		9EED0CE52826ABD50046AEEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDED4A77DB95E3B3172963C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		D053B79F9B078A665D55AC2F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -181,7 +196,7 @@
 				9E50C39F281C2D020008BFDD /* FirebaseStorage in Frameworks */,
 				9E50C39D281C2D020008BFDD /* FirebaseDatabase in Frameworks */,
 				9E50C38C281B49630008BFDD /* TinyConstraints in Frameworks */,
-				9EED0CDE28255C2E0046AEEC /* friendzoneKit.framework in Frameworks */,
+				9EED0CE72826B1EB0046AEEC /* friendzoneKit.framework in Frameworks */,
 				9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,7 +257,7 @@
 		25B0A302F3815A3DD53C3D98 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */,
+				9EED0CE52826ABD50046AEEC /* GoogleService-Info.plist */,
 				90F44006E313BD2D2CB199B3 /* Info.plist */,
 				8BD3000B83750C14BCF08771 /* Settings.bundle */,
 				99D67423AC938875518F9720 /* Configurations */,
@@ -518,6 +533,7 @@
 				A66CE9453EB78493B65B574A /* Copy GoogleService-Info */,
 				438FB7206FBF74985D59FA4F /* Resources */,
 				028743C166640F82FB6706F1 /* Frameworks */,
+				9EED0CE92826B1EB0046AEEC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -614,11 +630,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E50C390281C28020008BFDD /* Authorization.storyboard in Resources */,
+				9EED0CE62826ABD50046AEEC /* GoogleService-Info.plist in Resources */,
 				9E95E9BA281AE32700639243 /* UserNearbyTableViewCell.xib in Resources */,
 				CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */,
 				0574351BFB13B92B42E762E8 /* LaunchScreen.storyboard in Resources */,
 				F4EC279B43421B6A6EA3C16F /* Settings.bundle in Resources */,
-				9EED0CD62823FDC60046AEEC /* GoogleService-Info.plist in Resources */,
 				9E95E9B3281ADD8600639243 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,6 +887,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
@@ -935,6 +952,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
@@ -1024,6 +1042,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
@@ -1082,6 +1101,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
@@ -1247,6 +1267,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.friendzone.mikeleon-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
@@ -1389,6 +1410,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "/Users/paulkuhnel/Projekte/friendzone/friendzone-ios/Mike_Lichtenberg.mobileprovisi";
 				SDKROOT = iphoneos;
