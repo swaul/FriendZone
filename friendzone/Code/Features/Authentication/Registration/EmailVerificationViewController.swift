@@ -86,10 +86,14 @@ class EmailVerificationViewController: UIViewController {
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
+        continueButton.isLoading = true
         viewModel.checkVerification { [weak self] verified in
             guard let self = self else { return }
             if verified {
+                self.continueButton.isLoading = false
                 self.onContinue(self.viewModel)
+            } else {
+                self.continueButton.isLoading = false
             }
         }
     }

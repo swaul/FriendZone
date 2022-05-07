@@ -152,7 +152,6 @@ internal struct RectFramer {
         bezPathStage0.move(to: rectRef.topRight)
         bezPathStage0.addLine(to: rectRef.smallTopLeft)
         bezPathStage0.addQuadCurve(to: rectRef.smallBottomRight, controlPoint: CGPoint(x: rectRef.maxX * 0.7, y: rectRef.minY))
-        //        bezPathStage0.addLine(to: rectRef.rightMid)
         bezPathStage0.close()
         
         let bezPathStage1: UIBezierPath = UIBezierPath()
@@ -204,13 +203,13 @@ internal struct RectFramer {
         animStage0.toValue = bezPathStage1.cgPath
         // 3. Setting up timing
         animStage0.beginTime = 0.0
-        animStage0.duration = 2.5
+        animStage0.duration = 4.5
         
         let animStage1: CABasicAnimation = CABasicAnimation(keyPath: "path")
         animStage1.fromValue = bezPathStage1.cgPath
         animStage1.toValue = bezPathStage2.cgPath
         animStage1.beginTime = animStage0.beginTime + animStage0.duration // incremental timing
-        animStage1.duration =  animStage0.duration
+        animStage1.duration = animStage0.duration
         
         let animStage2: CABasicAnimation = CABasicAnimation(keyPath: "path")
         animStage2.fromValue = bezPathStage2.cgPath
@@ -326,7 +325,7 @@ internal struct RectFramer {
         animStage0.toValue = bezPathStage1.cgPath
         // 3. Setting up timing
         animStage0.beginTime = 0.0
-        animStage0.duration = 4.0
+        animStage0.duration = 6.0
         
         let animStage1: CABasicAnimation = CABasicAnimation(keyPath: "path")
         animStage1.fromValue = bezPathStage1.cgPath

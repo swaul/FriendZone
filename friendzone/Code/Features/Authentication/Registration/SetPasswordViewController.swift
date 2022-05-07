@@ -25,6 +25,8 @@ class SetPasswordViewController: UIViewController {
     @IBOutlet var confirmPasswordTitleLabel: UILabel!
     @IBOutlet var doneBUtton: FriendZoneButton!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var newPasswordErrorLabel: UILabel!
+    @IBOutlet var confirmPasswordErrorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,43 +47,69 @@ class SetPasswordViewController: UIViewController {
         
         viewModel.$passwordStepValid.sink { [weak self] valid in
             self?.doneBUtton.isEnabled = valid
+            guard let self = self else { return }
+            if valid {
+                self.showHideErrorMessage(hide: true, error: self.confirmPasswordErrorLabel)
+                self.showHideErrorMessage(hide: true, error: self.newPasswordErrorLabel)
+            }
         }.store(in: &cancellabels)
         
         viewModel.$userCreated.sink { [weak self] created in
             guard let self = self, let created = created else { return }
             if created {
                 self.onSubmit(self.viewModel)
+                self.doneBUtton.isLoading = false
+            }
+        }.store(in: &cancellabels)
+        
+        viewModel.newPassword.$validation.sink { [weak self] newValid in
+            guard let self = self else { return }
+            if let error = newValid.errorMessage {
+                self.showHideErrorMessage(hide: false, error: self.newPasswordErrorLabel)
+                self.newPasswordErrorLabel.text = error
+            } else {
+                self.showHideErrorMessage(hide: true, error: self.newPasswordErrorLabel)
+            }
+        }.store(in: &cancellabels)
+        
+        viewModel.$confirmPasswordValid.sink { [weak self] confirmValid in
+            guard let self = self else { return }
+            if confirmValid {
+                self.showHideErrorMessage(hide: false, error: self.confirmPasswordErrorLabel)
+                self.confirmPasswordErrorLabel.text = "Passwörter stimmen nicht überein"
+            } else {
+                self.showHideErrorMessage(hide: true, error: self.confirmPasswordErrorLabel)
             }
         }.store(in: &cancellabels)
     }
 
     func setupView() {
         view.layer.cornerRadius = 20
+        
+        titleLabel.text = "Passwort"
 
+        confirmPasswordErrorLabel.setStyle(TextStyle.errorText)
+        newPasswordErrorLabel.setStyle(TextStyle.errorText)
+        
+        confirmPasswordErrorLabel.isHidden = true
+        newPasswordErrorLabel.isHidden = true
+        
         newPasswordTextfield.delegate = self
         confirmPasswordTextfield.delegate = self
-        
-        let showPwButton = UIButton().with {
-            $0.setImage(.eyeSlash, for: .normal)
-            $0.addTarget(self, action: #selector(hidePw), for: .touchUpInside)
-        }
-        
-        let confirmShowPwButton = UIButton().with {
-            $0.setImage(.eyeSlash, for: .normal)
-            $0.addTarget(self, action: #selector(confirmHidePw), for: .touchUpInside)
-        }
         
         newPasswordTitleLabel.text = "Passwort erstellen"
         newPasswordTextfield.placeholder = "Neues Passwort"
         newPasswordTextfield.textContentType = .newPassword
         newPasswordTextfield.isSecureTextEntry = true
-        newPasswordTextfield.rightView = showPwButton
+        newPasswordTextfield.enablePasswordToggle()
         
         confirmPasswordTitleLabel.text = "Password wiederholen"
         confirmPasswordTextfield.placeholder = "Passwort wiederholen"
         confirmPasswordTextfield.textContentType = .password
         confirmPasswordTextfield.isSecureTextEntry = true
-        newPasswordTextfield.rightView = confirmShowPwButton
+        confirmPasswordTextfield.enablePasswordToggle()
+        
+        newPasswordTextfield.becomeFirstResponder()
         
         doneBUtton.setStyle(.primary)
         doneBUtton.setTitle("Fertig!", for: .normal)
@@ -96,6 +124,7 @@ class SetPasswordViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
+        doneBUtton.isLoading = true
         viewModel.registerUser()
     }
     

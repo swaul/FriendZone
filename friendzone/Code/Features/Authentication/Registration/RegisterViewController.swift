@@ -89,7 +89,9 @@ extension RegisterViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        nameTextField.resignFirstResponder()
+        if viewModel.usernameValid {
+            onContinue(viewModel)
+        }
         return true
     }
     

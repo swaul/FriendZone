@@ -51,6 +51,7 @@ class CardViewController: UIViewController {
     
     lazy var backButton = UIButton().with {
         $0.setImage(.chevronLeft, for: .normal)
+        $0.setTitle("Zurück", for: .normal)
         $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         $0.tintColor = .white
     }
@@ -106,6 +107,12 @@ class CardViewController: UIViewController {
                 ]
         }
     }
+    
+    func updateBackButton(title: String) {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+            self.backButton.setTitle(title, for: .normal)
+        }, completion: nil)
+    }
 
     func setupConstraints() {
         
@@ -139,7 +146,6 @@ class CardViewController: UIViewController {
     @objc func backgroundTapped() {
         onDismiss()
     }
-    
     
     @objc func backButtonTapped() {
         onBack()

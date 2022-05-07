@@ -53,27 +53,41 @@ class LoginViewController: UIViewController {
             self?.loginButton.isEnabled = emailValid.isValid && passwordValid.isValid
             if let error = emailValid.errorMessage {
                 self?.viewModel.emailError = error
+            } else {
+                self?.viewModel.emailError = nil
             }
             if let error = passwordValid.errorMessage {
-                self?.viewModel.emailError = error
+                self?.viewModel.passwordError = error
+            } else {
+                self?.viewModel.passwordError = nil
             }
         }.store(in: &cancellabels)
         
         viewModel.$passwordError.sink { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
-                self?.passwordErrorLabel.isHidden = false
-                self?.passwordErrorLabel.text = error
+                self.showHideErrorMessage(hide: false, error: self.passwordErrorLabel)
+                self.passwordErrorLabel.text = error
             } else {
-                self?.passwordErrorLabel.isHidden = true
+                self.showHideErrorMessage(hide: true, error: self.passwordErrorLabel)
             }
         }.store(in: &cancellabels)
         
         viewModel.$emailError.sink { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
-                self?.emailErrorLabel.isHidden = false
-                self?.emailErrorLabel.text = error
+                self.showHideErrorMessage(hide: false, error: self.emailErrorLabel)
+                self.emailErrorLabel.text = error
             } else {
-                self?.emailErrorLabel.isHidden = true
+                self.showHideErrorMessage(hide: true, error: self.emailErrorLabel)
+            }
+        }.store(in: &cancellabels)
+        
+        viewModel.$shake.sink { [weak self] shake in
+            if shake {
+                self?.passwordTextfield.shakeIt()
+                self?.emailTextField.shakeIt()
+                self?.viewModel.shake = false
             }
         }.store(in: &cancellabels)
     }
@@ -172,6 +186,7 @@ extension UITextField {
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         button.frame = CGRect(x: CGFloat(self.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
         button.addTarget(self, action: #selector(self.togglePasswordView), for: .touchUpInside)
+        button.tintColor = Asset.primaryColor.color
         self.rightView = button
         self.rightViewMode = .always
     }
@@ -179,4 +194,14 @@ extension UITextField {
         self.isSecureTextEntry = !self.isSecureTextEntry
         setPasswordToggleImage(sender as! UIButton)
     }
+}
+
+extension UIViewController {
+    
+    func showHideErrorMessage(hide: Bool, error: UILabel) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            error.isHidden = hide
+        }, completion: nil)
+    }
+    
 }

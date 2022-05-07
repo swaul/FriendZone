@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class RegisterCoordinator: CardCoordinator {
     
@@ -19,17 +20,21 @@ class RegisterCoordinator: CardCoordinator {
                 self?.onDismiss()
             } else {
                 self?.navigationController.popViewController(animated: true)
+                self?.cardViewController.updateBackButton(title: self?.getTitle(for: self?.navigationController.viewControllers.count ?? -1) ?? "Zurück")
             }
         }
         
         navigationController.setNavigationBarHidden(true, animated: true)
     }
     
+    var viewModel: RegisterViewModel!
+    
     override func start() {
-        let viewModel = RegisterViewModel()
+        viewModel = RegisterViewModel()
         let viewController = RegisterViewController.createWith(storyboard: .auth, viewModel: viewModel)
         
         viewController.onContinue = { [weak self] viewModel in
+            self?.cardViewController.updateBackButton(title: "Benutzername")
             self?.showEmailSetup(viewModel: viewModel)
         }
         
@@ -40,6 +45,7 @@ class RegisterCoordinator: CardCoordinator {
         let viewController = SetEmailViewController.createWith(storyboard: .auth, viewModel: viewModel)
         
         viewController.onContinue = { [weak self] viewModel in
+            self?.cardViewController.updateBackButton(title: "E-Mail Adresse")
             self?.showPasswortSetup(viewModel: viewModel)
         }
         
@@ -50,6 +56,7 @@ class RegisterCoordinator: CardCoordinator {
         let viewController = EmailVerificationViewController.createWith(storyboard: .auth, viewModel: viewModel)
         
         viewController.onContinue = { [weak self] viewModel in
+            self?.cardViewController.updateBackButton(title: "E-Mail Verifizieren")
             self?.showProfileSetup(viewModel: viewModel)
         }
         
@@ -60,7 +67,29 @@ class RegisterCoordinator: CardCoordinator {
         let viewController = SetProfilePictureViewController.createWith(storyboard: .auth, viewModel: viewModel)
         
         viewController.onContinue = { [weak self] viewModel in
+            self?.cardViewController.updateBackButton(title: "Steckbrief")
             self?.showSocialMediaSetup(viewModel: viewModel)
+        }
+        
+        viewController.onImageCrop = { [weak self] image, viewModel in
+            self?.showImageCropper(viewModel: viewModel, image: image)
+        }
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showImageCropper(viewModel: RegisterViewModel, image: UIImage) {
+        let viewController = ImageCropperViewController.createWith(storyboard: .auth, viewModel: viewModel, image: image)
+        
+        navigationController.present(viewController, animated: true)
+    }
+    
+    func showPasswortSetup(viewModel: RegisterViewModel) {
+        let viewController = SetPasswordViewController.createWith(storyboard: .auth, viewModel: viewModel)
+        
+        viewController.onSubmit = { [weak self] viewModel in
+            self?.cardViewController.updateBackButton(title: "Passwort")
+            self?.showEmailVerification(viewModel: viewModel)
         }
         
         navigationController.pushViewController(viewController, animated: true)
@@ -74,13 +103,23 @@ class RegisterCoordinator: CardCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showPasswortSetup(viewModel: RegisterViewModel) {
-        let viewController = SetPasswordViewController.createWith(storyboard: .auth, viewModel: viewModel)
-        
-        viewController.onSubmit = { [weak self] viewModel in
-            self?.showEmailVerification(viewModel: viewModel)
+    func getTitle(for index: Int) -> String {
+        switch index {
+        case 2:
+            return "Benutzername"
+        case 3:
+            return "E-Mail Adresse"
+        case 4:
+            return "E-Mail verifizieren"
+        case 4:
+            return "Passwort"
+        case 5:
+            return "Steckbrief"
+        case 6:
+            return "Soziales"
+        default:
+            return "Zurück"
         }
-        
-        navigationController.pushViewController(viewController, animated: true)
     }
+
 }

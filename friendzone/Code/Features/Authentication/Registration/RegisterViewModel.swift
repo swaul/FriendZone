@@ -49,7 +49,7 @@ class RegisterViewModel {
     @Published var newPassword = ValidatedText(value: nil, validation: { value in
         guard let value = value else { return .initial }
         guard !value.isEmpty else { return ValidationInfo(isValid: false, errorMessage: "Bitte gib ein Passwort ein") }
-        guard value.count > 7 else { return ValidationInfo(isValid: false, errorMessage: "Gib mindestens 7 Zeichen an") }
+        guard value.count > 7 else { return ValidationInfo(isValid: false, errorMessage: "Gib mindestens 8 Zeichen an") }
         return .valid
     }, formatter: { value in
         return value?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -65,7 +65,7 @@ class RegisterViewModel {
     @Published var instagramValid: Bool?
     @Published var tiktokValid: Bool?
     @Published var snapchatValid: Bool?
-    
+        
     @Published var instagram: String? {
         didSet {
             guard let instagram = instagram, let url = URL(string: "https://instagram.com/\(instagram)/") else {
@@ -201,6 +201,23 @@ class RegisterViewModel {
                 
             }
         }
+    }
+    
+    func isEmailInUse(completion: ((Bool) -> Void)?) {
+        guard let email = email.value, self.email.validation == .valid else { return }
+        Auth.auth().fetchSignInMethods(forEmail: email, completion: { (providers, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else if let providers = providers {
+                    if providers.isEmpty {
+                        completion?(false)
+                    } else {
+                        completion?(true)
+                    }
+                } else if providers == nil {
+                    completion?(false)
+                }
+            })
     }
     
     func checkVerification(completion: ((Bool) -> Void)?) {

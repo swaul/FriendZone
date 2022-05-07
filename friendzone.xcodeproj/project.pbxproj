@@ -72,6 +72,8 @@
 		9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */; };
 		9EED0CDD28250DA80046AEEC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CDC28250DA80046AEEC /* ConfettiView.swift */; };
 		9EED0CDE28255C2E0046AEEC /* friendzoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; };
+		9EED0CE2282578B90046AEEC /* ShakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CE1282578B90046AEEC /* ShakeView.swift */; };
+		9EED0CE4282590740046AEEC /* ImageCropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CE3282590740046AEEC /* ImageCropperViewController.swift */; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -152,6 +154,8 @@
 		9EED0CD32823F1080046AEEC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9EED0CD52823FDC60046AEEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EED0CDC28250DA80046AEEC /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		9EED0CE1282578B90046AEEC /* ShakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeView.swift; sourceTree = "<group>"; };
+		9EED0CE3282590740046AEEC /* ImageCropperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperViewController.swift; sourceTree = "<group>"; };
 		BDED4A77DB95E3B3172963C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		D053B79F9B078A665D55AC2F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 				9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */,
 				9E50C3AA281D5BF60008BFDD /* SetPasswordViewController.swift */,
 				9EED0CCD2822BA710046AEEC /* EmailVerificationViewController.swift */,
+				9EED0CE3282590740046AEEC /* ImageCropperViewController.swift */,
 				9E50C3B2281E04CD0008BFDD /* SetProfilePictureViewController.swift */,
 				9E22E676281F13F40030DF7C /* SetSocialMediaViewController.swift */,
 				9E50C3AE281DB84F0008BFDD /* RegisterViewModel.swift */,
@@ -473,6 +478,7 @@
 			children = (
 				83FC2093EA4E47651633A947 /* .gitkeep */,
 				9EED0CDC28250DA80046AEEC /* ConfettiView.swift */,
+				9EED0CE1282578B90046AEEC /* ShakeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -698,6 +704,7 @@
 			files = (
 				9E22E67E28216AD90030DF7C /* CardViewController.swift in Sources */,
 				9E22E673281F01160030DF7C /* PostalCode.swift in Sources */,
+				9EED0CE4282590740046AEEC /* ImageCropperViewController.swift in Sources */,
 				9E36EBC22822B5DA004BE351 /* SetEmailViewController.swift in Sources */,
 				2B4078944203D8A41757C2E7 /* AppCoordinator.swift in Sources */,
 				9E50C3B3281E04CD0008BFDD /* SetProfilePictureViewController.swift in Sources */,
@@ -722,6 +729,7 @@
 				9E22E677281F13F40030DF7C /* SetSocialMediaViewController.swift in Sources */,
 				9EED0CD42823F1080046AEEC /* LoginViewController.swift in Sources */,
 				9E95E9AF281ADD3F00639243 /* YourZoneViewController.swift in Sources */,
+				9EED0CE2282578B90046AEEC /* ShakeView.swift in Sources */,
 				9E22E660281E844A0030DF7C /* ValidatedText.swift in Sources */,
 				9E22E662281E957C0030DF7C /* FirebaseHandler.swift in Sources */,
 				9EED0CDD28250DA80046AEEC /* ConfettiView.swift in Sources */,

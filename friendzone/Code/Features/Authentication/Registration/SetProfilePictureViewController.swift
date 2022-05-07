@@ -21,9 +21,11 @@ class SetProfilePictureViewController: UIViewController {
     }
     
     var onContinue: ((RegisterViewModel) -> Void)!
-    var onBack: (() -> Void)!
+    var onImageCrop: ((UIImage, RegisterViewModel) -> Void)!
     
     var viewModel: RegisterViewModel!
+    
+    @Published var imagePicked: UIImage?
     
     @IBOutlet var profilePictureImageView: UIImageView!
     @IBOutlet var profilePictureHintLabel: UILabel!
@@ -31,6 +33,7 @@ class SetProfilePictureViewController: UIViewController {
     @IBOutlet var bioTextView: UITextView!
     @IBOutlet var continueButton: FriendZoneButton!
     @IBOutlet var counter: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +47,26 @@ class SetProfilePictureViewController: UIViewController {
         Keyboard.shared.$info.sink { [weak self] info in
             self?.updateSafeAreaInsets(keyboardInfo: info, animated: true)
         }.store(in: &cancellabels)
+        
+        $imagePicked.sink { [weak self] image in
+            guard let image = image, let self = self else { return }
+            self.onImageCrop(image, self.viewModel)
+        }.store(in: &cancellabels)
+        
+        viewModel.$profilePicture.sink { [weak self] image in
+            guard let image = image else { return }
+            self?.profilePictureImageView.image = image
+        }.store(in: &cancellabels)
     }
     
     func setupView() {
         view.layer.cornerRadius = 20
+        
+        titleLabel.text = "Steckbrief"
+        
+        bioTextView.layer.cornerRadius = 10
+        bioTextView.layer.borderWidth = 1
+        bioTextView.layer.borderColor = UIColor.systemGray5.cgColor
 
         profilePictureImageView.layer.cornerRadius = profilePictureImageView.bounds.height / 2
         profilePictureImageView.layer.borderWidth = 2
@@ -59,9 +78,14 @@ class SetProfilePictureViewController: UIViewController {
         profilePictureHintLabel.setStyle(TextStyle.blueNormal)
         profilePictureHintLabel.text = "Profilbild hinzufügen"
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
-        profilePictureImageView.addGestureRecognizer(gesture)
+        let imageGesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
+        profilePictureImageView.addGestureRecognizer(imageGesture)
         profilePictureImageView.isUserInteractionEnabled = true
+        
+        let labelGesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
+        profilePictureHintLabel.addGestureRecognizer(labelGesture)
+        profilePictureHintLabel.isUserInteractionEnabled = true
+        
         bioTextView.delegate = self
         
         counter.text = "0/140"
@@ -133,9 +157,10 @@ extension SetProfilePictureViewController: UIImagePickerControllerDelegate, UINa
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let image = info[.originalImage] as! UIImage
-        self.profilePictureImageView.image = image
-        self.viewModel.profilePicture = image
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.onImageCrop(image, self.viewModel)
+        }
     }
     
 }

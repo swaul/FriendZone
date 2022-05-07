@@ -24,6 +24,7 @@ class SetSocialMediaViewController: UIViewController {
     
     var viewModel: RegisterViewModel!
     
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var instagramTitleLabel: UILabel!
     @IBOutlet var instagramTextField: UITextField!
     @IBOutlet var tiktokTitleLabel: UILabel!
@@ -31,7 +32,8 @@ class SetSocialMediaViewController: UIViewController {
     @IBOutlet var snapchatTitleLabel: UILabel!
     @IBOutlet var snapchatTextField: UITextField!
     @IBOutlet var continiueButton: FriendZoneButton!
-
+    @IBOutlet var socialsErrorTItleLabel: UILabel!
+    
     var cancellabels = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -48,34 +50,55 @@ class SetSocialMediaViewController: UIViewController {
         viewModel.$instagramValid.sink { [weak self] isValid in
             guard let self = self, let isValid = isValid else { return }
             if isValid {
-                self.instagramTextField.textColor = Asset.textColor.color
-                self.instagramTextField.placeholder = self.instaPlaceholder
+                self.instagramTitleLabel.textColor = Asset.textColor.color
+                self.instagramTitleLabel.text = self.instaPlaceholder
             } else {
-                self.instagramTextField.textColor = .systemRed
-                self.instagramTextField.placeholder = "Da scheint was nicht zu stimmen"
+                self.instagramTitleLabel.textColor = .systemRed
+                self.instagramTitleLabel.text = "Da scheint was nicht zu stimmen"
             }
         }.store(in: &cancellabels)
         
         viewModel.$tiktokValid.sink { [weak self] isValid in
             guard let self = self, let isValid = isValid else { return }
             if isValid {
-                self.tiktokTextField.textColor = Asset.textColor.color
-                self.tiktokTextField.placeholder = self.tiktokPlaceholder
+                self.tiktokTitleLabel.textColor = Asset.textColor.color
+                self.tiktokTitleLabel.text = self.tiktokPlaceholder
             } else {
-                self.tiktokTextField.textColor = .systemRed
-                self.tiktokTextField.placeholder = "Da scheint was nicht zu stimmen"
+                self.tiktokTitleLabel.textColor = .systemRed
+                self.tiktokTitleLabel.text = "Da scheint was nicht zu stimmen"
+            }
+        }.store(in: &cancellabels)
+        
+        Publishers.CombineLatest3(viewModel.$instagramValid, viewModel.$tiktokValid, viewModel.$snapchatValid).sink { [weak self] (insta, tiktok, snap) in
+            guard let self = self else { return }
+            if let insta = insta, insta {
+                self.showHideErrorMessage(hide: true, error: self.socialsErrorTItleLabel)
+                self.continiueButton.isEnabled = true
+            } else if let tiktok = tiktok, tiktok {
+                self.showHideErrorMessage(hide: true, error: self.socialsErrorTItleLabel)
+                self.continiueButton.isEnabled = true
+            } else if let snap = snap, snap {
+                self.showHideErrorMessage(hide: true, error: self.socialsErrorTItleLabel)
+                self.continiueButton.isEnabled = true
+            } else {
+                self.showHideErrorMessage(hide: false, error: self.socialsErrorTItleLabel)
+                self.socialsErrorTItleLabel.text = "Bitte fülle mindestens ein Feld aus"
+                self.continiueButton.isEnabled = false
             }
         }.store(in: &cancellabels)
         
         viewModel.$profileCreated.sink { [weak self] created in
             if created {
                 self?.onContinue()
+                self?.continiueButton.isLoading = false
             }
         }.store(in: &cancellabels)
     }
     
     func setupView() {
         view.layer.cornerRadius = 20
+        
+        titleLabel.text = "Soziales"
 
         instagramTitleLabel.text = "Instagram"
         instagramTextField.delegate = self
@@ -98,6 +121,9 @@ class SetSocialMediaViewController: UIViewController {
         continiueButton.setTitle("Fertig!", for: .normal)
         continiueButton.setStyle(.primary)
         
+        socialsErrorTItleLabel.setStyle(TextStyle.errorText)
+        socialsErrorTItleLabel.isHidden = true
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
@@ -113,6 +139,7 @@ class SetSocialMediaViewController: UIViewController {
     let tiktokPlaceholder: String = "Dein TikTok Username"
     
     @IBAction func continueButtonTapped(_ sender: Any) {
+        continiueButton.isLoading = true
         viewModel.uploadImage()
     }
 }
