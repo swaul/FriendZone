@@ -13,6 +13,7 @@ import Combine
 import TinyConstraints
 import CoreLocation
 import FirebaseAuth
+import StatefulViewController
 
 class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -61,6 +62,11 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         checkLogin()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateUserInfo()
+    }
+    
     func checkLogin() {
         if Auth.auth().currentUser == nil {
             loginRequired()
@@ -68,13 +74,26 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setupView() {
+        userImageView.layer.cornerRadius = 20
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.register(UINib(nibName: "UserNearbyTableViewCell", bundle: nil), forCellReuseIdentifier: "UserNearbyTableViewCell")
+        tableView.separatorColor = .clear
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        
+        setupStatefulViews(backgroundVisible: true  )
+    }
+    
+    func updateUserInfo() {
         guard let user = Auth.auth().currentUser else { return }
         let defaults = UserDefaults.standard
         if let name = defaults.value(forKey: "name") as? String {
             userNameLabel.text = name
-        } else {
-            viewModel.getUserInfo()
         }
+        viewModel.getUserInfo()
         
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let url = documents.appendingPathComponent("profilePic.png")
@@ -85,15 +104,8 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
             viewModel.getImage(id: user.uid)
         }
         
-        userImageView.layer.cornerRadius = 20
+        viewModel.getImage(id: user.uid)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        tableView.register(UINib(nibName: "UserNearbyTableViewCell", bundle: nil), forCellReuseIdentifier: "UserNearbyTableViewCell")
-        tableView.separatorColor = .clear
-        tableView.backgroundColor = .clear
-        tableView.showsVerticalScrollIndicator = false
     }
     
     func makeLines() {
@@ -120,6 +132,10 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         animateBackground(color: UIColor.systemGreen.cgColor, startPoint: CGPoint(x: 0, y: maxY * 0.2), points: line2)
         animateBackground(color: UIColor.systemBlue.cgColor, startPoint: CGPoint(x: maxX, y: maxY * 0.5), points: line3)
         restartAnimation = false
+    }
+    
+    func hasContent() -> Bool {
+        !viewModel.usersNearby.isEmpty
     }
     
     var cancellabels = Set<AnyCancellable>()
@@ -333,6 +349,14 @@ extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
         selectedUserScoreLabel.text = String(selectedUser.score)
         
         showHidePopUp(hide: false)
+    }
+    
+}
+
+extension YourZoneViewController: StatefulViewController, CommonStatefulViews {
+    
+    func refetchData() {
+    
     }
     
 }

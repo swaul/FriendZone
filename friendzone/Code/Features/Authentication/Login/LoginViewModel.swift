@@ -42,6 +42,10 @@ class LoginViewModel {
                 self?.shake = true
                 self?.passwordError = error.localizedDescription
             } else {
+                guard let result = result else { return }
+                let defaults = UserDefaults.standard
+                defaults.setValue(result.credential, forKey: "credentials")
+                
                 self?.onLogin = true
             }
         }

@@ -35,6 +35,13 @@ class AppCoordinator: Coordinator {
         if Auth.auth().currentUser == nil {
             // not logged in
             presentLogin(animated: animated)
+        } else {
+            let defaults = UserDefaults.standard
+            if let credentials = defaults.value(forKey: "credentials") as? AuthCredential {
+                Auth.auth().currentUser?.reauthenticate(with: credentials, completion: { result, error in
+                    print(result, error)
+                })
+            }
         }
     }
     

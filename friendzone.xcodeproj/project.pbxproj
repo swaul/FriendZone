@@ -75,6 +75,17 @@
 		9EED0CE62826ABD50046AEEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CE52826ABD50046AEEC /* GoogleService-Info.plist */; };
 		9EED0CE72826B1EB0046AEEC /* friendzoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; };
 		9EED0CE82826B1EB0046AEEC /* friendzoneKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAD138C6A1A1D308730A049 /* friendzoneKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9EED0CEE2826E2620046AEEC /* Stateful+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CED2826E2610046AEEC /* Stateful+Common.swift */; };
+		9EED0CF52826E2D10046AEEC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CEF2826E2D10046AEEC /* ErrorView.swift */; };
+		9EED0CF62826E2D10046AEEC /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CF02826E2D10046AEEC /* LoadingView.xib */; };
+		9EED0CF72826E2D10046AEEC /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CF12826E2D10046AEEC /* EmptyView.swift */; };
+		9EED0CF82826E2D10046AEEC /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CF22826E2D10046AEEC /* EmptyView.xib */; };
+		9EED0CF92826E2D10046AEEC /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0CF32826E2D10046AEEC /* ErrorView.xib */; };
+		9EED0CFA2826E2D10046AEEC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CF42826E2D10046AEEC /* LoadingView.swift */; };
+		9EED0CFD2826E7880046AEEC /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 9EED0CFC2826E7880046AEEC /* NVActivityIndicatorView */; };
+		9EED0CFF2827052A0046AEEC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0CFE2827052A0046AEEC /* ProfileViewController.swift */; };
+		9EED0D01282705520046AEEC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED0D00282705520046AEEC /* ProfileViewModel.swift */; };
+		9EED0D03282705720046AEEC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EED0D02282705720046AEEC /* Profile.storyboard */; };
 		C86C66F779EA920EFD74DA28 /* Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = F2ED9E79D24A1F2F6DBA8443 /* Toolbox */; };
 		CAC6E36EADC0F44A93FE0465 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1016F74EEB0AAB0A4EB7E /* Config.swift */; };
 		CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DA5BFCC75310D00781A464 /* Assets.xcassets */; };
@@ -171,6 +182,16 @@
 		9EED0CE1282578B90046AEEC /* ShakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeView.swift; sourceTree = "<group>"; };
 		9EED0CE3282590740046AEEC /* ImageCropperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperViewController.swift; sourceTree = "<group>"; };
 		9EED0CE52826ABD50046AEEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9EED0CED2826E2610046AEEC /* Stateful+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stateful+Common.swift"; sourceTree = "<group>"; };
+		9EED0CEF2826E2D10046AEEC /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		9EED0CF02826E2D10046AEEC /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		9EED0CF12826E2D10046AEEC /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		9EED0CF22826E2D10046AEEC /* EmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
+		9EED0CF32826E2D10046AEEC /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
+		9EED0CF42826E2D10046AEEC /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		9EED0CFE2827052A0046AEEC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9EED0D00282705520046AEEC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		9EED0D02282705720046AEEC /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		BDED4A77DB95E3B3172963C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		D053B79F9B078A665D55AC2F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -195,6 +216,7 @@
 				9E22E66D281EE9E60030DF7C /* FirebaseFirestore in Frameworks */,
 				9E50C39F281C2D020008BFDD /* FirebaseStorage in Frameworks */,
 				9E50C39D281C2D020008BFDD /* FirebaseDatabase in Frameworks */,
+				9EED0CFD2826E7880046AEEC /* NVActivityIndicatorView in Frameworks */,
 				9E50C38C281B49630008BFDD /* TinyConstraints in Frameworks */,
 				9EED0CE72826B1EB0046AEEC /* friendzoneKit.framework in Frameworks */,
 				9EED0CDB282505ED0046AEEC /* ConfettiSwiftUI in Frameworks */,
@@ -232,8 +254,9 @@
 			children = (
 				F2BD3D6692ADB69DF9A554E6 /* LaunchScreen.storyboard */,
 				CDAA07BA585EEFF1154CEE42 /* Storyboard.swift */,
-				9E95E9B2281ADD8600639243 /* Main.storyboard */,
 				9E50C38F281C28020008BFDD /* Authorization.storyboard */,
+				9E95E9B2281ADD8600639243 /* Main.storyboard */,
+				9EED0D02282705720046AEEC /* Profile.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -268,9 +291,6 @@
 		33FA758E859804CD157ECD9D /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				9E22E668281ED8110030DF7C /* History */,
-				9E22E665281ED7CB0030DF7C /* Profile */,
-				9E95E9AD281ADCFC00639243 /* Home */,
 				F19C4F25496C04CB61A456A7 /* MainCoordinator.swift */,
 			);
 			path = Main;
@@ -349,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				9A1A77E9EE984583227BEDBC /* .gitkeep */,
+				9EED0CED2826E2610046AEEC /* Stateful+Common.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -387,6 +408,8 @@
 			isa = PBXGroup;
 			children = (
 				9E22E666281ED7DB0030DF7C /* ProfileCoordinator.swift */,
+				9EED0CFE2827052A0046AEEC /* ProfileViewController.swift */,
+				9EED0D00282705520046AEEC /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -494,6 +517,12 @@
 				83FC2093EA4E47651633A947 /* .gitkeep */,
 				9EED0CDC28250DA80046AEEC /* ConfettiView.swift */,
 				9EED0CE1282578B90046AEEC /* ShakeView.swift */,
+				9EED0CF12826E2D10046AEEC /* EmptyView.swift */,
+				9EED0CF22826E2D10046AEEC /* EmptyView.xib */,
+				9EED0CEF2826E2D10046AEEC /* ErrorView.swift */,
+				9EED0CF32826E2D10046AEEC /* ErrorView.xib */,
+				9EED0CF42826E2D10046AEEC /* LoadingView.swift */,
+				9EED0CF02826E2D10046AEEC /* LoadingView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -504,6 +533,9 @@
 				7BDA0D2096BB19BD7E99001D /* TemplateViewController.swift */,
 				6A212F62C044322632EB2A63 /* TemplateViewModel.swift */,
 				8BF2FE73AA56BDEFAE3281FD /* Authentication */,
+				9E22E668281ED8110030DF7C /* History */,
+				9E22E665281ED7CB0030DF7C /* Profile */,
+				9E95E9AD281ADCFC00639243 /* Home */,
 				33FA758E859804CD157ECD9D /* Main */,
 			);
 			path = Features;
@@ -552,6 +584,7 @@
 				9E22E66C281EE9E60030DF7C /* FirebaseFirestore */,
 				9E22E67928204C480030DF7C /* SFSafeSymbols */,
 				9EED0CDA282505ED0046AEEC /* ConfettiSwiftUI */,
+				9EED0CFC2826E7880046AEEC /* NVActivityIndicatorView */,
 			);
 			productName = friendzone;
 			productReference = 45C1A0FEB648D2F7EB6FE3A6 /* friendzone.app */;
@@ -614,6 +647,7 @@
 				9E50C395281C2D020008BFDD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9E22E67828204C480030DF7C /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				9EED0CD9282505ED0046AEEC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				9EED0CFB2826E7880046AEEC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -630,12 +664,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E50C390281C28020008BFDD /* Authorization.storyboard in Resources */,
+				9EED0D03282705720046AEEC /* Profile.storyboard in Resources */,
+				9EED0CF82826E2D10046AEEC /* EmptyView.xib in Resources */,
+				9EED0CF62826E2D10046AEEC /* LoadingView.xib in Resources */,
 				9EED0CE62826ABD50046AEEC /* GoogleService-Info.plist in Resources */,
 				9E95E9BA281AE32700639243 /* UserNearbyTableViewCell.xib in Resources */,
 				CD3C621FA095E5397DEC781A /* Assets.xcassets in Resources */,
 				0574351BFB13B92B42E762E8 /* LaunchScreen.storyboard in Resources */,
 				F4EC279B43421B6A6EA3C16F /* Settings.bundle in Resources */,
 				9E95E9B3281ADD8600639243 /* Main.storyboard in Resources */,
+				9EED0CF92826E2D10046AEEC /* ErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,12 +756,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EED0CEE2826E2620046AEEC /* Stateful+Common.swift in Sources */,
+				9EED0CF72826E2D10046AEEC /* EmptyView.swift in Sources */,
 				9E22E67E28216AD90030DF7C /* CardViewController.swift in Sources */,
 				9E22E673281F01160030DF7C /* PostalCode.swift in Sources */,
 				9EED0CE4282590740046AEEC /* ImageCropperViewController.swift in Sources */,
 				9E36EBC22822B5DA004BE351 /* SetEmailViewController.swift in Sources */,
 				2B4078944203D8A41757C2E7 /* AppCoordinator.swift in Sources */,
 				9E50C3B3281E04CD0008BFDD /* SetProfilePictureViewController.swift in Sources */,
+				9EED0CFF2827052A0046AEEC /* ProfileViewController.swift in Sources */,
 				9E50C3B1281DBE940008BFDD /* FriendZoneButton.swift in Sources */,
 				9E22E68228216BBC0030DF7C /* CardPresentationAnimation.swift in Sources */,
 				9E22E667281ED7DB0030DF7C /* ProfileCoordinator.swift in Sources */,
@@ -745,6 +786,7 @@
 				9E22E677281F13F40030DF7C /* SetSocialMediaViewController.swift in Sources */,
 				9EED0CD42823F1080046AEEC /* LoginViewController.swift in Sources */,
 				9E95E9AF281ADD3F00639243 /* YourZoneViewController.swift in Sources */,
+				9EED0D01282705520046AEEC /* ProfileViewModel.swift in Sources */,
 				9EED0CE2282578B90046AEEC /* ShakeView.swift in Sources */,
 				9E22E660281E844A0030DF7C /* ValidatedText.swift in Sources */,
 				9E22E662281E957C0030DF7C /* FirebaseHandler.swift in Sources */,
@@ -760,6 +802,8 @@
 				9E22E68428216C0C0030DF7C /* CustomPushAnimation.swift in Sources */,
 				3AF0388F1D95160A10C72B21 /* TemplateViewController.swift in Sources */,
 				1666D1FB48B9A5FD579A7464 /* TemplateViewModel.swift in Sources */,
+				9EED0CF52826E2D10046AEEC /* ErrorView.swift in Sources */,
+				9EED0CFA2826E2D10046AEEC /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1598,6 +1642,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		9EED0CFB2826E7880046AEEC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		BB36EA5C9C473900A88DCCD0 /* XCRemoteSwiftPackageReference "SimpleButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/allaboutapps/SimpleButton";
@@ -1679,6 +1731,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9EED0CD9282505ED0046AEEC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
 			productName = ConfettiSwiftUI;
+		};
+		9EED0CFC2826E7880046AEEC /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EED0CFB2826E7880046AEEC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
 		};
 		C395B301798EFD9CE6287FB7 /* Fetch */ = {
 			isa = XCSwiftPackageProductDependency;

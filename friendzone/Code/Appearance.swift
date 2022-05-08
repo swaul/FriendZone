@@ -6,8 +6,8 @@ struct Appearance {
     /// Sets the global appearance for the application.
     /// Call this method early in the application's setup, i.e. in `applicationDidFinishLaunching:`
     static func setup() {
-        UINavigationBar.appearance().barTintColor = .red
-        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().barTintColor = .systemBackground
+        UINavigationBar.appearance().tintColor = Asset.primaryColor.color
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         UITabBar.appearance().tintColor = Asset.primaryColor.color
@@ -51,6 +51,8 @@ public struct TextStyle {
     static let blueBig = Style(font: UIFont.FZ.regularTextFont.withSize(24.0), color: Asset.primaryColor.color)
     static let errorText = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.errorColor.color)
     static let versionLabel = Style(font: UIFont.FZ.regularTextFont.withSize(36.0), color: Asset.errorColor.color)
+    
+    static let grayBold = Style(font: UIFont.FZ.boldTextFont.withSize(18.0), color: Asset.textColor.color)
 }
 
 public struct TextFieldStyle {

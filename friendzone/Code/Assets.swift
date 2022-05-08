@@ -25,6 +25,8 @@ internal enum Asset {
   internal static let accentColor = ColorAsset(name: "accentColor")
   internal static let backgroundColor = ColorAsset(name: "backgroundColor")
   internal static let errorColor = ColorAsset(name: "errorColor")
+  internal static let grayBackground = ColorAsset(name: "grayBackground")
+  internal static let greyTextColor = ColorAsset(name: "greyTextColor")
   internal static let inactiveCommentInputColor = ColorAsset(name: "inactiveCommentInputColor")
   internal static let instagram = ImageAsset(name: "instagram")
   internal static let lightPrimaryColor = ColorAsset(name: "lightPrimaryColor")

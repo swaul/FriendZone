@@ -25,7 +25,7 @@ class YourZoneViewModel {
     
     func getUserInfo() {
         guard let user = Auth.auth().currentUser else { return }
-        let resource = LoadableResource<FZUser>(path: [.collection(collectionName: "users"), .document(documentName: user.uid)])
+        let resource = LoadableResource<FZUser>(path: [.collection(collectionName: "users")], firebaseConstraint: .containsMultipleValue(fieldName: "id", constraint: [user.uid]))
         FirebaseHandler.shared.getData(resource: resource) { result in
             switch result {
             case .failure(let error):

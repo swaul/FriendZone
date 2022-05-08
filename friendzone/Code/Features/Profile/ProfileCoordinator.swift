@@ -14,7 +14,14 @@ import SFSafeSymbols
 class ProfileCoordinator: NavigationCoordinator {
     
     override func start() {
+        let viewModel = ProfileViewModel()
+        let viewController = ProfileViewController.createWith(storyboard: .profile, viewModel: viewModel)
+        
+        navigationController.setNavigationBarHidden(false, animated: true)
+        
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .person)
+
+        push(viewController, animated: true)
     }
     
 }
