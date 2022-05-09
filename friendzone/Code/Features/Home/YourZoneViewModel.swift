@@ -33,6 +33,7 @@ class YourZoneViewModel {
             case .success(let data):
                 guard let info = data.first else { return }
                 self.userInfo = info
+                UserController.shared.loggedInUser = UserViewModel(model: info)
             }
         }
     }
@@ -46,6 +47,7 @@ class YourZoneViewModel {
             } else {
                 guard let image = UIImage(data: data!) else { return }
                 self.profileImage = image
+                UserController.shared.loggedInUser?.profilePicture = image
                 if let data = image.pngData() {
                     // Create URL
                     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

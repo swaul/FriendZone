@@ -6,7 +6,7 @@ import Toolbox
 
 class ImageCropperViewController: UIViewController {
     
-    public static func createWith(storyboard: Storyboard, viewModel: RegisterViewModel, image: UIImage) -> Self {
+    public static func createWith(storyboard: Storyboard, viewModel: ImagePicker, image: UIImage) -> Self {
         let viewController = UIStoryboard(storyboard).instantiateViewController(self)
         viewController.viewModel = viewModel
         viewController.image = image
@@ -17,7 +17,7 @@ class ImageCropperViewController: UIViewController {
     var image: UIImage!
     var center: CGPoint!
     
-    var viewModel: RegisterViewModel!
+    var viewModel: ImagePicker!
     
     var blurEffectStyle: UIBlurEffect.Style {
         if self.traitCollection.userInterfaceStyle == .dark {

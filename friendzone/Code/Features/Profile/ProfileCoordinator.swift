@@ -21,7 +21,17 @@ class ProfileCoordinator: NavigationCoordinator {
         
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .person)
 
+        viewController.onImageTapped = { image in
+            self.showImageCropper(image: image, viewModel: viewModel)
+        }
+        
         push(viewController, animated: true)
+    }
+    
+    func showImageCropper(image: UIImage, viewModel: ProfileViewModel) {
+        let viewController = ImageCropperViewController.createWith(storyboard: .auth, viewModel: viewModel, image: image)
+        
+        present(viewController, animated: true)
     }
     
 }

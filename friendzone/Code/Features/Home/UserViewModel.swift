@@ -26,6 +26,22 @@ class UserViewModel {
         model.bio ?? ""
     }
     
+    var tiktok: String? {
+        model.tiktok
+    }
+    
+    var insta: String? {
+        model.instagram
+    }
+    
+    var snap: String? {
+        model.snapchat
+    }
+    
+    var images: [String] {
+        model.images
+    }
+    
     init(model: FZUser) {
         self.model = model
         loadImage(url: model.profilePicture)

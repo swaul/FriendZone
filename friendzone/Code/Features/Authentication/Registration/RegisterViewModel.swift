@@ -14,7 +14,7 @@ import FirebaseAnalytics
 import Combine
 import friendzoneKit
 
-class RegisterViewModel {
+class RegisterViewModel: ImagePicker {
     
     @Published var email = ValidatedText(value: nil, validation: { value in
         guard let value = value else { return .initial }
