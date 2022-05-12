@@ -18,6 +18,7 @@ class ProfileCoordinator: NavigationCoordinator {
         let viewController = ProfileViewController.createWith(storyboard: .profile, viewModel: viewModel)
         
         navigationController.setNavigationBarHidden(false, animated: true)
+        navigationController.navigationBar.prefersLargeTitles = true
         
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .person)
 

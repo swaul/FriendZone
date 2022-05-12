@@ -198,21 +198,23 @@ class ProfileViewController: UIViewController {
     
     func setupHeader() {
         
-        let headerLabel = UILabel()
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 42)
-        headerLabel.textColor = Asset.primaryColor.color
-        headerLabel.text = "Profil"
-        
-        let headerView = UIView()
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(headerLabel)
-        
-        headerLabel.withConstraints { view in
-            view.alignEdges()
-        }
-        
-        navigationItem.titleView = headerView
+//        let headerLabel = UILabel()
+//        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+//        headerLabel.font = UIFont.boldSystemFont(ofSize: 42)
+//        headerLabel.textColor = Asset.primaryColor.color
+//        headerLabel.text = "Profil"
+//        
+//        let headerView = UIView()
+//        headerView.translatesAutoresizingMaskIntoConstraints = false
+//        headerView.addSubview(headerLabel)
+//        
+//        headerLabel.withConstraints { view in
+//            view.alignEdges()
+//        }
+//        
+//        navigationItem.titleView = headerView
+//        
+        title = "Profil"
     }
     
     @objc func didTapOutside() {

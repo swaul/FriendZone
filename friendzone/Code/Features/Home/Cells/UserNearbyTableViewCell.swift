@@ -54,9 +54,9 @@ class UserNearbyTableViewCell: UITableViewCell {
         cellViewWrapper.layer.cornerRadius = 10
         cellViewWrapper.backgroundColor = Asset.secondaryColor.color
         backgroundColor = .clear
-        userNameLabel.textColor = Asset.lightTextColor.color
-        userScoreLabel.textColor = Asset.lightTextColor.color
-        userNameBioLabel.textColor = Asset.lightTextColor.color
+        userNameLabel.setStyle(TextStyle.boldText)
+        userScoreLabel.setStyle(TextStyle.blueSmall)
+        userNameBioLabel.setStyle(TextStyle.fadedText)
         
         userNameLabel.text = user.name
         userScoreLabel.text = String(user.score)

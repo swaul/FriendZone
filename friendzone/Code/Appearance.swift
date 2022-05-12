@@ -52,6 +52,8 @@ public struct TextStyle {
     static let errorText = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.errorColor.color)
     static let versionLabel = Style(font: UIFont.FZ.regularTextFont.withSize(36.0), color: Asset.errorColor.color)
     
+    static let fadedText = Style(font: UIFont.FZ.regularTextFont.withSize(16.0), color: Asset.fadedTextColor.color)
+    static let boldText = Style(font: UIFont.FZ.boldTextFont.withSize(16.0), color: Asset.textColor.color)
     static let grayBold = Style(font: UIFont.FZ.boldTextFont.withSize(18.0), color: Asset.textColor.color)
 }
 

@@ -177,7 +177,8 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         shapeLayer.lineWidth = 4
         shapeLayer.path = path.cgPath
         shapeLayer.lineDashPattern = [3, 3, 3]
-
+        shapeLayer.backgroundColor = UIColor.clear.cgColor
+        
         // animate it
         var duration = newPoint.y / 100
         
@@ -192,19 +193,6 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         animation.fromValue = 0
         animation.duration = 10
         shapeLayer.add(animation, forKey: "MyAnimation")
-        
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.insertSubview(blurView, at: 0)
-        NSLayoutConstraint.activate(
-            [
-                blurView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor),
-                blurView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
-                blurView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
-                blurView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor)
-            ])
     }
 
     func timer(duration: CGFloat, color: CGColor, endPoint: CGPoint, points: [CGPoint]) {
@@ -261,22 +249,12 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var selectedUserNameLabel: UILabel!
     @IBOutlet var selectedUserBioLabel: UILabel!
     @IBOutlet var selectedUserScoreLabel: UILabel!
-    @IBOutlet var tiktokButton: UIButton!
-    @IBOutlet var instagramButton: UIButton!
-    @IBOutlet var snapchatButton: UIButton!
-    @IBOutlet var facebookButton: UIButton!
-    @IBOutlet var selectedUserImageLeftView: UIImageView!
-    @IBOutlet var selectedUserImageMiddleView: UIImageView!
-    @IBOutlet var selectedUserImageRightView: UIImageView!
-    @IBOutlet var selectedUserLeftVisitsLabel: UILabel!
-    @IBOutlet var selectedUserMiddleVisitsLabel: UILabel!
-    @IBOutlet var selectedUserRightVisitsLabel: UILabel!
     @IBOutlet var centerxConstraint: NSLayoutConstraint!
     
     lazy var popUpHiddenCenter = CGPoint(x: popUpView.frame.midX, y: view.frame.maxY + popUpView.frame.height / 2)
     
     func setupUpPop() {
-        popupBackgroundView.backgroundColor = .black.withAlphaComponent(0.2)
+//        popupBackgroundView.backgroundColor = .black.withAlphaComponent(0.2)
         popupBackgroundView.isHidden = true
         popUpView.center = popUpHiddenCenter
         popUpView.alpha = 0
@@ -286,10 +264,21 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         selectedUserImageView.layer.borderWidth = 4
         selectedUserImageView.layer.borderColor = Asset.accentColor.color.cgColor
         
-        selectedUserImageLeftView.layer.cornerRadius = 10
-        selectedUserImageMiddleView.layer.cornerRadius = 10
-        selectedUserImageRightView.layer.cornerRadius = 10
+        selectedUserNameLabel.setStyle(TextStyle.boldText)
+        selectedUserScoreLabel.setStyle(TextStyle.blueSmall)
 
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        popupBackgroundView.insertSubview(blurView, at: 0)
+        NSLayoutConstraint.activate(
+            [
+                blurView.leadingAnchor.constraint(equalTo: popupBackgroundView.leadingAnchor),
+                blurView.topAnchor.constraint(equalTo: popupBackgroundView.topAnchor),
+                blurView.bottomAnchor.constraint(equalTo: popupBackgroundView.bottomAnchor),
+                blurView.trailingAnchor.constraint(equalTo: popupBackgroundView.trailingAnchor)
+            ])
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -347,6 +336,7 @@ extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
         selectedUserNameLabel.text = selectedUser.name
         selectedUserBioLabel.text = selectedUser.bio
         selectedUserScoreLabel.text = String(selectedUser.score)
+        selectedUserScoreLabel.text! += "🔥"
         
         showHidePopUp(hide: false)
     }
