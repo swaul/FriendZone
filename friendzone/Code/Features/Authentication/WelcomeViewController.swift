@@ -49,13 +49,6 @@ class WelcomeViewController: UIViewController {
         setupView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY), endPoint: CGPoint(x: friendImage.frame.midX, y: friendImage.frame.midY))
-        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.9), endPoint: CGPoint(x: coupleImage.frame.midX, y: coupleImage.frame.midY))
-        drawLine(startPoint: CGPoint(x: personImage.frame.midX, y: personImage.frame.midY * 0.8), endPoint: CGPoint(x: teamImage.frame.midX, y: teamImage.frame.midY))
-    }
-      
     func setupView() {
         confettiView.isHidden = true
 
@@ -109,25 +102,6 @@ class WelcomeViewController: UIViewController {
     }
     
     var confettiSwiftUIView = ConfettiView()
-    
-    func drawLine(startPoint: CGPoint, endPoint: CGPoint) {
-        let path = UIBezierPath()
-        path.move(to: startPoint)
-        path.addLine(to: endPoint)
-    
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-        shapeLayer.strokeColor = UIColor.systemGreen.cgColor
-        shapeLayer.lineWidth = 4
-        shapeLayer.path = path.cgPath
-        shapeLayer.lineDashPattern = [3, 3, 3]
-                
-        backgroundView.layer.insertSublayer(shapeLayer, at: 0)
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 0
-        animation.duration = 1
-        shapeLayer.add(animation, forKey: "MyAnimation")
-    }
 }
 
 internal struct RectFramer {

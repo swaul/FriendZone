@@ -8,8 +8,8 @@ struct Appearance {
     static func setup() {
         UINavigationBar.appearance().barTintColor = .systemBackground
         UINavigationBar.appearance().tintColor = Asset.primaryColor.color
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryColor.color]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryColor.color]
         UITabBar.appearance().tintColor = Asset.primaryColor.color
     }
 }

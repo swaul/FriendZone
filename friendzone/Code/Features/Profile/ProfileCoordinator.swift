@@ -13,6 +13,8 @@ import SFSafeSymbols
 
 class ProfileCoordinator: NavigationCoordinator {
     
+    var onSignOut: (() -> Void)!
+    
     override func start() {
         let viewModel = ProfileViewModel()
         let viewController = ProfileViewController.createWith(storyboard: .profile, viewModel: viewModel)
@@ -24,6 +26,10 @@ class ProfileCoordinator: NavigationCoordinator {
 
         viewController.onImageTapped = { image in
             self.showImageCropper(image: image, viewModel: viewModel)
+        }
+        
+        viewController.onSignOut = { [weak self] in
+            self?.onSignOut()
         }
         
         push(viewController, animated: true)

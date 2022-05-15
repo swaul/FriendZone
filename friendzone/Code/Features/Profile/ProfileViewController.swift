@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Combine
 import Toolbox
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -21,6 +22,7 @@ class ProfileViewController: UIViewController {
     var viewModel: ProfileViewModel!
     
     var onImageTapped: ((UIImage) -> Void)!
+    var onSignOut: (() -> Void)!
     
     @IBOutlet var scrollView: UIScrollView!
     
@@ -60,6 +62,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet var inviteFriendsButton: UIButton!
     @IBOutlet var inviteFriendsHeight: NSLayoutConstraint!
     
+    @IBOutlet var signOutButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -86,6 +90,15 @@ class ProfileViewController: UIViewController {
         
         viewModel.$profilePicture.sink { [weak self] image in
             self?.profilePictureImageView.image = image
+        }.store(in: &cancellables)
+        
+        viewModel.$infosHaveChanged.sink { [weak self] changed in
+            guard let self = self else { return }
+            if !self.isEditing {
+                self.inviteFriendsButton.isEnabled = true
+            } else {
+                self.inviteFriendsButton.isEnabled = changed
+            }
         }.store(in: &cancellables)
     }
     
@@ -120,6 +133,12 @@ class ProfileViewController: UIViewController {
         
         tiktokImageView.image = Asset.tiktok.image
         
+        profileNameLabel.delegate = self
+        profileBioTextView.delegate = self
+        inistaTextField.delegate = self
+        tiktokTextField.delegate = self
+        snapchatTextField.delegate = self
+        
         profileNameLabel.isUserInteractionEnabled = false
         profileBioTextView.isUserInteractionEnabled = false
         
@@ -132,6 +151,9 @@ class ProfileViewController: UIViewController {
         snapchatTextField.isHidden = true
         socialsStackViewsStackView.axis = .horizontal
         
+        signOutButton.setTitle("Abmelden", for: .normal)
+        signOutButton.setTitleColor(.systemRed, for: .normal)
+        
         let profileGesture = UITapGestureRecognizer(target: self, action: #selector(profilePictureTapped))
         profilePictureImageView.addGestureRecognizer(profileGesture)
         profilePictureImageView.isUserInteractionEnabled = true
@@ -143,6 +165,7 @@ class ProfileViewController: UIViewController {
     
     func populateInfo() {
         let user = UserController.shared.loggedInUser
+        viewModel.user = user
         profileNameLabel.text = user?.name
         profileBioTextView.text = user?.bio
         profilePictureImageView.image = user?.profilePicture
@@ -197,23 +220,6 @@ class ProfileViewController: UIViewController {
     }
     
     func setupHeader() {
-        
-//        let headerLabel = UILabel()
-//        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-//        headerLabel.font = UIFont.boldSystemFont(ofSize: 42)
-//        headerLabel.textColor = Asset.primaryColor.color
-//        headerLabel.text = "Profil"
-//        
-//        let headerView = UIView()
-//        headerView.translatesAutoresizingMaskIntoConstraints = false
-//        headerView.addSubview(headerLabel)
-//        
-//        headerLabel.withConstraints { view in
-//            view.alignEdges()
-//        }
-//        
-//        navigationItem.titleView = headerView
-//        
         title = "Profil"
     }
     
@@ -230,11 +236,51 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func toggleEditingTapped(_ sender: Any) {
-        setEditing(!isEditing, animated: true)
+        if !isEditing {
+            setEditing(!isEditing, animated: true)
+        } else if viewModel.infosHaveChanged {
+            showUnsavedChangesDialog()
+        } else {
+            setEditing(!isEditing, animated: true)
+        }
+    }
+    
+    func showUnsavedChangesDialog() {
+        let dialog = UIAlertController(title: "Du hast ungespeicherte Änderungen", message: "Willst du deine Änderungen speichern?", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+            self?.viewModel.updateInfo(completion: { [weak self] success in
+                if success {
+                    self?.setEditing(false, animated: true)
+                } else {
+                    self?.view.shakeIt()
+                }
+            })
+        }
+        
+        let dismissAction = UIAlertAction(title: "Verwerfen", style: .destructive) { [weak self] _ in
+            
+            self?.setEditing(false, animated: true)
+        }
+        
+        dialog.addAction(saveAction)
+        dialog.addAction(dismissAction)
+        
+        present(dialog, animated: true)
     }
     
     @IBAction func inviteFriendsButtonTapped(_ sender: Any) {
-        
+        if isEditing {
+            viewModel.updateInfo { [weak self] success in
+                if success {
+                    self?.setEditing(false, animated: true)
+                } else {
+                    self?.view.shakeIt()
+                }
+            }
+        } else {
+            "Invite friends"
+        }
     }
     
     @IBAction func addImageTapped(_ sender: Any) {
@@ -289,6 +335,7 @@ class ProfileViewController: UIViewController {
         }
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut) {
             if editing {
+                self.inviteFriendsButton.isEnabled = false
                 self.editProfileButton.setImage(.xmarkCircle, for: .normal)
                 self.socialsStackViewsStackView.axis = .vertical
                 self.inistaTextField.isHidden = false
@@ -330,6 +377,26 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func signOutButtonTapped(_ sender: Any) {
+        showSignOutDialog()
+    }
+    
+    func showSignOutDialog() {
+        let dialog = UIAlertController(title: "Abmelden", message: "Willst du dich wirklich abmelden?", preferredStyle: .alert)
+        
+        let logoutAction = UIAlertAction(title: "Abmelden", style: .destructive) { [weak self] _ in
+            try! Auth.auth().signOut()
+            self?.onSignOut()
+        }
+        
+        let cancel = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        
+        dialog.addAction(logoutAction)
+        dialog.addAction(cancel)
+        
+        present(dialog, animated: true)
+    }
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -345,5 +412,31 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 extension ProfileViewController: UIScrollViewDelegate {
+    
+}
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text, let user = viewModel.user else { return }
+        if profileNameLabel.isFirstResponder {
+            viewModel.changedName = UserInfo(value: user.name, newValue: text, type: .name)
+        } else if tiktokTextField.isFirstResponder {
+            viewModel.changedTikTok = UserInfo(value: user.tiktok, newValue: text, type: .tiktok)
+        } else if inistaTextField.isFirstResponder {
+            viewModel.changedInsta = UserInfo(value: user.insta, newValue: text, type: .insta)
+        } else if snapchatTextField.isFirstResponder {
+            viewModel.changedSnap = UserInfo(value: user.snap, newValue: text, type: .snap)
+        }
+    }
+    
+}
+
+extension ProfileViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        viewModel.changedBio = UserInfo(value: viewModel.user!.bio, newValue: text, type: .bio)
+        return true
+    }
     
 }

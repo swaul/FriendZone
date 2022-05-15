@@ -59,8 +59,8 @@ public class FirebaseHandler {
         query?.getDocuments { (querySnapshot, err) in
             
             if let err = err {
-                completion(.failure(.unknownError(error: err)))
                 print(err)
+                completion(.failure(.unknownError(error: err)))
             } else {
                 
                 let notes = querySnapshot!.documents.compactMap { (document) -> T? in
@@ -74,30 +74,23 @@ public class FirebaseHandler {
     }
     
     public func updateLocation(postalCode: String, country: String, userId: String, _ completion: @escaping ((Result<Void, FirebaseError>) -> Void)) {
-        let defaults = UserDefaults.standard
-        if let recent = defaults.string(forKey: "recentLocation"), recent == postalCode {
-            print("No need")
-        } else {
-            db.collection("locations").document(country).collection(postalCode).document(postalCode).updateData(["users": FieldValue.arrayUnion([userId])], completion: { error in
-                if let error = error {
-                    if error.localizedDescription.lowercased().contains(("No document to update").lowercased()) {
-                        self.setLocation(postalCode: postalCode, country: country, userId: userId) { result in
-                            switch result {
-                            case .failure(let error):
-                                completion(.failure(FirebaseError.unknownError(error: error)))
-                            case .success(()):
-                                completion(.success(()))
-                            }
+        db.collection("locations").document(country).collection(postalCode).document(postalCode).updateData(["users": FieldValue.arrayUnion([userId])], completion: { error in
+            if let error = error {
+                if error.localizedDescription.lowercased().contains(("No document to update").lowercased()) {
+                    self.setLocation(postalCode: postalCode, country: country, userId: userId) { result in
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(FirebaseError.unknownError(error: error)))
+                        case .success:
+                            completion(.success(()))
                         }
                     }
-                    completion(.failure(.unknownError(error: error)))
-                } else {
-                    completion(.success(()))
-                    let defaults = UserDefaults.standard
-                    defaults.setValue(postalCode, forKey: "recentLocation")
                 }
-            })
-        }
+                completion(.failure(.unknownError(error: error)))
+            } else {
+                completion(.success(()))
+            }
+        })
     }
     
     public func setLocation(postalCode: String, country: String, userId: String, _ completion: @escaping ((Result<Void, FirebaseError>) -> Void)) {
@@ -110,6 +103,16 @@ public class FirebaseHandler {
                 defaults.setValue(postalCode, forKey: "recentLocation")
             }
         })
+    }
+    
+    public func deleteLocation(userId: String, postalCode: String, country: String, _ completion: @escaping ((Result<Void, FirebaseError>) -> Void) ) {
+        db.collection("locations").document(country).collection(postalCode).document(postalCode).updateData(["users": FieldValue.arrayRemove([userId])]) { error in
+            if let error = error {
+                completion(.failure(.unknownError(error: error)))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
     
 }

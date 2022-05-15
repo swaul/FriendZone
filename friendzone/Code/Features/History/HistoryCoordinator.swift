@@ -14,7 +14,17 @@ import SFSafeSymbols
 class HistoryCoordinator: NavigationCoordinator {
     
     override func start() {
+        let viewModel = HistoryViewModel()
+        let viewController = HistoryViewController.createWith(storyboard: .history, viewModel: viewModel)
+        
+        navigationController.setNavigationBarHidden(false, animated: true)
+        navigationController.navigationBar.prefersLargeTitles = true
+        
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .clockArrowCirclepath)
+        
+        viewController.title = "Gespeichert"
+        
+        push(viewController, animated: true)
     }
     
 }

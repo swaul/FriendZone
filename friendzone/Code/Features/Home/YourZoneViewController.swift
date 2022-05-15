@@ -32,23 +32,24 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     var line3 = [CGPoint]()
     
     var loginRequired: (() -> Void)!
+    var onProfile: (() -> Void)!
+    var onNews: (() -> Void)!
 
     // MARK: - Outlets
     
-    @IBOutlet var userImageView: UIImageView!
-    @IBOutlet var userNameLabel: UILabel!
-    @IBOutlet var userScoreLabel: UILabel!
-    @IBOutlet var yourZoneHeaderLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var goOfflineLabel: UILabel!
     @IBOutlet var offlineSwitch: UISwitch!
     @IBOutlet var backgroundView: UIView!
+    @IBOutlet var backgroundBlob: UIImageView!
+    @IBOutlet var newsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupUpPop()
         setupBindings()
+        setupUserProfile()
         if restartAnimation {
             makeLines()
         }
@@ -67,6 +68,11 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         updateUserInfo()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        userImageView.layer.cornerRadius = 24
+    }
+    
     func checkLogin() {
         if Auth.auth().currentUser == nil {
             loginRequired()
@@ -74,7 +80,8 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setupView() {
-        userImageView.layer.cornerRadius = 20
+        titleLabel.text = "Your Zone"
+        offlineSwitch.isOn = false
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,17 +91,20 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         
-        setupStatefulViews(backgroundVisible: true  )
+        setupStatefulViews(backgroundVisible: true)
+        offlineSwitch.onTintColor = .systemGreen
     }
-    
+
     func updateUserInfo() {
         guard let user = Auth.auth().currentUser else { return }
         let defaults = UserDefaults.standard
         if let name = defaults.value(forKey: "name") as? String {
             userNameLabel.text = name
+        } else {
+            viewModel.getUserInfo()
         }
-        viewModel.getUserInfo()
         
+        guard userImageView.image == nil else { return }
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let url = documents.appendingPathComponent("profilePic.png")
         
@@ -103,9 +113,7 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         } catch {
             viewModel.getImage(id: user.uid)
         }
-        
-        viewModel.getImage(id: user.uid)
-        
+            
     }
     
     func makeLines() {
@@ -155,8 +163,7 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         
         viewModel.$userInfo.sink { [weak self] user in
             guard let user = user else { return }
-            self?.userNameLabel.text = user.name
-            self?.userScoreLabel.text = String(user.score)
+            self?.populateUserProfile(user: UserViewModel(model: user))
         }.store(in: &cancellabels)
         
         viewModel.$profileImage.sink { [weak self] image in
@@ -203,6 +210,27 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
+    @IBAction func offlineDidChange(_ sender: Any) {
+        onlineIndicatorView.tintColor = offlineSwitch.isOn ? .systemRed : .systemGreen
+        viewModel.isOffline = offlineSwitch.isOn
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut) {
+            self.backgroundBlob.tintColor = self.offlineSwitch.isOn ? .gray : Asset.primaryColor.color
+            self.backgroundView.alpha = self.offlineSwitch.isOn ? 0.0 : 1.0
+        } completion: { completed in
+            if completed && self.offlineSwitch.isOn {
+                print("done")
+                self.tableView.reloadData()
+            } else {
+                self.getLocation()
+            }
+        }
+
+    }
+    
+    @IBAction func newsButtonTapped(_ sender: Any) {
+        onNews()
+    }
+    
     // MARK: - Location
     
     var locationManager: CLLocationManager!
@@ -220,12 +248,20 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("updateLocation")
         guard let location = locations.first else { return }
-        currentLocation = location
+        print("to ", location)
+        let distance = currentLocation?.distance(from: location) ?? 10000
+        if distance > 100.0 {
+            print("upload location", distance)
+            currentLocation = location
+        }
     }
     
     func getLocation() {
         locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -236,83 +272,73 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard error == nil, let placemarks = placemarks, let postalCode = placemarks.first!.postalCode, let country = placemarks.first!.country else { return }
+            print("uploading location")
             self?.viewModel.updateLocation(postalCode: postalCode, country: country)
+            print("updating nearby users")
             self?.viewModel.getNearbyUserIds(postalCode: postalCode, country: country)
         }
     }
     
+    // MARK: - User
+    
+    @IBOutlet var userWrapperView: UIView!
+    @IBOutlet var userImageView: UIImageView!
+    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var onlineIndicatorView: UIImageView!
+    @IBOutlet var userScoreLabel: UILabel!
+    
+    func setupUserProfile() {
+        userImageView.layer.borderColor = Asset.accentColor.color.cgColor
+        userImageView.layer.borderWidth = 2
+        userNameLabel.setStyle(TextStyle.normal)
+        
+        let profileTap = UITapGestureRecognizer(target: self, action: #selector(showProfile))
+        userWrapperView.addGestureRecognizer(profileTap)
+        userWrapperView.isUserInteractionEnabled = true
+    }
+    
+    func populateUserProfile(user: UserViewModel) {
+        userNameLabel.text = user.name
+        userScoreLabel.text = String(user.score)
+        userScoreLabel.text! += "🔥"
+        onlineIndicatorView.tintColor = offlineSwitch.isOn ? .systemRed : .systemGreen
+        
+        guard userImageView.image == nil else { return }
+        userImageView.image = user.profilePicture
+    }
+    
+    @objc func showProfile() {
+        onProfile()
+    }
+    
     // MARK: - PopUp
+    var currentlySelectedUser: UserViewModel?
     
-    @IBOutlet var popupBackgroundView: UIView!
-    @IBOutlet var popUpView: UIView!
-    @IBOutlet var selectedUserImageView: UIImageView!
-    @IBOutlet var selectedUserNameLabel: UILabel!
-    @IBOutlet var selectedUserBioLabel: UILabel!
-    @IBOutlet var selectedUserScoreLabel: UILabel!
-    @IBOutlet var centerxConstraint: NSLayoutConstraint!
-    
-    lazy var popUpHiddenCenter = CGPoint(x: popUpView.frame.midX, y: view.frame.maxY + popUpView.frame.height / 2)
-    
-    func setupUpPop() {
-//        popupBackgroundView.backgroundColor = .black.withAlphaComponent(0.2)
-        popupBackgroundView.isHidden = true
-        popUpView.center = popUpHiddenCenter
-        popUpView.alpha = 0
-        popUpView.layer.cornerRadius = 20
-                
-        selectedUserImageView.layer.cornerRadius = 60
-        selectedUserImageView.layer.borderWidth = 4
-        selectedUserImageView.layer.borderColor = Asset.accentColor.color.cgColor
+    @IBAction func historyButtonTapped(_ sender: Any) {
+        guard let user = currentlySelectedUser else { return }
+        let users = [user.id: Date()]
         
-        selectedUserNameLabel.setStyle(TextStyle.boldText)
-        selectedUserScoreLabel.setStyle(TextStyle.blueSmall)
-
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
+        let defaults = UserDefaults.standard
+        defaults.set(users, forKey: "savedUsers")
+    }
+    
+    func showHidePopUp(user: UserViewModel) {
+        let popup = UserPopupViewController.createWith(storyboard: .main, viewModel: user)
+        popup.transitioningDelegate = popup.presentationManager
+        popup.modalPresentationStyle = .custom
         
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        popupBackgroundView.insertSubview(blurView, at: 0)
-        NSLayoutConstraint.activate(
-            [
-                blurView.leadingAnchor.constraint(equalTo: popupBackgroundView.leadingAnchor),
-                blurView.topAnchor.constraint(equalTo: popupBackgroundView.topAnchor),
-                blurView.bottomAnchor.constraint(equalTo: popupBackgroundView.bottomAnchor),
-                blurView.trailingAnchor.constraint(equalTo: popupBackgroundView.trailingAnchor)
-            ])
-    }
-    
-    @IBAction func closeButtonTapped(_ sender: Any) {
-        showHidePopUp(hide: true)
-    }
-    
-    func showHidePopUp(hide: Bool) {
-        if hide {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                self.popUpView.center = self.popUpHiddenCenter
-                self.popupBackgroundView.alpha = 0
-                self.popUpView.alpha = 0
-            }, completion: { _ in
-                self.popupBackgroundView.isHidden = true
-            })
-        } else {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                self.popUpView.isHidden = false
-                self.popupBackgroundView.isHidden = false
-                self.popUpView.center = self.view.center
-                self.popupBackgroundView.alpha = 1
-                self.popUpView.alpha = 1
-            }, completion: nil)
-        }
-    }
-    @IBAction func logoutTapped(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            checkLogin()
-        } catch {
-
+        let backgroundView = UIView(frame: view.frame)
+        backgroundView.backgroundColor = .black.withAlphaComponent(0.22)
+        view.addSubview(backgroundView)
+        
+        popup.onDismiss = { [weak self] in
+            self?.currentlySelectedUser = nil
+            backgroundView.removeFromSuperview()
         }
         
+        present(popup, animated: true)
     }
+
 }
 
 extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
@@ -332,13 +358,8 @@ extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedUser = viewModel.usersNearby[indexPath.row]
-        selectedUserImageView.image = selectedUser.profilePicture
-        selectedUserNameLabel.text = selectedUser.name
-        selectedUserBioLabel.text = selectedUser.bio
-        selectedUserScoreLabel.text = String(selectedUser.score)
-        selectedUserScoreLabel.text! += "🔥"
-        
-        showHidePopUp(hide: false)
+        currentlySelectedUser = selectedUser
+        showHidePopUp(user: selectedUser)
     }
     
 }

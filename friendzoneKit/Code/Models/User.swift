@@ -10,17 +10,20 @@ import Foundation
 
 public struct FZUser: FirebaseDecodable {
     
-    public let name: String
-    public let profilePicture: String
-    public let email: String?
-    public let snapchat: String?
-    public let instagram: String?
-    public let tiktok: String?
-    public let bio: String?
-    public let score: Int
-    public let images: [String]
+    public var id: String
+    public var name: String
+    public var profilePicture: String
+    public var email: String?
+    public var snapchat: String?
+    public var instagram: String?
+    public var tiktok: String?
+    public var bio: String?
+    public var score: Int
+    public var images: [String]
+    public var postalCode: String?
     
-    public init(name: String, profilePicture: String, snapchat: String?, instagram: String?, tiktok: String?, bio: String?, score: Int, images: [String]) {
+    public init(id: String, name: String, profilePicture: String, snapchat: String?, instagram: String?, tiktok: String?, bio: String?, score: Int, images: [String], postalCode: String) {
+        self.id = id
         self.name = name
         self.profilePicture = profilePicture
         self.snapchat = snapchat
@@ -30,9 +33,11 @@ public struct FZUser: FirebaseDecodable {
         self.score = score
         self.images = images
         self.email = nil
+        self.postalCode = postalCode
     }
     
     public init?(data: [String: Any]) {
+        self.id = data["id"] as! String
         self.name = data["name"] as! String
         self.profilePicture = data["profilePicture"] as! String
         self.bio = data["bio"] as! String
@@ -54,6 +59,11 @@ public struct FZUser: FirebaseDecodable {
         }
         self.score = data["score"] as! Int
         self.images = []
+        if let postalCode = data["postalCode"] as? String {
+            self.postalCode = postalCode
+        } else {
+            self.postalCode = nil
+        }
     }
     
 }

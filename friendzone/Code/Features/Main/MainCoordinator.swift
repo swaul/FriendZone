@@ -19,8 +19,16 @@ class MainCoordinator: TabBarCoordinator {
             self?.loginRequired()
         }
         
+        yourZoneCoordinator.showProfile = { [weak self] in
+            self?.tabBarController.selectedIndex = 0
+        }
+        
         let profile = ProfileCoordinator()
         profile.start()
+        
+        profile.onSignOut = { [weak self] in
+            self?.loginRequired()
+        }
         
         let history = HistoryCoordinator()
         history.start()

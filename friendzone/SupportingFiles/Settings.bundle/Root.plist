@@ -20,7 +20,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>0.1 (1)</string>
+			<string>0.1 (2)</string>
 			<key>Key</key>
 			<string>AppVersion</string>
 			<key>Title</key>

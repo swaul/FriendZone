@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -199,10 +200,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3a-pl-TbT">
-                                                <rect key="frame" x="32" y="499.5" width="350" height="314.5"/>
+                                                <rect key="frame" x="32" y="499.5" width="350" height="227.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MnY-hq-Kig">
-                                                        <rect key="frame" x="16" y="16" width="318" height="282.5"/>
+                                                        <rect key="frame" x="16" y="16" width="318" height="195.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OAh-x2-25M" userLabel="instaStack">
                                                                 <rect key="frame" x="0.0" y="0.0" width="318" height="34"/>
@@ -225,7 +226,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5Aw-gX-Dfy" userLabel="tiktokStack">
-                                                                <rect key="frame" x="0.0" y="124.5" width="318" height="34"/>
+                                                                <rect key="frame" x="0.0" y="81" width="318" height="34"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tiktok" translatesAutoresizingMaskIntoConstraints="NO" id="3rS-SK-gfI">
                                                                         <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
@@ -245,7 +246,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fb2-SZ-NRF" userLabel="snapStack">
-                                                                <rect key="frame" x="0.0" y="248.5" width="318" height="34"/>
+                                                                <rect key="frame" x="0.0" y="161.5" width="318" height="34"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snapchat" translatesAutoresizingMaskIntoConstraints="NO" id="gV5-D9-aB8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
@@ -288,7 +289,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-SX-eOb">
-                                                <rect key="frame" x="32" y="846" width="350" height="63"/>
+                                                <rect key="frame" x="32" y="759" width="350" height="63"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00O-Cu-fDb">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="63"/>
@@ -310,17 +311,42 @@
                                                     <constraint firstAttribute="height" constant="63" id="twf-JJ-NWf"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zkQ-32-Uoo">
+                                                <rect key="frame" x="32" y="854" width="350" height="63"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbg-5Y-UU9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="63"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                        <connections>
+                                                            <action selector="signOutButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="neV-LL-8IP"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="gbg-5Y-UU9" secondAttribute="trailing" id="FGJ-ri-KUA"/>
+                                                    <constraint firstItem="gbg-5Y-UU9" firstAttribute="top" secondItem="zkQ-32-Uoo" secondAttribute="top" id="ObO-2O-7nZ"/>
+                                                    <constraint firstAttribute="height" constant="63" id="VdW-K7-CfD"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gbg-5Y-UU9" secondAttribute="bottom" id="pvA-5y-Okg"/>
+                                                    <constraint firstItem="gbg-5Y-UU9" firstAttribute="leading" secondItem="zkQ-32-Uoo" secondAttribute="leading" id="rU4-0T-m7n"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="backgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="bhw-SX-eOb" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="AOn-es-hKM"/>
+                                            <constraint firstItem="zkQ-32-Uoo" firstAttribute="top" secondItem="bhw-SX-eOb" secondAttribute="bottom" constant="32" id="D2L-D5-vYr"/>
                                             <constraint firstItem="yL5-wY-Igr" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="Gg0-LZ-WLr"/>
                                             <constraint firstItem="v3a-pl-TbT" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="IAV-eI-XKm"/>
                                             <constraint firstItem="fcC-cm-LB6" firstAttribute="top" secondItem="yL5-wY-Igr" secondAttribute="bottom" constant="32" id="L24-gl-oSX"/>
                                             <constraint firstAttribute="trailing" secondItem="v3a-pl-TbT" secondAttribute="trailing" constant="32" id="NwF-xM-TFy"/>
+                                            <constraint firstItem="zkQ-32-Uoo" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="T6t-12-29M"/>
+                                            <constraint firstAttribute="bottom" secondItem="zkQ-32-Uoo" secondAttribute="bottom" constant="8" id="VJS-RR-1fs"/>
                                             <constraint firstAttribute="trailing" secondItem="nIC-L6-bwf" secondAttribute="trailing" constant="16" id="Voj-Az-2xn"/>
                                             <constraint firstItem="fcC-cm-LB6" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="Wg7-ft-FXV"/>
                                             <constraint firstAttribute="trailing" secondItem="yL5-wY-Igr" secondAttribute="trailing" constant="32" id="jJm-Xj-G6r"/>
+                                            <constraint firstAttribute="trailing" secondItem="zkQ-32-Uoo" secondAttribute="trailing" constant="32" id="oN6-yM-xWk"/>
                                             <constraint firstItem="bhw-SX-eOb" firstAttribute="top" secondItem="v3a-pl-TbT" secondAttribute="bottom" constant="32" id="qce-MC-5IA"/>
                                             <constraint firstItem="53f-dW-bvY" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="rhm-rS-ajj"/>
                                             <constraint firstAttribute="trailing" secondItem="bhw-SX-eOb" secondAttribute="trailing" constant="32" id="saj-BT-htv"/>
@@ -328,7 +354,6 @@
                                             <constraint firstItem="nIC-L6-bwf" firstAttribute="top" secondItem="DsT-fF-qSp" secondAttribute="top" constant="16" id="vfY-nd-wNq"/>
                                             <constraint firstItem="yL5-wY-Igr" firstAttribute="top" secondItem="53f-dW-bvY" secondAttribute="bottom" constant="16" id="wqq-WP-mFE"/>
                                             <constraint firstItem="yL5-wY-Igr" firstAttribute="top" secondItem="nIC-L6-bwf" secondAttribute="bottom" constant="16" id="xC4-jP-FHW"/>
-                                            <constraint firstAttribute="bottom" secondItem="bhw-SX-eOb" secondAttribute="bottom" constant="16" id="yIY-bY-MYt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -380,6 +405,7 @@
                         <outlet property="rightImageViewView" destination="AyC-d2-vzs" id="aYk-4H-Ier"/>
                         <outlet property="rightdelegetButton" destination="5Cv-YB-hhG" id="Sbb-Yp-plH"/>
                         <outlet property="scrollView" destination="eBE-Yl-AVW" id="jK4-jd-pNn"/>
+                        <outlet property="signOutButton" destination="gbg-5Y-UU9" id="VXN-JO-gEE"/>
                         <outlet property="snapchatImageView" destination="gV5-D9-aB8" id="X3W-RE-pCu"/>
                         <outlet property="snapchatStackView" destination="Fb2-SZ-NRF" id="i1U-bh-K44"/>
                         <outlet property="snapchatTextField" destination="lem-ff-2eP" id="4kA-bf-wfx"/>
@@ -423,5 +449,8 @@
         <namedColor name="secondaryColor">
             <color red="0.68627450980392157" green="0.72549019607843135" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

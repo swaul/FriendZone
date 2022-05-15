@@ -22,6 +22,11 @@ class YourZoneViewModel {
     @Published var usersUpdated: Bool = false
     @Published var userInfo: FZUser?
     @Published var profileImage: UIImage?
+    @Published var isOffline: Bool = false {
+        didSet {
+            usersNearby.removeAll()
+        }
+    }
     
     func getUserInfo() {
         guard let user = Auth.auth().currentUser else { return }
@@ -64,7 +69,7 @@ class YourZoneViewModel {
     }
     
     func getNearbyUserIds(postalCode: String?, country: String?) {
-        guard let postalCode = postalCode, let country = country else { return }
+        guard let postalCode = postalCode, let country = country, !isOffline else { return }
         let resource = LoadableResource<PostalCode>(path: [.collection(collectionName: "locations"), .document(documentName: country), .collection(collectionName: postalCode), .document(documentName: postalCode)])
         
         FirebaseHandler.shared.getData(resource: resource) { [weak self] result in
@@ -82,6 +87,9 @@ class YourZoneViewModel {
         guard let user = Auth.auth().currentUser else { return }
         var userIds = userIds
         userIds.remove(element: user.uid)
+        guard !userIds.isEmpty else {
+            return
+        }
         let resource = LoadableResource<FZUser>(path: [.collection(collectionName: "users")], firebaseConstraint: .containsMultipleValue(fieldName: "id", constraint: userIds))
         FirebaseHandler.shared.getData(resource: resource) { [weak self] result in
             switch result {
@@ -94,11 +102,30 @@ class YourZoneViewModel {
     }
     
     func updateLocation(postalCode: String, country: String) {
-        guard let user = Auth.auth().currentUser else { return }
+        guard let user = Auth.auth().currentUser, !isOffline else { return }
+
+        let defaults = UserDefaults.standard
+        if let lastLocation = defaults.value(forKey: "lastLocation") as? [String: Any] {
+            let countr = lastLocation["country"] as! String
+            let postal = lastLocation["postalCode"] as! String
+            FirebaseHandler.shared.deleteLocation(userId: user.uid, postalCode: postal, country: countr) { result in
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success:
+                    print("deleted")
+                }
+            }
+        }
         FirebaseHandler.shared.updateLocation(postalCode: postalCode, country: country, userId: user.uid) { result in
             switch result {
             case .success:
                 print("done")
+                let data = [
+                    "country": country,
+                    "postalCode": postalCode
+                ]
+                defaults.set(data, forKey: "lastLocation")
             case .failure(let error):
                 print(error.localizedDescription)
             }

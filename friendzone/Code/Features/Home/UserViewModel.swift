@@ -12,35 +12,72 @@ import FirebaseStorage
 
 class UserViewModel {
     
-    let model: FZUser!
+    var model: FZUser!
     
     @Published var profilePicture: UIImage?
+    
+    var id: String {
+        model.id
+    }
     
     var score: Int {
         model.score
     }
-    var name: String {
-        model.name
+    
+    var email: String {
+        model.email!
     }
+    
+    var name: String {
+        get {
+            model.name
+        }
+        set {
+            model.name = newValue
+        }
+    }
+    
     var bio: String {
-        model.bio ?? ""
+        get {
+            model.bio ?? ""
+        }
+        set {
+            model.bio = newValue
+        }
     }
     
     var tiktok: String? {
-        model.tiktok
+        get {
+            model.tiktok
+        }
+        set {
+            model.tiktok = newValue
+        }
     }
     
     var insta: String? {
-        model.instagram
+        get {
+            model.instagram
+        }
+        set {
+            model.instagram = newValue
+        }
     }
     
     var snap: String? {
-        model.snapchat
+        get {
+            model.snapchat
+        }
+        set {
+            model.snapchat = newValue
+        }
     }
     
     var images: [String] {
         model.images
     }
+    
+    var savedUsers = [String: Any]()
     
     init(model: FZUser) {
         self.model = model
@@ -58,6 +95,22 @@ class UserViewModel {
                 }
             }
         }
+    }
+    
+    func toData() -> [String: Any] {
+        let data: [String: Any] = [
+            "id": id,
+            "profilePicture": model.profilePicture,
+            "email": email,
+            "name": name,
+            "bio": bio,
+            "score": score,
+            "instagram": insta ?? "",
+            "tiktok": tiktok ?? "",
+            "snapchat": snap ?? ""
+        ]
+        
+        return data
     }
     
 }

@@ -18,6 +18,7 @@ class YourZoneCoordinator: NavigationCoordinator {
     // MARK: Start
     
     var loginRequired: (() -> Void)!
+    var showProfile: (() -> Void)!
     
     override func start() {
         let viewModel = YourZoneViewModel()
@@ -25,13 +26,30 @@ class YourZoneCoordinator: NavigationCoordinator {
         
         navigationController.setNavigationBarHidden(true, animated: true)
         
+        viewController.title = "Your Zone"
+        
         viewController.loginRequired = { [weak self] in
             self?.loginRequired()
+        }
+        
+        viewController.onProfile = { [weak self] in
+            self?.showProfile()
+        }
+        
+        viewController.onNews = { [weak self] in
+            self?.showNews()
         }
         
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .house)
         
         push(viewController, animated: true)
+    }
+    
+    func showNews() {
+        let coordinator = NotificationCoordinator()
+        coordinator.start()
+        
+        present(coordinator, animated: true)
     }
     
 }

@@ -26,6 +26,7 @@ internal enum Asset {
   internal static let snapchat = ImageAsset(name: "snapchat")
   internal static let tiktok = ImageAsset(name: "tiktok")
   internal static let accentColor = ColorAsset(name: "accentColor")
+  internal static let background = ImageAsset(name: "background")
   internal static let backgroundColor = ColorAsset(name: "backgroundColor")
   internal static let errorColor = ColorAsset(name: "errorColor")
   internal static let fadedTextColor = ColorAsset(name: "fadedTextColor")
