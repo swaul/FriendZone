@@ -68,6 +68,21 @@ class UserPopupViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         onDismiss?()
     }
+    
+    @IBAction func historyButtonTapped(_ sender: Any) {
+        guard let user = viewModel else { return }
+        var usersToSave = [String: Date]()
+        let defaults = UserDefaults.standard
+        
+        if let savedUsers = defaults.value(forKey: "savedUsers") as? [String: Date] {
+            usersToSave = savedUsers
+            usersToSave[user.id] = Date()
+        } else {
+            usersToSave[user.id] = Date()
+        }
+        
+        defaults.set(usersToSave, forKey: "savedUsers")
+    }
 }
 
 extension UserPopupViewController: DimmingViewTappedProtocol {}

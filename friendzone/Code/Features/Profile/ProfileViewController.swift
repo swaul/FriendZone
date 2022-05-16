@@ -168,11 +168,14 @@ class ProfileViewController: UIViewController {
         viewModel.user = user
         profileNameLabel.text = user?.name
         profileBioTextView.text = user?.bio
-        profilePictureImageView.image = user?.profilePicture
         
         inistaTextField.text = user?.insta
         tiktokTextField.text = user?.tiktok
         snapchatTextField.text = user?.snap
+        
+        if profilePictureImageView.image == nil {
+            profilePictureImageView.image = user?.profilePicture
+        }
     }
     
     func showPictures() {

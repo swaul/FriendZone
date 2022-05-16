@@ -66,6 +66,7 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateUserInfo()
+        getLocation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -314,14 +315,6 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - PopUp
     var currentlySelectedUser: UserViewModel?
     
-    @IBAction func historyButtonTapped(_ sender: Any) {
-        guard let user = currentlySelectedUser else { return }
-        let users = [user.id: Date()]
-        
-        let defaults = UserDefaults.standard
-        defaults.set(users, forKey: "savedUsers")
-    }
-    
     func showHidePopUp(user: UserViewModel) {
         let popup = UserPopupViewController.createWith(storyboard: .main, viewModel: user)
         popup.transitioningDelegate = popup.presentationManager
@@ -339,16 +332,72 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         present(popup, animated: true)
     }
 
+    func saveUser(user: UserViewModel?) {
+        guard let user = user else { return }
+        var usersToSave = [String: Date]()
+        let defaults = UserDefaults.standard
+        
+        if let savedUsers = defaults.value(forKey: "savedUsers") as? [String: Date] {
+            usersToSave = savedUsers
+            usersToSave[user.id] = Date()
+        } else {
+            usersToSave[user.id] = Date()
+        }
+        
+        defaults.set(usersToSave, forKey: "savedUsers")
+    }
+    
+    func ignoreUser(user: UserViewModel?) {
+        guard let user = user else { return }
+        var usersToIgnore = [String: Date]()
+        let defaults = UserDefaults.standard
+        
+        if let ignoredUsers = defaults.value(forKey: "ignoredUsers") as? [String: Date] {
+            usersToIgnore = ignoredUsers
+            usersToIgnore[user.id] = Date()
+        } else {
+            usersToIgnore[user.id] = Date()
+        }
+        
+        defaults.set(usersToIgnore, forKey: "ignoredUsers")
+        
+        viewModel.usersNearby.removeAll(where: { $0.id == user.id })
+        getLocation()
+        tableView.reloadData()
+    }
+    
 }
 
 extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Ignorieren") { [weak self] (_, _, completionHandler) in
+            guard let self = self else { return }
+            self.ignoreUser(user: self.viewModel.usersNearby[indexPath.row])
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(systemSymbol: .xCircle)
+        deleteAction.backgroundColor = Asset.errorColor.color
+        
+        let saveAction = UIContextualAction(style: .normal, title: "Speichern") { [weak self] (_, _, completionHandler) in
+            guard let self = self else { return }
+            self.saveUser(user: self.viewModel.usersNearby[indexPath.row])
+            completionHandler(true)
+        }
+        saveAction.image = UIImage(systemSymbol: .clockArrowCirclepath)
+        saveAction.backgroundColor = Asset.primaryColor.color
+    
+        let configuration = UISwipeActionsConfiguration(actions: [saveAction, deleteAction])
+                
+        return configuration
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.usersNearby.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UserNearbyTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UserNearbyTableViewCell") as!  UserNearbyTableViewCell
+        let cell: UserNearbyTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UserNearbyTableViewCell") as! UserNearbyTableViewCell
         
         cell.configure(user: viewModel.usersNearby[indexPath.row])
         cell.selectionStyle = .none

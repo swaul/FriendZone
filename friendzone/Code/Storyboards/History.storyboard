@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,19 +19,62 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CKn-Qf-2a3">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1bh-xU-IF0">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qs-fc-Uwb">
+                                <rect key="frame" x="86" y="348.5" width="242" height="199"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lädt..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqx-rU-0FD">
+                                        <rect key="frame" x="32" y="150" width="178" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWK-mc-FXN">
+                                        <rect key="frame" x="78" y="32" width="86" height="86"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="86" id="QuH-uG-gqc"/>
+                                            <constraint firstAttribute="width" secondItem="gWK-mc-FXN" secondAttribute="height" id="nuC-FC-iSk"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" name="grayBackground"/>
+                                <constraints>
+                                    <constraint firstItem="cqx-rU-0FD" firstAttribute="leading" secondItem="3Qs-fc-Uwb" secondAttribute="leading" constant="32" id="1MI-9x-5tp"/>
+                                    <constraint firstAttribute="trailing" secondItem="cqx-rU-0FD" secondAttribute="trailing" constant="32" id="6zN-Jn-BBG"/>
+                                    <constraint firstAttribute="bottom" secondItem="cqx-rU-0FD" secondAttribute="bottom" constant="20" id="7D1-FW-09l"/>
+                                    <constraint firstItem="gWK-mc-FXN" firstAttribute="top" secondItem="3Qs-fc-Uwb" secondAttribute="top" constant="32" id="TxL-E3-8Cb"/>
+                                    <constraint firstItem="cqx-rU-0FD" firstAttribute="top" secondItem="gWK-mc-FXN" secondAttribute="bottom" constant="32" id="lhQ-pS-W3x"/>
+                                    <constraint firstItem="gWK-mc-FXN" firstAttribute="centerX" secondItem="3Qs-fc-Uwb" secondAttribute="centerX" id="rcl-cV-bPD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstItem="CKn-Qf-2a3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Eg2-PC-qdm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CKn-Qf-2a3" secondAttribute="trailing" id="Fdh-ud-O0c"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1bh-xU-IF0" secondAttribute="trailing" id="KDc-ct-9kd"/>
+                            <constraint firstItem="1bh-xU-IF0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SCY-0z-yKf"/>
+                            <constraint firstItem="3Qs-fc-Uwb" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="V7s-Bs-rq8"/>
+                            <constraint firstItem="3Qs-fc-Uwb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="86" id="XzM-Fw-Xyu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3Qs-fc-Uwb" secondAttribute="trailing" constant="86" id="aSw-O9-fOF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="CKn-Qf-2a3" secondAttribute="bottom" id="f6d-Ph-Gzs"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1bh-xU-IF0" secondAttribute="bottom" id="hQd-yK-8bJ"/>
+                            <constraint firstItem="1bh-xU-IF0" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lNI-68-x0r"/>
                             <constraint firstItem="CKn-Qf-2a3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="yS7-k1-dEV"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <connections>
+                        <outlet property="ignoredTableView" destination="1bh-xU-IF0" id="vTO-38-SJW"/>
+                        <outlet property="indicatorWrapper" destination="gWK-mc-FXN" id="qz3-aC-Ndh"/>
+                        <outlet property="loadingWrapper" destination="3Qs-fc-Uwb" id="Xbt-es-CI5"/>
                         <outlet property="tableView" destination="CKn-Qf-2a3" id="Qcc-pN-oI9"/>
                     </connections>
                 </viewController>
@@ -40,6 +84,12 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="backgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="grayBackground">
+            <color red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

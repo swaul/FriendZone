@@ -33,7 +33,7 @@ class AppCoordinator: Coordinator {
     
     func checkCredentials(animated: Bool = true) {
         if Auth.auth().currentUser == nil {
-            // not logged in
+            
             presentLogin(animated: animated)
         } else {
             let defaults = UserDefaults.standard

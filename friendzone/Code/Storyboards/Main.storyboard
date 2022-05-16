@@ -46,6 +46,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="historyButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="0hi-he-cF7"/>
+                                            <action selector="historyButtonTapped:" destination="wR9-Rl-WLK" eventType="touchUpInside" id="aDa-ZN-Jdm"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j53-Zc-dqf">

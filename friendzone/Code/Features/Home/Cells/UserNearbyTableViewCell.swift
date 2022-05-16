@@ -23,25 +23,7 @@ class UserNearbyTableViewCell: UITableViewCell {
     @IBOutlet var userScoreLabel: UILabel!
     @IBOutlet var userNameBioLabel: UILabel!
     @IBOutlet var ignoreUserButton: UIButton!
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        if selected {
-//            cellViewWrapper.backgroundColor = Asset.secondaryColor.color.darker()
-//        } else {
-//            cellViewWrapper.backgroundColor = Asset.secondaryColor.color
-//        }
-//    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        if highlighted {
-            cellViewWrapper.backgroundColor = Asset.secondaryColor.color.darker()
-        } else {
-            cellViewWrapper.backgroundColor = Asset.secondaryColor.color
-        }
-    }
-    
+
     var user: UserViewModel!
     
     func configure(user: UserViewModel) {
@@ -52,7 +34,6 @@ class UserNearbyTableViewCell: UITableViewCell {
         userImageView.layer.borderColor = Asset.accentColor.color.cgColor
         userImageView.layer.borderWidth = 2
         cellViewWrapper.layer.cornerRadius = 10
-        cellViewWrapper.backgroundColor = Asset.secondaryColor.color
         backgroundColor = .clear
         userNameLabel.setStyle(TextStyle.boldText)
         userScoreLabel.setStyle(TextStyle.blueSmall)
@@ -61,6 +42,12 @@ class UserNearbyTableViewCell: UITableViewCell {
         userNameLabel.text = user.name
         userScoreLabel.text = String(user.score)
         userNameBioLabel.text = user.bio
+        
+        if user.ignored {
+            cellViewWrapper.backgroundColor = .systemRed.withAlphaComponent(0.4)
+        } else {
+            cellViewWrapper.backgroundColor = Asset.secondaryColor.color
+        }
         
         guard let image = user.profilePicture else { return }
         userImageView.image = image

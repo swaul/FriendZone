@@ -28,6 +28,8 @@ class UserViewModel {
         model.email!
     }
     
+    var ignored: Bool
+    
     var name: String {
         get {
             model.name
@@ -79,13 +81,14 @@ class UserViewModel {
     
     var savedUsers = [String: Any]()
     
-    init(model: FZUser) {
+    init(model: FZUser, ignored: Bool = false) {
         self.model = model
+        self.ignored = ignored
         loadImage(url: model.profilePicture)
     }
     
     func loadImage(url: String) {
-        Storage.storage().reference().child("images/\(url).png").getData(maxSize: 10 * 1024 * 1024) { data, error in
+        Storage.storage().reference().child("images/\(url)").getData(maxSize: 10 * 1024 * 1024) { data, error in
             if let error = error {
                 print(error.localizedDescription)
             } else {

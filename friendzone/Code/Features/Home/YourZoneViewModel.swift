@@ -96,7 +96,14 @@ class YourZoneViewModel {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let data):
-                self?.usersNearby = data.map { UserViewModel(model: $0) }
+                var users = data.map { UserViewModel(model: $0) }
+                let defaults = UserDefaults.standard
+                if let ignoredUsers = defaults.value(forKey: "ignoredUsers") as? [String: Date] {
+                    for user in ignoredUsers {
+                        users.removeAll(where: { $0.id == user.key })
+                    }
+                }
+                self?.usersNearby = users
             }
         }
     }
