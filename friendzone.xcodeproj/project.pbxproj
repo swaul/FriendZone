@@ -40,6 +40,9 @@
 		9E22E68028216B600030DF7C /* CardNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E67F28216B600030DF7C /* CardNavigationController.swift */; };
 		9E22E68228216BBC0030DF7C /* CardPresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E68128216BBC0030DF7C /* CardPresentationAnimation.swift */; };
 		9E22E68428216C0C0030DF7C /* CustomPushAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E68328216C0C0030DF7C /* CustomPushAnimation.swift */; };
+		9E264337283667290019B795 /* FileAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E264336283667290019B795 /* FileAccess.swift */; };
+		9E2643392836677C0019B795 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2643382836677C0019B795 /* Storage.swift */; };
+		9E26433C28366EFF0019B795 /* LocalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26433A28366DF20019B795 /* LocalUser.swift */; };
 		9E36EBC22822B5DA004BE351 /* SetEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */; };
 		9E50C38C281B49630008BFDD /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 9E50C38B281B49630008BFDD /* TinyConstraints */; };
 		9E50C390281C28020008BFDD /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E50C38F281C28020008BFDD /* Authorization.storyboard */; };
@@ -163,6 +166,9 @@
 		9E22E67F28216B600030DF7C /* CardNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNavigationController.swift; sourceTree = "<group>"; };
 		9E22E68128216BBC0030DF7C /* CardPresentationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresentationAnimation.swift; sourceTree = "<group>"; };
 		9E22E68328216C0C0030DF7C /* CustomPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimation.swift; sourceTree = "<group>"; };
+		9E264336283667290019B795 /* FileAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAccess.swift; sourceTree = "<group>"; };
+		9E2643382836677C0019B795 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		9E26433A28366DF20019B795 /* LocalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUser.swift; sourceTree = "<group>"; };
 		9E36EBC12822B5DA004BE351 /* SetEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEmailViewController.swift; sourceTree = "<group>"; };
 		9E50C38F281C28020008BFDD /* Authorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		9E50C391281C2B2A0008BFDD /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -345,6 +351,9 @@
 				9E22E67D28216AD90030DF7C /* CardViewController.swift */,
 				9E22E67F28216B600030DF7C /* CardNavigationController.swift */,
 				9E22E68328216C0C0030DF7C /* CustomPushAnimation.swift */,
+				9E264336283667290019B795 /* FileAccess.swift */,
+				9E2643382836677C0019B795 /* Storage.swift */,
+				9E26433A28366DF20019B795 /* LocalUser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -823,6 +832,7 @@
 				17286C8AEA1DBF5539774099 /* AuthCoordinator.swift in Sources */,
 				9E50C3AB281D5BF60008BFDD /* SetPasswordViewController.swift in Sources */,
 				9ED61C8A282DAC0000A3647A /* NotificationCoordinator.swift in Sources */,
+				9E2643392836677C0019B795 /* Storage.swift in Sources */,
 				9E50C392281C2B2A0008BFDD /* WelcomeViewController.swift in Sources */,
 				9ED61C8C282DAFE000A3647A /* NotificationViewController.swift in Sources */,
 				9E50C3AD281D5C0B0008BFDD /* RegisterViewController.swift in Sources */,
@@ -845,9 +855,11 @@
 				9E50C3AF281DB84F0008BFDD /* RegisterViewModel.swift in Sources */,
 				882E36F86A257DC95AD8A944 /* MainCoordinator.swift in Sources */,
 				1D15C06DE32F9D9CCA71ABDD /* Storyboard.swift in Sources */,
+				9E26433C28366EFF0019B795 /* LocalUser.swift in Sources */,
 				9E22E68428216C0C0030DF7C /* CustomPushAnimation.swift in Sources */,
 				9EED0CF52826E2D10046AEEC /* ErrorView.swift in Sources */,
 				9EED0CFA2826E2D10046AEEC /* LoadingView.swift in Sources */,
+				9E264337283667290019B795 /* FileAccess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

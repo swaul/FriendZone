@@ -27,6 +27,9 @@ class UserPopupViewController: UIViewController {
     @IBOutlet var selectedUserNameLabel: UILabel!
     @IBOutlet var selectedUserBioLabel: UILabel!
     @IBOutlet var selectedUserScoreLabel: UILabel!
+    @IBOutlet var instaImage: UIButton!
+    @IBOutlet var tiktokImage: UIButton!
+    @IBOutlet var snapchatImage: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +65,28 @@ class UserPopupViewController: UIViewController {
         selectedUserBioLabel.text = viewModel.bio
         selectedUserScoreLabel.text = String(viewModel.score)
         selectedUserScoreLabel.text! += "🔥"
+        
+        instaImage.isHidden = viewModel.insta.isNilOrEmpty
+        tiktokImage.isHidden = viewModel.tiktok.isNilOrEmpty
+        snapchatImage.isHidden = viewModel.snap.isNilOrEmpty
+    }
+    
+    @IBAction func instaTapped(_ sender: Any) {
+        let Username =  "instagram" // Your Instagram Username here
+        let appURL = URL(string: "instagram://user?username=\(Username)")!
+        let application = UIApplication.shared
+
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+        } else {
+            // if Instagram app is not installed, open URL inside Safari
+            let webURL = URL(string: "https://instagram.com/\(Username)")!
+            application.open(webURL)
+        }
+    }
+    
+    @IBAction func tiktokTapped(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://www.tiktok.com/@\(viewModel.tiktok)")!)
     }
     
     @IBAction func xTapped(_ sender: Any) {

@@ -10,6 +10,7 @@ import UIKit
 import Combine
 import Toolbox
 import FirebaseAuth
+import friendzoneKit
 
 class ProfileViewController: UIViewController {
     
@@ -78,7 +79,7 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        populateInfo()
+        viewModel.getUser()
     }
     
     var cancellables = Set<AnyCancellable>()
@@ -86,6 +87,11 @@ class ProfileViewController: UIViewController {
     func setupBindings() {
         Keyboard.shared.$info.sink { [weak self] info in
             self?.adjustContentInsets(info: info)
+        }.store(in: &cancellables)
+        
+        viewModel.$user.sink { [weak self] user in
+            guard let user = user else { return }
+            self?.populateInfo(user: user)
         }.store(in: &cancellables)
         
         viewModel.$profilePicture.sink { [weak self] image in
@@ -163,18 +169,16 @@ class ProfileViewController: UIViewController {
         view.isUserInteractionEnabled = true
     }
     
-    func populateInfo() {
-        let user = UserController.shared.loggedInUser
-        viewModel.user = user
-        profileNameLabel.text = user?.name
-        profileBioTextView.text = user?.bio
+    func populateInfo(user: UserViewModel) {
+        profileNameLabel.text = user.name
+        profileBioTextView.text = user.bio
         
-        inistaTextField.text = user?.insta
-        tiktokTextField.text = user?.tiktok
-        snapchatTextField.text = user?.snap
+        inistaTextField.text = user.insta
+        tiktokTextField.text = user.tiktok
+        snapchatTextField.text = user.snap
         
         if profilePictureImageView.image == nil {
-            profilePictureImageView.image = user?.profilePicture
+            viewModel.getImage(id: user.id)
         }
     }
     
@@ -284,10 +288,6 @@ class ProfileViewController: UIViewController {
         } else {
             "Invite friends"
         }
-    }
-    
-    @IBAction func addImageTapped(_ sender: Any) {
-        
     }
     
     @objc func profilePictureTapped() {

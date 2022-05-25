@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bqh-iY-ADg" userLabel="DetailPopUp">
-                                <rect key="frame" x="36" y="265" width="342" height="366.5"/>
+                                <rect key="frame" x="16" y="259" width="382" height="378.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WnU-5i-ywX">
-                                        <rect key="frame" x="111" y="41" width="120" height="120"/>
+                                        <rect key="frame" x="131" y="41" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="SZz-pK-tju"/>
                                             <constraint firstAttribute="width" constant="120" id="tY1-Xk-5Ft"/>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJ6-FY-wkm">
-                                        <rect key="frame" x="283" y="12" width="47" height="31"/>
+                                        <rect key="frame" x="323" y="12" width="47" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="clock.arrow.circlepath" catalog="system">
                                             <color key="baseForegroundColor" name="primaryColor"/>
@@ -49,46 +49,71 @@
                                             <action selector="historyButtonTapped:" destination="wR9-Rl-WLK" eventType="touchUpInside" id="aDa-ZN-Jdm"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j53-Zc-dqf">
-                                        <rect key="frame" x="150.5" y="173" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j53-Zc-dqf">
+                                        <rect key="frame" x="16" y="173" width="350" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-L4-nUx">
-                                        <rect key="frame" x="150.5" y="234" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-L4-nUx">
+                                        <rect key="frame" x="16" y="234" width="350" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="KJD-WA-iPR">
-                                        <rect key="frame" x="32" y="286.5" width="278" height="48"/>
+                                        <rect key="frame" x="34" y="286.5" width="314" height="60"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="n2i-MO-Nyl">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReB-oI-Xug">
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="S7Z-M2-vAP"/>
-                                                    <constraint firstAttribute="width" constant="48" id="bRr-fl-5rR"/>
+                                                    <constraint firstAttribute="width" secondItem="ReB-oI-Xug" secondAttribute="height" id="8DF-S4-NnS"/>
+                                                    <constraint firstAttribute="width" constant="60" id="d7z-Qq-X4j"/>
                                                 </constraints>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tiktok" translatesAutoresizingMaskIntoConstraints="NO" id="zf3-xO-2j5">
-                                                <rect key="frame" x="115" y="0.0" width="48" height="48"/>
+                                                <color key="tintColor" name="primaryColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button" image="instagram">
+                                                    <color key="titleColor" name="primaryColor"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="instaTapped:" destination="wR9-Rl-WLK" eventType="touchUpInside" id="zeW-zJ-v7Z"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf7-M4-kw2">
+                                                <rect key="frame" x="127" y="0.0" width="60" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="LND-AT-0p4"/>
-                                                    <constraint firstAttribute="width" constant="48" id="pEN-uW-eaN"/>
+                                                    <constraint firstAttribute="width" secondItem="vf7-M4-kw2" secondAttribute="height" id="2oH-2x-Qpp"/>
+                                                    <constraint firstAttribute="width" constant="60" id="RsT-tT-fJy"/>
                                                 </constraints>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snapchat" translatesAutoresizingMaskIntoConstraints="NO" id="TDO-Zv-RwM">
-                                                <rect key="frame" x="230" y="0.0" width="48" height="48"/>
+                                                <color key="tintColor" name="primaryColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button" image="tiktok">
+                                                    <color key="titleColor" name="primaryColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tiktokTapped:" destination="wR9-Rl-WLK" eventType="touchUpInside" id="0Ca-5B-UiQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZg-tz-GvT">
+                                                <rect key="frame" x="254" y="0.0" width="60" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="PfF-Rt-tPN"/>
-                                                    <constraint firstAttribute="width" constant="48" id="paf-Wv-Gaq"/>
+                                                    <constraint firstAttribute="width" constant="60" id="enx-SN-BmS"/>
+                                                    <constraint firstAttribute="width" secondItem="mZg-tz-GvT" secondAttribute="height" id="pxx-Xm-Xkn"/>
                                                 </constraints>
-                                            </imageView>
+                                                <color key="tintColor" name="primaryColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button" image="snapchat">
+                                                    <color key="titleColor" name="primaryColor"/>
+                                                </state>
+                                            </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="xD4-iC-5jo"/>
+                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdV-bd-KiU">
-                                        <rect key="frame" x="150.5" y="197.5" width="41.5" height="20.5"/>
+                                        <rect key="frame" x="170.5" y="197.5" width="41.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="fadedTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -98,20 +123,24 @@
                                 <constraints>
                                     <constraint firstItem="lfI-Uc-ivy" firstAttribute="leading" secondItem="Bqh-iY-ADg" secondAttribute="leading" constant="12" id="2aD-LF-jTw"/>
                                     <constraint firstItem="WnU-5i-ywX" firstAttribute="top" secondItem="JJ6-FY-wkm" secondAttribute="bottom" constant="-2" id="7Y9-7e-tUD"/>
-                                    <constraint firstItem="KJD-WA-iPR" firstAttribute="leading" secondItem="Bqh-iY-ADg" secondAttribute="leading" constant="32" id="DjW-Iu-jOT"/>
+                                    <constraint firstItem="KJD-WA-iPR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bqh-iY-ADg" secondAttribute="leading" constant="32" id="DjW-Iu-jOT"/>
                                     <constraint firstItem="j53-Zc-dqf" firstAttribute="centerX" secondItem="Bqh-iY-ADg" secondAttribute="centerX" id="DwD-00-FCE"/>
                                     <constraint firstItem="WnW-L4-nUx" firstAttribute="centerX" secondItem="Bqh-iY-ADg" secondAttribute="centerX" id="JLg-yU-lQj"/>
                                     <constraint firstAttribute="trailing" secondItem="JJ6-FY-wkm" secondAttribute="trailing" constant="12" id="JY5-hZ-CHg"/>
                                     <constraint firstAttribute="bottom" secondItem="KJD-WA-iPR" secondAttribute="bottom" constant="32" id="LZq-hp-d6S"/>
                                     <constraint firstItem="ZdV-bd-KiU" firstAttribute="top" secondItem="j53-Zc-dqf" secondAttribute="bottom" constant="4" id="N5h-XO-7q6"/>
-                                    <constraint firstAttribute="trailing" secondItem="KJD-WA-iPR" secondAttribute="trailing" constant="32" id="WdG-YR-AdM"/>
+                                    <constraint firstItem="j53-Zc-dqf" firstAttribute="leading" secondItem="Bqh-iY-ADg" secondAttribute="leading" constant="16" id="VGY-BB-359"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KJD-WA-iPR" secondAttribute="trailing" constant="32" id="WdG-YR-AdM"/>
                                     <constraint firstItem="lfI-Uc-ivy" firstAttribute="top" secondItem="Bqh-iY-ADg" secondAttribute="top" constant="12" id="XyF-dv-Rgg"/>
                                     <constraint firstItem="ZdV-bd-KiU" firstAttribute="centerX" secondItem="Bqh-iY-ADg" secondAttribute="centerX" id="ZWT-oE-NQP"/>
                                     <constraint firstItem="KJD-WA-iPR" firstAttribute="top" secondItem="WnW-L4-nUx" secondAttribute="bottom" constant="32" id="aKN-AE-D8p"/>
+                                    <constraint firstItem="WnW-L4-nUx" firstAttribute="leading" secondItem="Bqh-iY-ADg" secondAttribute="leading" constant="16" id="eQI-Ur-OmC"/>
                                     <constraint firstItem="WnU-5i-ywX" firstAttribute="centerX" secondItem="Bqh-iY-ADg" secondAttribute="centerX" id="fCx-hx-crI"/>
                                     <constraint firstItem="j53-Zc-dqf" firstAttribute="top" secondItem="WnU-5i-ywX" secondAttribute="bottom" constant="12" id="ikr-FY-jHF"/>
                                     <constraint firstItem="WnW-L4-nUx" firstAttribute="top" secondItem="ZdV-bd-KiU" secondAttribute="bottom" constant="16" id="log-5u-kuF"/>
+                                    <constraint firstAttribute="trailing" secondItem="j53-Zc-dqf" secondAttribute="trailing" constant="16" id="pLN-ss-eeO"/>
                                     <constraint firstItem="KJD-WA-iPR" firstAttribute="centerX" secondItem="Bqh-iY-ADg" secondAttribute="centerX" id="q2n-jT-wLq"/>
+                                    <constraint firstAttribute="trailing" secondItem="WnW-L4-nUx" secondAttribute="trailing" constant="16" id="qEX-NL-Lho"/>
                                     <constraint firstItem="JJ6-FY-wkm" firstAttribute="top" secondItem="Bqh-iY-ADg" secondAttribute="top" constant="12" id="vYh-BC-DZD"/>
                                 </constraints>
                             </view>
@@ -119,24 +148,27 @@
                         <viewLayoutGuide key="safeArea" id="A10-3P-ZMr"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Bqh-iY-ADg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A10-3P-ZMr" secondAttribute="leading" constant="16" id="QpI-U8-9SX"/>
+                            <constraint firstItem="Bqh-iY-ADg" firstAttribute="leading" secondItem="A10-3P-ZMr" secondAttribute="leading" constant="16" id="QpI-U8-9SX"/>
                             <constraint firstItem="Bqh-iY-ADg" firstAttribute="centerY" secondItem="kT2-Kx-zYO" secondAttribute="centerY" id="fZF-qU-87y"/>
-                            <constraint firstItem="A10-3P-ZMr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bqh-iY-ADg" secondAttribute="trailing" constant="16" id="ozQ-0b-4FN"/>
                             <constraint firstItem="Bqh-iY-ADg" firstAttribute="centerX" secondItem="kT2-Kx-zYO" secondAttribute="centerX" id="y8i-7x-QOF"/>
+                            <constraint firstAttribute="trailing" secondItem="Bqh-iY-ADg" secondAttribute="trailing" constant="16" id="z1n-dU-CSZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="instaImage" destination="ReB-oI-Xug" id="RFd-ud-0ob"/>
                         <outlet property="popupBackgroundView" destination="kT2-Kx-zYO" id="b6t-q0-cVp"/>
                         <outlet property="popupView" destination="Bqh-iY-ADg" id="YoV-YU-6nQ"/>
                         <outlet property="selectedUserBioLabel" destination="WnW-L4-nUx" id="zpt-0J-yWO"/>
                         <outlet property="selectedUserImageView" destination="WnU-5i-ywX" id="b9e-mR-haf"/>
                         <outlet property="selectedUserNameLabel" destination="j53-Zc-dqf" id="zAg-v3-lcV"/>
                         <outlet property="selectedUserScoreLabel" destination="ZdV-bd-KiU" id="JKX-g7-J3l"/>
+                        <outlet property="snapchatImage" destination="mZg-tz-GvT" id="EkA-E0-k6a"/>
+                        <outlet property="tiktokImage" destination="vf7-M4-kw2" id="TNR-VZ-6UZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6x-BO-ogi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-901" y="78"/>
+            <point key="canvasLocation" x="-901.44927536231887" y="77.678571428571431"/>
         </scene>
         <!--Your Zone View Controller-->
         <scene sceneID="s0d-6b-0kx">

@@ -47,7 +47,6 @@ class HistoryViewController: UIViewController {
     func setupBindings() {
         viewModel.$usersUpdated.sink { [weak self] updated in
             if updated {
-                self?.showLoading(true)
                 self?.tableView.reloadData()
                 print("false")
                 self?.viewModel.usersUpdated = false
@@ -56,6 +55,19 @@ class HistoryViewController: UIViewController {
         
         $ignoredShowing.sink { [weak self] _ in
             self?.tableView.reloadData()
+        }.store(in: &cancellables)
+        
+        viewModel.$viewModelState.sink { [weak self] state in
+            switch state {
+            case .loading:
+                self?.showLoading(true)
+            case .loaded:
+                self?.showLoading(false)
+            case .empty:
+                self?.showLoading(false)
+            case .error:
+                self?.showLoading(false)
+            }
         }.store(in: &cancellables)
     }
     
@@ -148,7 +160,7 @@ class HistoryViewController: UIViewController {
     }
     
     func showLoading(_ loading: Bool) {
-        
+        print("is hidden", !loading)
         loadingWrapper.isHidden = !loading
     }
     

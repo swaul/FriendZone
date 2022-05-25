@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct FZUser: FirebaseDecodable {
+public struct FZUser: FirebaseDecodable, Codable {
     
     public var id: String
     public var name: String
@@ -59,11 +59,6 @@ public struct FZUser: FirebaseDecodable {
         }
         self.score = data["score"] as! Int
         self.images = []
-        if let postalCode = data["postalCode"] as? String {
-            self.postalCode = postalCode
-        } else {
-            self.postalCode = nil
-        }
     }
     
 }

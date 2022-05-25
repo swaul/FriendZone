@@ -11,6 +11,7 @@ import friendzoneKit
 import FirebaseAuth
 import FirebaseStorage
 import UIKit
+import Combine
 
 class YourZoneViewModel {
     
@@ -38,9 +39,45 @@ class YourZoneViewModel {
             case .success(let data):
                 guard let info = data.first else { return }
                 self.userInfo = info
-                UserController.shared.loggedInUser = UserViewModel(model: info)
+                self.saveUser(user: info)
             }
         }
+    }
+    
+    private var getUserCancellable: AnyCancellable?
+    
+    func getUser() {
+        guard let user = Auth.auth().currentUser else { return }
+        let storage = UserStorage.init(userId: user.uid)
+        
+        getUserCancellable = storage.loadState().sink(receiveCompletion: { [weak self] completion in
+            switch completion {
+            case .finished:
+                print("loaded")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }, receiveValue: { [weak self] user in
+            DispatchQueue.main.async {
+                self?.userInfo = user.user
+            }
+        })
+    }
+    
+    private var saveUserCancellable: AnyCancellable?
+
+    func saveUser(user: FZUser) {
+        let storage = UserStorage(userId: user.id)
+        saveUserCancellable?.cancel()
+        saveUserCancellable = storage.saveState(LocalUser(user: user)).sink { completion in
+            switch completion {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .finished:
+                print("saved")
+            }
+        } receiveValue: { _ in }
+        
     }
     
     func getImage(id: String?) {

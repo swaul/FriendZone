@@ -24,18 +24,22 @@ class ProfileViewModel: ImagePicker {
     @Published var percentComplete: Float = 0.0
     @Published var profileCreated: Bool = false
     
-    @Published var changedName = UserInfo(value: nil, newValue: nil, type: .name)
-    @Published var changedBio = UserInfo(value: nil, newValue: nil, type: .bio)
-    @Published var changedInsta = UserInfo(value: nil, newValue: nil, type: .insta)
-    @Published var changedSnap = UserInfo(value: nil, newValue: nil, type: .snap)
-    @Published var changedTikTok = UserInfo(value: nil, newValue: nil, type: .tiktok)
+    @Published var changedName = UserInfo(value: nil, newValue: "", type: .name)
+    @Published var changedBio = UserInfo(value: nil, newValue: "", type: .bio)
+    @Published var changedInsta = UserInfo(value: nil, newValue: "", type: .insta) {
+        didSet {
+            print(changedInsta.newValue)
+        }
+    }
+    @Published var changedSnap = UserInfo(value: nil, newValue: "", type: .snap)
+    @Published var changedTikTok = UserInfo(value: nil, newValue: "", type: .tiktok)
     
     @Published var bioHasChanged: Bool = false
     @Published var socialsHaveChanged: Bool = false
     
     @Published var infosHaveChanged: Bool = false
     
-    var user: UserViewModel?
+    @Published var user: UserViewModel?
     
     var cancellablels = Set<AnyCancellable>()
     
@@ -110,7 +114,7 @@ class ProfileViewModel: ImagePicker {
     }
     
     func updateInfo(completion: @escaping ((Bool) -> Void)) {
-        var changedUser = user!
+        let changedUser = user!
         
         if changedName.changed, let newName = changedName.newValue {
             changedUser.name = newName
@@ -121,23 +125,84 @@ class ProfileViewModel: ImagePicker {
         if changedSnap.changed {
             changedUser.snap = changedSnap.newValue
         }
-        if changedInsta.changed  {
+        if changedInsta.changed {
             changedUser.insta = changedInsta.newValue
         }
         if changedTikTok.changed {
             changedUser.tiktok = changedTikTok.newValue
         }
 
-        FirebaseHandler.shared.uploadUserData(userId: changedUser.id, data: changedUser.toData()) { result in
+        FirebaseHandler.shared.uploadUserData(userId: changedUser.id, data: changedUser.toData()) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(false)
             case .success:
                 print("done")
+                self?.saveUser(user: changedUser.model)
                 completion(true)
             }
         }
+    }
+    
+    func getImage(id: String?) {
+        guard let id = id else { return }
+
+        Storage.storage().reference().child("images/\(id)").getData(maxSize: 10 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                guard let image = UIImage(data: data!) else { return }
+                self.profilePicture = image
+                if let data = image.pngData() {
+                    // Create URL
+                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    let url = documents.appendingPathComponent("profilePic.png")
+                    
+                    do {
+                        try data.write(to: url)
+                    } catch {
+                        print("Unable to Write Data to Disk (\(error))")
+                    }
+                }
+            }
+        }
+    }
+    
+    private var getUserCancellable: AnyCancellable?
+    
+    func getUser() {
+        guard let user = Auth.auth().currentUser else { return }
+        let storage = UserStorage.init(userId: user.uid)
+        
+        getUserCancellable = storage.loadState().sink(receiveCompletion: { [weak self] completion in
+            switch completion {
+            case .finished:
+                print("loaded")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }, receiveValue: { [weak self] user in
+            DispatchQueue.main.async {
+                self?.user = UserViewModel(model: user.user)
+            }
+        })
+    }
+    
+    private var saveUserCancellable: AnyCancellable?
+
+    func saveUser(user: FZUser) {
+        let storage = UserStorage(userId: user.id)
+        saveUserCancellable?.cancel()
+        saveUserCancellable = storage.saveState(LocalUser(user: user)).sink { completion in
+            switch completion {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .finished:
+                print("saved")
+            }
+        } receiveValue: { _ in }
+        
     }
     
     init() {
@@ -163,6 +228,8 @@ class UserInfo: ObservableObject {
             changed = false
             return
         }
+        self.value = value
+        self.newValue = newValue
         changed = newValue != value
     }
     

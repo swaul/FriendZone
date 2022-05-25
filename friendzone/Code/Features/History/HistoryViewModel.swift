@@ -57,6 +57,7 @@ class HistoryViewModel {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let data):
+                self?.viewModelState = .loaded
                 if ignored {
                     self?.ignoredUsers = data.map { UserViewModel(model: $0, ignored: true) }
                 } else {
