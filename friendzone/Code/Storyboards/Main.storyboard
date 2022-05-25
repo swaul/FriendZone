@@ -61,8 +61,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="KJD-WA-iPR">
-                                        <rect key="frame" x="34" y="286.5" width="314" height="60"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="KJD-WA-iPR">
+                                        <rect key="frame" x="69" y="286.5" width="244" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReB-oI-Xug">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -81,7 +81,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf7-M4-kw2">
-                                                <rect key="frame" x="127" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="92" y="0.0" width="60" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="vf7-M4-kw2" secondAttribute="height" id="2oH-2x-Qpp"/>
                                                     <constraint firstAttribute="width" constant="60" id="RsT-tT-fJy"/>
@@ -96,7 +96,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZg-tz-GvT">
-                                                <rect key="frame" x="254" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="184" y="0.0" width="60" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="enx-SN-BmS"/>
                                                     <constraint firstAttribute="width" secondItem="mZg-tz-GvT" secondAttribute="height" id="pxx-Xm-Xkn"/>
@@ -106,6 +106,9 @@
                                                 <state key="normal" title="Button" image="snapchat">
                                                     <color key="titleColor" name="primaryColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="snapTapped:" destination="wR9-Rl-WLK" eventType="touchUpInside" id="IUR-ga-4Mr"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

@@ -86,7 +86,34 @@ class UserPopupViewController: UIViewController {
     }
     
     @IBAction func tiktokTapped(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://www.tiktok.com/@\(viewModel.tiktok)")!)
+        guard let userName = viewModel.tiktok, let appURL = URL(string: "https://www.tiktok.com/@\(userName)") else {
+            UIApplication.shared.open(URL(string: "https://www.tiktok.com/search?q=\(viewModel.tiktok!)")!)
+            return
+        }
+        let application = UIApplication.shared
+
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+        } else {
+            let webURL = URL(string: "https://www.tiktok.com/search?q=\(userName)")!
+            application.open(webURL)
+        }
+    }
+    
+    @IBAction func snapTapped(_ sender: Any) {
+        guard let username = viewModel.snap else { return }
+        let appURL = URL(string: "snapchat://add/\(username)")!
+        let application = UIApplication.shared
+
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+
+        } else {
+            // if Snapchat app is not installed, open URL inside Safari
+            let webURL = URL(string: "https://www.snapchat.com/add/\(username)")!
+            application.open(webURL)
+
+        }
     }
     
     @IBAction func xTapped(_ sender: Any) {
