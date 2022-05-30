@@ -56,6 +56,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="backgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="CKn-Qf-2a3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Eg2-PC-qdm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CKn-Qf-2a3" secondAttribute="trailing" id="Fdh-ud-O0c"/>
@@ -69,6 +70,10 @@
                             <constraint firstItem="1bh-xU-IF0" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lNI-68-x0r"/>
                             <constraint firstItem="CKn-Qf-2a3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="yS7-k1-dEV"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="n1L-V5-Ia4" appends="YES" id="Hx4-Mw-5hc"/>
+                            <outletCollection property="gestureRecognizers" destination="Cks-SB-U7G" appends="YES" id="lKL-Hg-8yG"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <connections>
@@ -79,6 +84,20 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="n1L-V5-Ia4" userLabel="leftPan">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="swipedLeft:" destination="Y6W-OH-hqX" id="8IL-l0-cCI"/>
+                        <outlet property="delegate" destination="5EZ-qb-Rvc" id="eh2-gD-yC4"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Cks-SB-U7G" userLabel="rightPan">
+                    <rectEdge key="edges" right="YES"/>
+                    <connections>
+                        <action selector="swipedRight:" destination="Y6W-OH-hqX" id="O52-ch-InS"/>
+                        <outlet property="delegate" destination="5EZ-qb-Rvc" id="8pj-jT-cOv"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-23" y="80"/>
         </scene>

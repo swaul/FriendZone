@@ -11,6 +11,14 @@ struct Appearance {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryColor.color]
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryColor.color]
         UITabBar.appearance().tintColor = Asset.primaryColor.color
+
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.inlineLayoutAppearance.normal.badgeBackgroundColor = Asset.primaryColor.color
+        tabBarAppearance.compactInlineLayoutAppearance.normal.badgeBackgroundColor = Asset.primaryColor.color
+        tabBarAppearance.stackedLayoutAppearance.normal.badgeBackgroundColor = Asset.primaryColor.color
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+
     }
 }
 

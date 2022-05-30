@@ -21,25 +21,33 @@ class YourZoneViewModel {
         }
     }
     @Published var usersUpdated: Bool = false
-    @Published var userInfo: FZUser?
+    @Published var userInfo: LocalUser?
     @Published var profileImage: UIImage?
     @Published var isOffline: Bool = false {
         didSet {
-            usersNearby.removeAll()
+            if isOffline {
+                usersNearby.removeAll()
+            }
         }
     }
     
     func getUserInfo() {
         guard let user = Auth.auth().currentUser else { return }
+
         let resource = LoadableResource<FZUser>(path: [.collection(collectionName: "users")], firebaseConstraint: .containsMultipleValue(fieldName: "id", constraint: [user.uid]))
         FirebaseHandler.shared.getData(resource: resource) { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let data):
-                guard let info = data.first else { return }
-                self.userInfo = info
-                self.saveUser(user: info)
+                guard let user = data.first(where: { $0.id == user.uid }) else { return }
+                let localUser = LocalUser(user: user)
+                if let oldUser = self.userInfo, oldUser.user.id == localUser.user.id {
+                    localUser.ignoredUserIds = oldUser.ignoredUserIds
+                    localUser.savedUserIds = oldUser.savedUserIds
+                }
+                self.userInfo = localUser
+                self.saveUser(user: user, ignoredUsers: nil, savedUsers: nil)
             }
         }
     }
@@ -59,22 +67,37 @@ class YourZoneViewModel {
             }
         }, receiveValue: { [weak self] user in
             DispatchQueue.main.async {
-                self?.userInfo = user.user
+                self?.userInfo = user
             }
         })
     }
     
     private var saveUserCancellable: AnyCancellable?
 
-    func saveUser(user: FZUser) {
+    func saveUser(user: FZUser, ignoredUsers: String?, savedUsers: String?) {
         let storage = UserStorage(userId: user.id)
+        var userToChange: LocalUser
+        if let localUser = userInfo, localUser.user.id == user.id {
+            userToChange = localUser
+        } else {
+            userToChange = LocalUser(user: user)
+        }
+        if let ignoredUsers = ignoredUsers {
+            userToChange.ignoredUserIds.append(ignoredUsers)
+            userToChange.ignoredUserIds.removeDuplicatesInPlace()
+        }
+        if let savedUsers = savedUsers {
+            userToChange.savedUserIds.append(savedUsers)
+            userToChange.savedUserIds.removeDuplicatesInPlace()
+        }
         saveUserCancellable?.cancel()
-        saveUserCancellable = storage.saveState(LocalUser(user: user)).sink { completion in
+        userInfo = userToChange
+        saveUserCancellable = storage.saveState(userToChange).sink { completion in
             switch completion {
             case .failure(let error):
                 print(error.localizedDescription)
             case .finished:
-                print("saved")
+                print("saved \(savedUsers), ignored \(ignoredUsers)")
             }
         } receiveValue: { _ in }
         
@@ -134,10 +157,9 @@ class YourZoneViewModel {
                 print(error.localizedDescription)
             case .success(let data):
                 var users = data.map { UserViewModel(model: $0) }
-                let defaults = UserDefaults.standard
-                if let ignoredUsers = defaults.value(forKey: "ignoredUsers") as? [String: Date] {
-                    for user in ignoredUsers {
-                        users.removeAll(where: { $0.id == user.key })
+                if let user = self?.userInfo, !user.ignoredUserIds.isEmpty {
+                    for userId in user.ignoredUserIds {
+                        users.removeAll(where: { $0.id == userId })
                     }
                 }
                 self?.usersNearby = users
@@ -176,6 +198,23 @@ class YourZoneViewModel {
         }
     }
     
+    func saveUserForLater(userToSave: UserViewModel?) {
+        guard let user = userInfo, let userToSave = userToSave else { return }
+
+        saveUser(user: user.user, ignoredUsers: nil, savedUsers: userToSave.id)
+    }
+    
+    func ignoreUser(userToIgnore: UserViewModel?) {
+        guard let user = userInfo, let userToIgnore = userToIgnore else { return }
+
+        saveUser(user: user.user, ignoredUsers: userToIgnore.id, savedUsers: nil)
+        usersNearby.removeAll(where: { $0.id == user.user.id })
+    }
+
+    init() {
+        getUser()
+    }
+    
 }
 
 extension String: FirebaseDecodable {
@@ -187,6 +226,20 @@ extension String: FirebaseDecodable {
         } else {
             self.init()
         }
+    }
+    
+}
+
+extension Array where Element: Hashable {
+    
+    mutating func removeDuplicatesInPlace() {
+        var result: [Element] = []
+        for value in self {
+            if !result.contains(value) {
+                result.append(value)
+            }
+        }
+        self = result
     }
     
 }

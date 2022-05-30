@@ -10,14 +10,13 @@ public class EmptyView: UIView, StatefulPlaceholderView {
     private var retryClosure: (() -> Void)?
     
     var edgeInsets = UIEdgeInsets.zero
-    var isAnimating = false
     
     class func viewFromNib() -> EmptyView {
         let view = Bundle.main.loadNibNamed("EmptyView", owner: self, options: nil)!.first as! EmptyView
         return view
     }
     
-    @discardableResult public func configure(image: UIImage?, title: String?, subtitle: String?, insets: UIEdgeInsets = UIEdgeInsets.zero, showArrow: Bool) -> EmptyView {
+    @discardableResult public func configure(image: UIImage?, title: String?, subtitle: String?, insets: UIEdgeInsets = UIEdgeInsets.zero) -> EmptyView {
                 
         imageView.image = image
         imageView.isHidden = image == nil

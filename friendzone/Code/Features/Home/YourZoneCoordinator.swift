@@ -19,7 +19,8 @@ class YourZoneCoordinator: NavigationCoordinator {
     
     var loginRequired: (() -> Void)!
     var showProfile: (() -> Void)!
-    
+    var onLoaded: ((Bool) -> Void)!
+        
     override func start() {
         let viewModel = YourZoneViewModel()
         let viewController = YourZoneViewController.createWith(storyboard: .main, viewModel: viewModel)
@@ -38,6 +39,10 @@ class YourZoneCoordinator: NavigationCoordinator {
         
         viewController.onNews = { [weak self] in
             self?.showNews()
+        }
+        
+        viewController.onLoaded = { [weak self] complete in
+            self?.onLoaded(complete)
         }
         
         rootViewController.tabBarItem.image = UIImage(systemSymbol: .house)

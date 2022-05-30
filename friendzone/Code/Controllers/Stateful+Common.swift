@@ -16,8 +16,9 @@ protocol CommonStatefulViews {
 
 extension CommonStatefulViews where Self: UIViewController, Self: StatefulViewController {
     
-    func setupStatefulViews(backgroundVisible: Bool) {
+    func setupStatefulViews(image: UIImage?, title: String?, subtitle: String?, backgroundVisible: Bool) {
         loadingView = LoadingView.viewFromNib().configure(backgroundVisible: backgroundVisible)
+        emptyView = EmptyView.viewFromNib().configure(image: image, title: title, subtitle: subtitle)
     }
 
     var loadingPlaceholderView: LoadingView? {

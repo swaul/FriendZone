@@ -8,8 +8,14 @@
 import Foundation
 import friendzoneKit
 
-struct LocalUser: Codable {
+class LocalUser: Codable {
 
     let user: FZUser
     
+    var ignoredUserIds = [String]()
+    var savedUserIds = [String]()
+    
+    init(user: FZUser) {
+        self.user = user
+    }
 }

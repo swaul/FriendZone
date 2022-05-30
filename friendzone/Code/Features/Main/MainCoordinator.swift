@@ -32,7 +32,11 @@ class MainCoordinator: TabBarCoordinator {
         
         let history = HistoryCoordinator()
         history.start()
-                
+    
+        yourZoneCoordinator.onLoaded = { [weak self] complete in
+            profile.updateBadge(count: complete ? nil : 1)
+        }
+        
         tabBarController.viewControllers = [
             profile.rootViewController,
             yourZoneCoordinator.rootViewController,

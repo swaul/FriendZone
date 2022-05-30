@@ -84,7 +84,16 @@ class UserViewModel {
     init(model: FZUser, ignored: Bool = false) {
         self.model = model
         self.ignored = ignored
+        
         loadImage(url: model.profilePicture)
+    }
+    
+    func userComplete() -> Bool {
+        if insta.isNilOrEmpty || tiktok.isNilOrEmpty || snap.isNilOrEmpty {
+            return false
+        } else {
+            return true
+        }
     }
     
     func loadImage(url: String) {

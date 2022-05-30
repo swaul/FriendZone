@@ -11,6 +11,7 @@ import Combine
 import Toolbox
 import FirebaseAuth
 import friendzoneKit
+import SFSafeSymbols
 
 class ProfileViewController: UIViewController {
     
@@ -24,6 +25,8 @@ class ProfileViewController: UIViewController {
     
     var onImageTapped: ((UIImage) -> Void)!
     var onSignOut: (() -> Void)!
+    var profileComplete: ((Bool) -> Void)!
+    var didDismiss: (() -> Void)!
     
     @IBOutlet var scrollView: UIScrollView!
     
@@ -47,6 +50,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var addImageButton: UIButton!
     
     @IBOutlet var socialsTitleLabel: UILabel!
+    @IBOutlet var socialsNotCompleteLabel: FriendZoneButton!
     @IBOutlet var socialsView: UIView!
     @IBOutlet var socialsStackViewsStackView: UIStackView!
     @IBOutlet var instaStackView: UIStackView!
@@ -79,7 +83,15 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.getUser()
+        socialsNotCompleteLabel.isHidden = viewModel.profileComplete
+        didDismiss()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        profileComplete(true)
     }
     
     var cancellables = Set<AnyCancellable>()
@@ -105,6 +117,10 @@ class ProfileViewController: UIViewController {
             } else {
                 self.inviteFriendsButton.isEnabled = changed
             }
+        }.store(in: &cancellables)
+        
+        viewModel.$profileComplete.sink { [weak self] complete in
+            self?.profileComplete(complete)
         }.store(in: &cancellables)
     }
     
@@ -136,6 +152,10 @@ class ProfileViewController: UIViewController {
         socialsTitleLabel.setStyle(TextStyle.grayBold)
         profileTitleLabel.text = "Dein Profil"
         socialsTitleLabel.text = "Soziales"
+        socialsNotCompleteLabel.setTitle("Füge mehr Socials hinzu!", for: .normal)
+        socialsNotCompleteLabel.setImage(UIImage(systemSymbol: .exclamationmarkCircleFill), for: .normal)
+        socialsNotCompleteLabel.setStyle(.tertiary)
+        socialsNotCompleteLabel.isHidden = viewModel.profileComplete
         
         tiktokImageView.image = Asset.tiktok.image
         
@@ -381,6 +401,10 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @IBAction func addSocialsButtonTapped(_ sender: Any) {
+        setEditing(true, animated: true)
+    }
+    
     @IBAction func signOutButtonTapped(_ sender: Any) {
         showSignOutDialog()
     }
@@ -389,7 +413,7 @@ class ProfileViewController: UIViewController {
         let dialog = UIAlertController(title: "Abmelden", message: "Willst du dich wirklich abmelden?", preferredStyle: .alert)
         
         let logoutAction = UIAlertAction(title: "Abmelden", style: .destructive) { [weak self] _ in
-            try! Auth.auth().signOut()
+            self?.viewModel.resetData()
             self?.onSignOut()
         }
         

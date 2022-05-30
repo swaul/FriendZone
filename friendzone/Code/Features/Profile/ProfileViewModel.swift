@@ -14,23 +14,15 @@ import Combine
 
 class ProfileViewModel: ImagePicker {
     
-    @Published var profilePicture: UIImage? {
-        didSet {
-            uploadImage()
-        }
-    }
+    @Published var profilePicture: UIImage?
     
     let storageRef = Storage.storage().reference()
     @Published var percentComplete: Float = 0.0
-    @Published var profileCreated: Bool = false
+    @Published var profileComplete: Bool = true
     
     @Published var changedName = UserInfo(value: nil, newValue: "", type: .name)
     @Published var changedBio = UserInfo(value: nil, newValue: "", type: .bio)
-    @Published var changedInsta = UserInfo(value: nil, newValue: "", type: .insta) {
-        didSet {
-            print(changedInsta.newValue)
-        }
-    }
+    @Published var changedInsta = UserInfo(value: nil, newValue: "", type: .insta)
     @Published var changedSnap = UserInfo(value: nil, newValue: "", type: .snap)
     @Published var changedTikTok = UserInfo(value: nil, newValue: "", type: .tiktok)
     
@@ -39,7 +31,13 @@ class ProfileViewModel: ImagePicker {
     
     @Published var infosHaveChanged: Bool = false
     
-    @Published var user: UserViewModel?
+    @Published var user: UserViewModel? {
+        didSet {
+            if let user = user, user.insta.isNilOrEmpty || user.tiktok.isNilOrEmpty || user.snap.isNilOrEmpty {
+                profileComplete = false
+            }
+        }
+    }
     
     var cancellablels = Set<AnyCancellable>()
     
@@ -69,10 +67,19 @@ class ProfileViewModel: ImagePicker {
         }.store(in: &cancellablels)
     }
     
-    func uploadImage() {
+    func updateProfilePicture(image: UIImage?) {
+        guard let image = image else {
+            return
+        }
+        
+        self.profilePicture = image
+        uploadImage(image: image)
+    }
+    
+    func uploadImage(image: UIImage) {
         guard let user = Auth.auth().currentUser else { return }
         
-        guard let image = profilePicture, let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         
         let userId = user.uid
         let imagesRef = storageRef.child("images/\(userId)")
@@ -131,7 +138,7 @@ class ProfileViewModel: ImagePicker {
         if changedTikTok.changed {
             changedUser.tiktok = changedTikTok.newValue
         }
-
+        
         FirebaseHandler.shared.uploadUserData(userId: changedUser.id, data: changedUser.toData()) { [weak self] result in
             switch result {
             case .failure(let error):
@@ -145,24 +152,39 @@ class ProfileViewModel: ImagePicker {
         }
     }
     
+    func getLocalImage() -> UIImage? {
+        guard profilePicture == nil else { return nil }
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let url = documents.appendingPathComponent("profilePic.png")
+        
+        do {
+            return try UIImage(data: Data(contentsOf: url))
+        } catch {
+            return nil
+        }
+    }
+    
     func getImage(id: String?) {
         guard let id = id else { return }
-
-        Storage.storage().reference().child("images/\(id)").getData(maxSize: 10 * 1024 * 1024) { data, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                guard let image = UIImage(data: data!) else { return }
-                self.profilePicture = image
-                if let data = image.pngData() {
-                    // Create URL
-                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                    let url = documents.appendingPathComponent("profilePic.png")
-                    
-                    do {
-                        try data.write(to: url)
-                    } catch {
-                        print("Unable to Write Data to Disk (\(error))")
+        if let image = getLocalImage() {
+            profilePicture = image
+        } else {
+            Storage.storage().reference().child("images/\(id)").getData(maxSize: 10 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    guard let image = UIImage(data: data!) else { return }
+                    self.profilePicture = image
+                    if let data = image.pngData() {
+                        // Create URL
+                        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                        let url = documents.appendingPathComponent("profilePic.png")
+                        
+                        do {
+                            try data.write(to: url)
+                        } catch {
+                            print("Unable to Write Data to Disk (\(error))")
+                        }
                     }
                 }
             }
@@ -190,7 +212,7 @@ class ProfileViewModel: ImagePicker {
     }
     
     private var saveUserCancellable: AnyCancellable?
-
+    
     func saveUser(user: FZUser) {
         let storage = UserStorage(userId: user.id)
         saveUserCancellable?.cancel()
@@ -205,14 +227,25 @@ class ProfileViewModel: ImagePicker {
         
     }
     
+    func resetData() {
+        guard let user = Auth.auth().currentUser else { return }
+        
+        try! Auth.auth().signOut()
+        
+        let storage = UserStorage(userId: user.uid)
+        storage.deleteState()
+    }
+    
     init() {
+        print("################## PROFILE SCREEN CREATED")
+        getUser()
         setupBindings()
     }
     
 }
 
 protocol ImagePicker {
-    var profilePicture: UIImage? { get set }
+    func updateProfilePicture(image: UIImage?)
 }
 
 class UserInfo: ObservableObject {

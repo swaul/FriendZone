@@ -53,9 +53,10 @@
 	<string>$(CONFIGURATION)</string>
 	<key>_ServerEnvironment</key>
 	<string>$(SERVER_ENVIRONMENT)</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>instagram</string>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>snapchat</string>
+		<string>instagram</string>
+	</array>
 </dict>
 </plist>

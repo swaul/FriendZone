@@ -24,6 +24,9 @@
 		7BEDA4DCFD12EA09032B2E8A /* Decoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED303F8118884F1D717CD5F /* Decoders.swift */; };
 		817E07C584EF7BA0272048D4 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7FF08462700CF26BDFDF5 /* Environment.swift */; };
 		882E36F86A257DC95AD8A944 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19C4F25496C04CB61A456A7 /* MainCoordinator.swift */; };
+		9E19D17B2840F0C000868B61 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E19D17A2840F0C000868B61 /* SettingsCoordinator.swift */; };
+		9E19D17D2840F0CB00868B61 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E19D17C2840F0CB00868B61 /* SettingsViewModel.swift */; };
+		9E19D17F2840F0D600868B61 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E19D17E2840F0D600868B61 /* SettingsViewController.swift */; };
 		9E22E660281E844A0030DF7C /* ValidatedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E65F281E844A0030DF7C /* ValidatedText.swift */; };
 		9E22E662281E957C0030DF7C /* FirebaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E661281E957C0030DF7C /* FirebaseHandler.swift */; };
 		9E22E664281ED6980030DF7C /* YourZoneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22E663281ED6980030DF7C /* YourZoneCoordinator.swift */; };
@@ -152,6 +155,10 @@
 		90F44006E313BD2D2CB199B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		97635C8CFC060CCA53D0E9BF /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		9A1A77E9EE984583227BEDBC /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		9E19D17A2840F0C000868B61 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		9E19D17C2840F0CB00868B61 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		9E19D17E2840F0D600868B61 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9E19D1812840F68100868B61 /* friendzone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = friendzone.entitlements; sourceTree = "<group>"; };
 		9E22E65F281E844A0030DF7C /* ValidatedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedText.swift; sourceTree = "<group>"; };
 		9E22E661281E957C0030DF7C /* FirebaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHandler.swift; sourceTree = "<group>"; };
 		9E22E663281ED6980030DF7C /* YourZoneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourZoneCoordinator.swift; sourceTree = "<group>"; };
@@ -320,6 +327,7 @@
 		490665563B43B2740B302835 /* friendzone */ = {
 			isa = PBXGroup;
 			children = (
+				9E19D1812840F68100868B61 /* friendzone.entitlements */,
 				E3724E3439CD901E84A0A528 /* Assets */,
 				23300747FB8E0049EECA9649 /* Code */,
 				25B0A302F3815A3DD53C3D98 /* SupportingFiles */,
@@ -429,12 +437,23 @@
 			path = Configurations;
 			sourceTree = "<group>";
 		};
+		9E19D1802840F0DD00868B61 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9E19D17A2840F0C000868B61 /* SettingsCoordinator.swift */,
+				9E19D17E2840F0D600868B61 /* SettingsViewController.swift */,
+				9E19D17C2840F0CB00868B61 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		9E22E665281ED7CB0030DF7C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				9E22E666281ED7DB0030DF7C /* ProfileCoordinator.swift */,
 				9EED0CFE2827052A0046AEEC /* ProfileViewController.swift */,
 				9EED0D00282705520046AEEC /* ProfileViewModel.swift */,
+				9E19D1802840F0DD00868B61 /* Settings */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -806,6 +825,7 @@
 				9EED0CEE2826E2620046AEEC /* Stateful+Common.swift in Sources */,
 				9EED0CF72826E2D10046AEEC /* EmptyView.swift in Sources */,
 				9E22E67E28216AD90030DF7C /* CardViewController.swift in Sources */,
+				9E19D17D2840F0CB00868B61 /* SettingsViewModel.swift in Sources */,
 				9E22E673281F01160030DF7C /* UserLocation.swift in Sources */,
 				9EED0CE4282590740046AEEC /* ImageCropperViewController.swift in Sources */,
 				9E36EBC22822B5DA004BE351 /* SetEmailViewController.swift in Sources */,
@@ -818,12 +838,14 @@
 				9E22E68228216BBC0030DF7C /* CardPresentationAnimation.swift in Sources */,
 				9E22E667281ED7DB0030DF7C /* ProfileCoordinator.swift in Sources */,
 				9E22E675281F04200030DF7C /* UserViewModel.swift in Sources */,
+				9E19D17B2840F0C000868B61 /* SettingsCoordinator.swift in Sources */,
 				9E22E68028216B600030DF7C /* CardNavigationController.swift in Sources */,
 				9E22E67C28216ABF0030DF7C /* CardCoordinator.swift in Sources */,
 				9E22E664281ED6980030DF7C /* YourZoneCoordinator.swift in Sources */,
 				D6E23396A15DA2BFD631E690 /* AppDelegate.swift in Sources */,
 				E54BADB31CB040FD3AEA46FE /* Appearance.swift in Sources */,
 				9E9EAF862827EBE600A1F4C8 /* UserController.swift in Sources */,
+				9E19D17F2840F0D600868B61 /* SettingsViewController.swift in Sources */,
 				9EED0CCE2822BA710046AEEC /* EmailVerificationViewController.swift in Sources */,
 				781F7C7A73769EF72CDDFE4A /* Assets.swift in Sources */,
 				9E50C3A7281CA4090008BFDD /* DesignableTextField.swift in Sources */,
@@ -890,6 +912,7 @@
 			baseConfigurationReference = E1C78B71A5912AF3FA0BD54B /* Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = friendzone/friendzone.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -1068,6 +1091,7 @@
 			baseConfigurationReference = E1C78B71A5912AF3FA0BD54B /* Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = friendzone/friendzone.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -1216,10 +1240,11 @@
 			baseConfigurationReference = F638987ECDC86FB82BA1CFBB /* Live.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = friendzone/friendzone.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 846WZ8H33D;
+				DEVELOPMENT_TEAM = PFHCSKC9F5;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1229,7 +1254,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = friendzone;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Mike Lichtenberg";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1300,6 +1325,7 @@
 			baseConfigurationReference = EDD3C36E661FBA1791B43ECF /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = friendzone/friendzone.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -1382,6 +1408,7 @@
 			baseConfigurationReference = EDD3C36E661FBA1791B43ECF /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = friendzone/friendzone.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -1436,10 +1463,11 @@
 			baseConfigurationReference = F638987ECDC86FB82BA1CFBB /* Live.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = friendzone/friendzone.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 846WZ8H33D;
+				DEVELOPMENT_TEAM = PFHCSKC9F5;
 				INFOPLIST_FILE = friendzone/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1449,7 +1477,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = de.friendzone.mikeleon;
 				PRODUCT_NAME = friendzone;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Mike Lichtenberg";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

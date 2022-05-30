@@ -34,6 +34,7 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
     var loginRequired: (() -> Void)!
     var onProfile: (() -> Void)!
     var onNews: (() -> Void)!
+    var onLoaded: ((Bool) -> Void)!
 
     // MARK: - Outlets
     
@@ -92,7 +93,7 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         
-        setupStatefulViews(backgroundVisible: true)
+        setupStatefulViews(image: nil, title: "leer", subtitle: "keiner da", backgroundVisible: true)
         offlineSwitch.onTintColor = .systemGreen
     }
 
@@ -164,7 +165,9 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         
         viewModel.$userInfo.sink { [weak self] user in
             guard let user = user else { return }
-            self?.populateUserProfile(user: UserViewModel(model: user))
+            let userViewModel = UserViewModel(model: user.user)
+            self?.onLoaded(userViewModel.userComplete())
+            self?.populateUserProfile(user: userViewModel)
         }.store(in: &cancellabels)
         
         viewModel.$profileImage.sink { [weak self] image in
@@ -331,40 +334,6 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         
         present(popup, animated: true)
     }
-
-    func saveUser(user: UserViewModel?) {
-        guard let user = user else { return }
-        var usersToSave = [String: Date]()
-        let defaults = UserDefaults.standard
-        
-        if let savedUsers = defaults.value(forKey: "savedUsers") as? [String: Date] {
-            usersToSave = savedUsers
-            usersToSave[user.id] = Date()
-        } else {
-            usersToSave[user.id] = Date()
-        }
-        
-        defaults.set(usersToSave, forKey: "savedUsers")
-    }
-    
-    func ignoreUser(user: UserViewModel?) {
-        guard let user = user else { return }
-        var usersToIgnore = [String: Date]()
-        let defaults = UserDefaults.standard
-        
-        if let ignoredUsers = defaults.value(forKey: "ignoredUsers") as? [String: Date] {
-            usersToIgnore = ignoredUsers
-            usersToIgnore[user.id] = Date()
-        } else {
-            usersToIgnore[user.id] = Date()
-        }
-        
-        defaults.set(usersToIgnore, forKey: "ignoredUsers")
-        
-        viewModel.usersNearby.removeAll(where: { $0.id == user.id })
-        getLocation()
-        tableView.reloadData()
-    }
     
 }
 
@@ -373,7 +342,7 @@ extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Ignorieren") { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
-            self.ignoreUser(user: self.viewModel.usersNearby[indexPath.row])
+            self.viewModel.ignoreUser(userToIgnore: self.viewModel.usersNearby[indexPath.row])
             completionHandler(true)
         }
         deleteAction.image = UIImage(systemSymbol: .xCircle)
@@ -381,7 +350,7 @@ extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
         
         let saveAction = UIContextualAction(style: .normal, title: "Speichern") { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
-            self.saveUser(user: self.viewModel.usersNearby[indexPath.row])
+            self.viewModel.saveUserForLater(userToSave: self.viewModel.usersNearby[indexPath.row])
             completionHandler(true)
         }
         saveAction.image = UIImage(systemSymbol: .clockArrowCirclepath)

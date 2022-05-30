@@ -86,7 +86,7 @@ class UserPopupViewController: UIViewController {
     }
     
     @IBAction func tiktokTapped(_ sender: Any) {
-        guard let userName = viewModel.tiktok, let appURL = URL(string: "https://www.tiktok.com/@\(userName)") else {
+        guard let userName = viewModel.tiktok, let appURL = URL(string: "tiktok://@\(userName)") else {
             UIApplication.shared.open(URL(string: "https://www.tiktok.com/search?q=\(viewModel.tiktok!)")!)
             return
         }

@@ -155,7 +155,7 @@ class ImageCropperViewController: UIViewController {
         UIGraphicsEndImageContext()
         let data = resizedCroppedImage!.pngData()
 
-        viewModel.profilePicture = UIImage(data: data!)
+        viewModel.updateProfilePicture(image: UIImage(data: data!))
         dismiss(animated: true)
     }
     

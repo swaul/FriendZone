@@ -193,7 +193,7 @@
                                                     <constraint firstItem="gwE-Z9-VHp" firstAttribute="top" secondItem="qwD-81-E1q" secondAttribute="bottom" constant="12" id="pRK-Ry-V7h"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcC-cm-LB6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcC-cm-LB6">
                                                 <rect key="frame" x="32" y="471" width="41.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -332,6 +332,16 @@
                                                     <constraint firstItem="gbg-5Y-UU9" firstAttribute="leading" secondItem="zkQ-32-Uoo" secondAttribute="leading" id="rU4-0T-m7n"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZ1-Mb-hX5" customClass="FriendZoneButton" customModule="friendzone" customModuleProvider="target">
+                                                <rect key="frame" x="89.5" y="466.5" width="292.5" height="30"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleColor" name="primaryColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addSocialsButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jao-L6-hLC"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="backgroundColor"/>
                                         <constraints>
@@ -345,8 +355,11 @@
                                             <constraint firstAttribute="bottom" secondItem="zkQ-32-Uoo" secondAttribute="bottom" constant="8" id="VJS-RR-1fs"/>
                                             <constraint firstAttribute="trailing" secondItem="nIC-L6-bwf" secondAttribute="trailing" constant="16" id="Voj-Az-2xn"/>
                                             <constraint firstItem="fcC-cm-LB6" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="Wg7-ft-FXV"/>
+                                            <constraint firstAttribute="trailing" secondItem="yZ1-Mb-hX5" secondAttribute="trailing" constant="32" id="dqs-O3-oLg"/>
                                             <constraint firstAttribute="trailing" secondItem="yL5-wY-Igr" secondAttribute="trailing" constant="32" id="jJm-Xj-G6r"/>
+                                            <constraint firstItem="yZ1-Mb-hX5" firstAttribute="centerY" secondItem="fcC-cm-LB6" secondAttribute="centerY" id="mCu-Ig-BGD"/>
                                             <constraint firstAttribute="trailing" secondItem="zkQ-32-Uoo" secondAttribute="trailing" constant="32" id="oN6-yM-xWk"/>
+                                            <constraint firstItem="yZ1-Mb-hX5" firstAttribute="leading" secondItem="fcC-cm-LB6" secondAttribute="trailing" constant="16" id="pDg-PM-25D"/>
                                             <constraint firstItem="bhw-SX-eOb" firstAttribute="top" secondItem="v3a-pl-TbT" secondAttribute="bottom" constant="32" id="qce-MC-5IA"/>
                                             <constraint firstItem="53f-dW-bvY" firstAttribute="leading" secondItem="DsT-fF-qSp" secondAttribute="leading" constant="32" id="rhm-rS-ajj"/>
                                             <constraint firstAttribute="trailing" secondItem="bhw-SX-eOb" secondAttribute="trailing" constant="32" id="saj-BT-htv"/>
@@ -409,6 +422,7 @@
                         <outlet property="snapchatImageView" destination="gV5-D9-aB8" id="X3W-RE-pCu"/>
                         <outlet property="snapchatStackView" destination="Fb2-SZ-NRF" id="i1U-bh-K44"/>
                         <outlet property="snapchatTextField" destination="lem-ff-2eP" id="4kA-bf-wfx"/>
+                        <outlet property="socialsNotCompleteLabel" destination="yZ1-Mb-hX5" id="maa-cy-fMq"/>
                         <outlet property="socialsStackViewsStackView" destination="MnY-hq-Kig" id="q7p-rc-dva"/>
                         <outlet property="socialsTitleLabel" destination="fcC-cm-LB6" id="AoL-2r-cU4"/>
                         <outlet property="socialsView" destination="v3a-pl-TbT" id="sCC-cR-VJ9"/>

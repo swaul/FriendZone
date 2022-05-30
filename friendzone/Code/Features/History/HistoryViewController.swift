@@ -48,7 +48,6 @@ class HistoryViewController: UIViewController {
         viewModel.$usersUpdated.sink { [weak self] updated in
             if updated {
                 self?.tableView.reloadData()
-                print("false")
                 self?.viewModel.usersUpdated = false
             }
         }.store(in: &cancellables)
@@ -129,41 +128,39 @@ class HistoryViewController: UIViewController {
                 self.barButton.title = "Ignoriert"
             }
         } completion: { completed in
-            print(completed)
+            if ignoredShowing {
+                self.title = "Ignoriert"
+            } else {
+                self.title = "Gespeichert"
+            }
         }
     }
     
-    func removeSavedUser(user: UserViewModel?) {
-        guard let user = user else { return }
-        let defaults = UserDefaults.standard
-        
-        if let savedUsers = defaults.value(forKey: "savedUsers") as? [String: Date] {
-            var usersSaved = savedUsers
-            usersSaved.removeValue(forKey: user.id)
-            defaults.set(usersSaved, forKey: "savedUsers")
-        }
-        
-        viewModel.retreiveSavedUsers()
+    func removeSavedUser(userId: String) {
+        viewModel.removeUser(userId: userId, fromIgnored: false)
     }
     
-    func removeIgnoredUser(user: UserViewModel?) {
-        guard let user = user else { return }
-        let defaults = UserDefaults.standard
-        
-        if let ignoredUsers = defaults.value(forKey: "ignoredUsers") as? [String: Date] {
-            var usersToIgnore = ignoredUsers
-            usersToIgnore.removeValue(forKey: user.id)
-            defaults.set(usersToIgnore, forKey: "ignoredUsers")
-        }
-        
-        viewModel.retreiveSavedUsers()
+    func removeIgnoredUser(userId: String) {
+        viewModel.removeUser(userId: userId, fromIgnored: true)
     }
     
     func showLoading(_ loading: Bool) {
-        print("is hidden", !loading)
         loadingWrapper.isHidden = !loading
     }
     
+    @IBAction func swipedLeft(_ sender: Any) {
+        if ignoredShowing {
+            switchTableViews(ignoredShowing: false)
+            ignoredShowing = !ignoredShowing
+        }
+    }
+    
+    @IBAction func swipedRight(_ sender: Any) {
+        if !ignoredShowing {
+            switchTableViews(ignoredShowing: true)
+            ignoredShowing = !ignoredShowing
+        }
+    }
 }
 
 extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
@@ -173,7 +170,7 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         case self.tableView:
             let deleteAction = UIContextualAction(style: .destructive, title: "Entfernen") { [weak self] (_, _, completionHandler) in
                 guard let self = self else { return }
-                self.removeSavedUser(user: self.viewModel.savedUsers[indexPath.row])
+                self.removeSavedUser(userId: self.viewModel.savedUsers[indexPath.row].id)
                 completionHandler(true)
             }
             deleteAction.image = UIImage(systemSymbol: .xCircle)
@@ -184,7 +181,7 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         case ignoredTableView:
             let deleteAction = UIContextualAction(style: .destructive, title: "Rückgängig") { [weak self] (_, _, completionHandler) in
                 guard let self = self else { return }
-                self.removeIgnoredUser(user: self.viewModel.ignoredUsers[indexPath.row])
+                self.removeIgnoredUser(userId: self.viewModel.ignoredUsers[indexPath.row].id)
                 completionHandler(true)
             }
             deleteAction.image = UIImage(systemSymbol: .arrowClockwiseHeart)
@@ -200,9 +197,9 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case self.tableView:
-            return viewModel.savedUserIds.count
+            return viewModel.savedUsers.count
         case self.ignoredTableView:
-            return viewModel.ignoredUserIds.count
+            return viewModel.ignoredUsers.count
         default:
             return 0
         }

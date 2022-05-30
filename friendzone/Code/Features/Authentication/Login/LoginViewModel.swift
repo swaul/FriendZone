@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import KeychainAccess
 
 class LoginViewModel {
     
@@ -42,13 +43,21 @@ class LoginViewModel {
                 self?.shake = true
                 self?.passwordError = error.localizedDescription
             } else {
-                guard let result = result else { return }
+                guard let result = result, let self = self else { return }
                 let defaults = UserDefaults.standard
                 defaults.setValue(result.credential, forKey: "credentials")
                 
-                self?.onLogin = true
+                let keychain = Keychain(service: "addzone")
+                keychain[self.email.value!] = self.password.value
+                
+                self.onLogin = true
             }
         }
+    }
+    
+    func getKeychainData() {
+        let keychain = Keychain(service: "addzone")
+        
     }
     
 }

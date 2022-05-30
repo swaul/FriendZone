@@ -15,6 +15,13 @@ import Combine
 import friendzoneKit
 
 class RegisterViewModel: ImagePicker {
+    func updateProfilePicture(image: UIImage?) {
+        guard let image = image else {
+            return
+        }
+
+        profilePicture = image
+    }
     
     @Published var email = ValidatedText(value: nil, validation: { value in
         guard let value = value else { return .initial }

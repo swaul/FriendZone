@@ -116,11 +116,11 @@ class RegisterCoordinator: CardCoordinator {
             return "E-Mail Adresse"
         case 4:
             return "E-Mail verifizieren"
-        case 4:
-            return "Passwort"
         case 5:
-            return "Steckbrief"
+            return "Passwort"
         case 6:
+            return "Steckbrief"
+        case 7:
             return "Soziales"
         default:
             return "Zurück"
