@@ -33,11 +33,13 @@ class ProfileViewModel: ImagePicker {
     
     @Published var user: UserViewModel? {
         didSet {
-            if let user = user, user.insta.isNilOrEmpty || user.tiktok.isNilOrEmpty || user.snap.isNilOrEmpty {
+            if let user = user, user.bio.isNilOrEmpty || user.profilePicture == nil {
                 profileComplete = false
             }
         }
     }
+    
+    var localUser: LocalUser?
     
     var cancellablels = Set<AnyCancellable>()
     
@@ -74,6 +76,12 @@ class ProfileViewModel: ImagePicker {
         
         self.profilePicture = image
         uploadImage(image: image)
+        
+        guard let user = user else { return }
+        user.model.profilePicture = user.id
+        self.updateInfo(user: user) { _ in
+            print("done")
+        }
     }
     
     func uploadImage(image: UIImage) {
@@ -120,8 +128,8 @@ class ProfileViewModel: ImagePicker {
         }
     }
     
-    func updateInfo(completion: @escaping ((Bool) -> Void)) {
-        let changedUser = user!
+    func updateInfo(user: UserViewModel? = nil, completion: @escaping ((Bool) -> Void)) {
+        let changedUser = user ?? self.user!
         
         if changedName.changed, let newName = changedName.newValue {
             changedUser.name = newName
@@ -153,7 +161,7 @@ class ProfileViewModel: ImagePicker {
     }
     
     func getLocalImage() -> UIImage? {
-        guard profilePicture == nil else { return nil }
+        guard profilePicture == nil, user?.profilePictureId != nil else { return nil }
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let url = documents.appendingPathComponent("profilePic.png")
         
@@ -164,7 +172,7 @@ class ProfileViewModel: ImagePicker {
         }
     }
     
-    func getImage(id: String?) {
+    func getImage(id: String?, completion: ((Bool) -> Void)?) {
         guard let id = id else { return }
         if let image = getLocalImage() {
             profilePicture = image
@@ -182,10 +190,37 @@ class ProfileViewModel: ImagePicker {
                         
                         do {
                             try data.write(to: url)
+                            completion?(true)
                         } catch {
                             print("Unable to Write Data to Disk (\(error))")
+                            completion?(false)
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    func removeImage() {
+        guard let user = user, let profilePictureId = user.profilePictureId else { return }
+        Storage.storage().reference().child("images/\(profilePictureId)").delete { [weak self] error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self?.profilePicture = nil
+                user.profilePictureId = nil
+                self?.updateInfo(user: user, completion: { [weak self] completed in
+                    print("did delete profile picture", completed)
+                })
+                self?.saveUser(user: user.model)
+                let manager = FileManager.default
+                let documents = manager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let url = documents.appendingPathComponent("profilePic.png")
+                let data = Data.init()
+                do {
+                    try data.write(to: url)
+                } catch {
+                    print(error)
                 }
             }
         }
@@ -206,6 +241,7 @@ class ProfileViewModel: ImagePicker {
             }
         }, receiveValue: { [weak self] user in
             DispatchQueue.main.async {
+                self?.localUser = user
                 self?.user = UserViewModel(model: user.user)
             }
         })
@@ -216,6 +252,13 @@ class ProfileViewModel: ImagePicker {
     func saveUser(user: FZUser) {
         let storage = UserStorage(userId: user.id)
         saveUserCancellable?.cancel()
+        let localUser: LocalUser
+        if let savedLocalUser = self.localUser {
+            localUser = savedLocalUser
+            localUser.user = user
+        } else {
+            localUser = LocalUser(user: user)
+        }
         saveUserCancellable = storage.saveState(LocalUser(user: user)).sink { completion in
             switch completion {
             case .failure(let error):

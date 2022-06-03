@@ -29,11 +29,12 @@ class ProfileViewController: UIViewController {
     var didDismiss: (() -> Void)!
     
     @IBOutlet var scrollView: UIScrollView!
-    
+    @IBOutlet var emptyProfileImageButton: UIButton!
     @IBOutlet var profileTitleLabel: UILabel!
     @IBOutlet var editProfileButton: UIButton!
     @IBOutlet var profileVIew: UIView!
     @IBOutlet var profilePictureImageView: UIImageView!
+
     @IBOutlet var profileNameLabel: UITextField!
     @IBOutlet var profileBioTextView: UITextView!
     @IBOutlet var profileImagesStackView: UIStackView!
@@ -50,7 +51,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet var addImageButton: UIButton!
     
     @IBOutlet var socialsTitleLabel: UILabel!
-    @IBOutlet var socialsNotCompleteLabel: FriendZoneButton!
     @IBOutlet var socialsView: UIView!
     @IBOutlet var socialsStackViewsStackView: UIStackView!
     @IBOutlet var instaStackView: UIStackView!
@@ -85,7 +85,6 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.getUser()
-        socialsNotCompleteLabel.isHidden = viewModel.profileComplete
         didDismiss()
     }
     
@@ -124,6 +123,17 @@ class ProfileViewController: UIViewController {
         }.store(in: &cancellables)
     }
     
+    lazy var bioEmptyButton = FriendZoneButton().with {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setTitle("Erzähl mehr über dich!", for: .normal)
+        $0.setStyle(.tertiary)
+        $0.addAction(UIAction(handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.setEditing(true, animated: true)
+            self.profileBioTextView.becomeFirstResponder()
+        }), for: .touchUpInside)
+    }
+    
     func setupViews() {
         scrollView.delegate = self
         showPictures()
@@ -152,10 +162,6 @@ class ProfileViewController: UIViewController {
         socialsTitleLabel.setStyle(TextStyle.grayBold)
         profileTitleLabel.text = "Dein Profil"
         socialsTitleLabel.text = "Soziales"
-        socialsNotCompleteLabel.setTitle("Füge mehr Socials hinzu!", for: .normal)
-        socialsNotCompleteLabel.setImage(UIImage(systemSymbol: .exclamationmarkCircleFill), for: .normal)
-        socialsNotCompleteLabel.setStyle(.tertiary)
-        socialsNotCompleteLabel.isHidden = viewModel.profileComplete
         
         tiktokImageView.image = Asset.tiktok.image
         
@@ -187,6 +193,16 @@ class ProfileViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
+        
+        view.addSubview(bioEmptyButton)
+        bioEmptyButton.withConstraints { button in
+            return[
+                button.topAnchor.constraint(equalTo: profileBioTextView.topAnchor),
+                button.leadingAnchor.constraint(equalTo: profileBioTextView.leadingAnchor),
+                button.trailingAnchor.constraint(equalTo: profileBioTextView.trailingAnchor),
+                button.bottomAnchor.constraint(equalTo: profileBioTextView.bottomAnchor)
+            ]
+        }
     }
     
     func populateInfo(user: UserViewModel) {
@@ -198,8 +214,19 @@ class ProfileViewController: UIViewController {
         snapchatTextField.text = user.snap
         
         if profilePictureImageView.image == nil {
-            viewModel.getImage(id: user.id)
+            viewModel.getImage(id: user.id) { [weak self] completed in
+                if !completed {
+                    self?.profilePictureImageView.image = Asset.image.image
+                }
+            }
         }
+        
+        if user.bio.isNilOrEmpty {
+            bioEmptyButton.isHidden = false
+        } else {
+            bioEmptyButton.isHidden = true
+        }
+        
     }
     
     func showPictures() {
@@ -244,6 +271,11 @@ class ProfileViewController: UIViewController {
                 view.alpha = 1.0
             }, completion: nil)
         }
+    }
+    
+    @IBAction func emptyProfilePictureButton(_ sender: Any) {
+        setEditing(true, animated: true)
+        showImagePicker()
     }
     
     func setupHeader() {
@@ -330,10 +362,32 @@ class ProfileViewController: UIViewController {
             self?.createImagePicker(source: .photoLibrary)
         }
         
+        let removeAction = UIAlertAction(title: "Profilfoto löschen", style: .destructive) { [weak self] _ in
+            self?.presentRemoveImageDialog()
+        }
+        
         let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)
         
         alertVC.addAction(cameraAction)
         alertVC.addAction(galleryAction)
+        if let user = viewModel.user, user.profilePictureId != nil {
+            alertVC.addAction(removeAction)
+        }
+        alertVC.addAction(cancel)
+        
+        present(alertVC, animated: true)
+    }
+    
+    private func presentRemoveImageDialog() {
+        let alertVC = UIAlertController(title: "Profilfoto löschen", message: "Willst du dein Profilfoto wirklich löschen?", preferredStyle: .alert)
+
+        let removeAction = UIAlertAction(title: "Löschen", style: .destructive) { [weak self] _ in
+            self?.viewModel.removeImage()
+        }
+        
+        let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)
+        
+        alertVC.addAction(removeAction)
         alertVC.addAction(cancel)
         
         present(alertVC, animated: true)
@@ -349,8 +403,9 @@ class ProfileViewController: UIViewController {
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
+        guard self.isEditing != editing else { return }
         super.setEditing(editing, animated: animated)
-        showPictures()
+        bioEmptyButton.isHidden = editing
         profileNameLabel.isUserInteractionEnabled = editing
         profileBioTextView.isUserInteractionEnabled = editing
         if !editing {
@@ -399,10 +454,6 @@ class ProfileViewController: UIViewController {
                 
             }
         }
-    }
-    
-    @IBAction func addSocialsButtonTapped(_ sender: Any) {
-        setEditing(true, animated: true)
     }
     
     @IBAction func signOutButtonTapped(_ sender: Any) {

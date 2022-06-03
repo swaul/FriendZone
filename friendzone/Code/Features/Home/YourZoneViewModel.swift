@@ -21,6 +21,7 @@ class YourZoneViewModel {
         }
     }
     @Published var usersUpdated: Bool = false
+    @Published var updateNearbyUsers: Bool = false
     @Published var userInfo: LocalUser?
     @Published var profileImage: UIImage?
     @Published var isOffline: Bool = false {
@@ -103,7 +104,7 @@ class YourZoneViewModel {
         
     }
     
-    func getImage(id: String?) {
+    func getImage(id: String?, completion: ((Bool) -> Void)?) {
         guard let id = id else { return }
 
         Storage.storage().reference().child("images/\(id)").getData(maxSize: 10 * 1024 * 1024) { data, error in
@@ -120,8 +121,10 @@ class YourZoneViewModel {
                     
                     do {
                         try data.write(to: url)
+                        completion?(true)
                     } catch {
                         print("Unable to Write Data to Disk (\(error))")
+                        completion?(false)
                     }
                 }
             }
@@ -208,6 +211,7 @@ class YourZoneViewModel {
         guard let user = userInfo, let userToIgnore = userToIgnore else { return }
 
         saveUser(user: user.user, ignoredUsers: userToIgnore.id, savedUsers: nil)
+        updateNearbyUsers = true
         usersNearby.removeAll(where: { $0.id == user.user.id })
     }
 

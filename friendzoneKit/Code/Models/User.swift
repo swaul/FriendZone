@@ -12,8 +12,8 @@ public struct FZUser: FirebaseDecodable, Codable {
     
     public var id: String
     public var name: String
-    public var profilePicture: String
-    public var email: String?
+    public var profilePicture: String?
+    public var email: String
     public var snapchat: String?
     public var instagram: String?
     public var tiktok: String?
@@ -22,7 +22,7 @@ public struct FZUser: FirebaseDecodable, Codable {
     public var images: [String]
     public var postalCode: String?
     
-    public init(id: String, name: String, profilePicture: String, snapchat: String?, instagram: String?, tiktok: String?, bio: String?, score: Int, images: [String], postalCode: String) {
+    public init(id: String, name: String, email: String, profilePicture: String?, snapchat: String?, instagram: String?, tiktok: String?, bio: String?, score: Int, images: [String], postalCode: String) {
         self.id = id
         self.name = name
         self.profilePicture = profilePicture
@@ -32,16 +32,26 @@ public struct FZUser: FirebaseDecodable, Codable {
         self.bio = bio
         self.score = score
         self.images = images
-        self.email = nil
+        self.email = email
         self.postalCode = postalCode
     }
     
     public init?(data: [String: Any]) {
         self.id = data["id"] as! String
         self.name = data["name"] as! String
-        self.profilePicture = data["profilePicture"] as! String
-        self.bio = data["bio"] as! String
         self.email = data["email"] as! String
+
+        if let profilePicture = data["profilePicture"] as? String {
+            self.profilePicture = profilePicture
+        } else {
+            self.profilePicture = nil
+        }
+        
+        if let bio = data["bio"] as? String {
+            self.bio = bio
+        } else {
+            self.bio = nil
+        }
         if let snapchat = data["snapchat"] as? String {
             self.snapchat = snapchat
         } else {

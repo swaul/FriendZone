@@ -111,9 +111,19 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         let url = documents.appendingPathComponent("profilePic.png")
         
         do {
-            userImageView.image = try UIImage(data: Data(contentsOf: url))
+            let data = try Data(contentsOf: url)
+            if data.isEmpty {
+                userImageView.image = Asset.image.image
+            } else {
+                userImageView.image = UIImage(data: data)
+            }
         } catch {
-            viewModel.getImage(id: user.uid)
+            viewModel.getImage(id: user.uid) { [weak self] completed in
+                if !completed {
+                    self?.userImageView.image = Asset.image.image
+                }
+            }
+            
         }
             
     }
@@ -173,6 +183,12 @@ class YourZoneViewController: UIViewController, CLLocationManagerDelegate {
         viewModel.$profileImage.sink { [weak self] image in
             guard let image = image else { return }
             self?.userImageView.image = image
+        }.store(in: &cancellabels)
+        
+        viewModel.$updateNearbyUsers.sink { [weak self] update in
+            if update {
+                self?.getLocation()
+            }
         }.store(in: &cancellabels)
     }
     
@@ -368,7 +384,7 @@ extension YourZoneViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UserNearbyTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UserNearbyTableViewCell") as! UserNearbyTableViewCell
         
-        cell.configure(user: viewModel.usersNearby[indexPath.row])
+        cell.configure(user: viewModel.usersNearby[indexPath.row], buttonType: .delete)
         cell.selectionStyle = .none
         
         return cell

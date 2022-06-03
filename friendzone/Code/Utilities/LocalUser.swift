@@ -10,7 +10,7 @@ import friendzoneKit
 
 class LocalUser: Codable {
 
-    let user: FZUser
+    var user: FZUser
     
     var ignoredUserIds = [String]()
     var savedUserIds = [String]()

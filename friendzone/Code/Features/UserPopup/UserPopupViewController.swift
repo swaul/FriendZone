@@ -60,7 +60,11 @@ class UserPopupViewController: UIViewController {
         popupBackgroundView.addGestureRecognizer(dismissTap)
         popupBackgroundView.isUserInteractionEnabled = true
         
-        selectedUserImageView.image = viewModel.profilePicture
+        if viewModel.profilePicture != nil {
+            selectedUserImageView.image = viewModel.profilePicture
+        } else {
+            selectedUserImageView.image = Asset.image.image
+        }
         selectedUserNameLabel.text = viewModel.name
         selectedUserBioLabel.text = viewModel.bio
         selectedUserScoreLabel.text = String(viewModel.score)

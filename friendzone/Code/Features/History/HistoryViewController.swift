@@ -210,9 +210,9 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch tableView {
         case self.tableView:
-            cell.configure(user: viewModel.savedUsers[indexPath.row])
+            cell.configure(user: viewModel.savedUsers[indexPath.row], buttonType: .delete)
         case self.ignoredTableView:
-            cell.configure(user: viewModel.ignoredUsers[indexPath.row])
+            cell.configure(user: viewModel.ignoredUsers[indexPath.row], buttonType: .revert)
         default:
             fatalError()
         }
